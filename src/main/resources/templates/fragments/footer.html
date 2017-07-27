@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title>Footer</title>
+</head>
+
+<body>
+<div th:fragment="footer">
+        <footer>
+            © 2017 developer: vinty1978@gmail.com
+            <span sec:authorize="isAuthenticated()">
+                <a th:href="@{/logout}">Выйти</a>
+            </span>
+        </footer>
+</div>
+</body>
+</html>

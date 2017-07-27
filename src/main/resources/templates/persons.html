@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Persons</title>
+    <link href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" rel="stylesheet" media="screen"> </link>
+    <!--<link href="webjars/bootstrap/3.3.7-1/js/bootstrap.js" rel="stylesheet" media="screen"> </link>-->
+    <script src="webjars/jquery/1.11.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $('#pageSizeSelect').change(function(evt) {
+            window.location.replace("/?pageSize=" + this.value + "&page=1");
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('h1').animate({
+                fontSize: '48px'
+            }, "slow");
+        });
+    </script>
+
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/></div>
+<!--<p th:text="'Приветствую !'" />-->
+<div class="container">
+    <div class="row">
+        <h1>Телефонный справочник</h1>
+        <h6>(Spring Security protected)</h6>
+        <h6 th:inline="text">role: [[${#httpServletRequest.remoteUser}]]!</h6>
+    </div>
+    <div class="row">
+        <table class="table table-hover">
+            <thead class="thead-inverse">
+            <tr>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Number</th>
+            </tr>
+            </thead>
+            <tr th:each="person : ${persons}">
+                <td th:text="${person.firstName}"></td>
+                <td th:text="${person.lastName}"></td>
+                <td th:text="${person.number}"></td>
+            </tr>
+        </table>
+    </div>
+    <div class="row">
+
+        <div th:if="${persons.totalPages != 1}" class="form-group col-md-11 pagination-centered">
+            <ul class="pagination">
+                <li th:class="${persons.number == 0} ? disabled">
+                    <a class="pageLink" th:href="@{/(pageSize=${selectedPageSize}, page=1)}">&laquo;</a>
+                </li>
+                <li th:class="${persons.number == 0} ? disabled">
+                    <a class="pageLink" th:href="@{/(pageSize=${selectedPageSize}, page=${persons.number})}">&larr;</a>
+                </li>
+                <li th:class="${persons.number == (page - 1)} ? 'active pointer-disabled'"
+                    th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
+                    <a class="pageLink" th:href="@{/(pageSize=${selectedPageSize}, page=${page})}"
+                       th:text="${page}"></a>
+                </li>
+                <li th:class="${persons.number + 1 == persons.totalPages} ? disabled">
+                    <a class="pageLink"
+                       th:href="@{/(pageSize=${selectedPageSize}, page=${persons.number + 2})}">&rarr;</a>
+                </li>
+                <li th:class="${persons.number + 1 == persons.totalPages} ? disabled">
+                    <a class="pageLink"
+                       th:href="@{/(pageSize=${selectedPageSize}, page=${persons.totalPages})}">&raquo;</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div th:replace="fragments/footer :: footer"/>
+</div>
+
+<!--<script th:src="@{//static/js/app.js}"></script>-->
+<!--<script th:src="@{//static/js/bootstrap.min.js}"></script>-->
+<!--<script th:src="@{//static/js/npm.js}"></script>-->
+
+
+</body>
+</html>
