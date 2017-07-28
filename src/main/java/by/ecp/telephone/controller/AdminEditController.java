@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -41,11 +43,19 @@ public class AdminEditController {
 
 		Page<Person> persons = personService.findAllPageableOrderBylastName(new PageRequest(evalPage, evalPageSize));
 		Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
-
+		Person person = new Person();
 		modelAndView.addObject("persons", persons);
+		modelAndView.addObject("person", person);
 		modelAndView.addObject("selectedPageSize", evalPageSize);
 		modelAndView.addObject("pageSizes", PAGE_SIZES);
 		modelAndView.addObject("pager", pager);
 		return modelAndView;
+	}
+
+	@RequestMapping(value = "/adminEdit/save", method = RequestMethod.POST)
+	public String save( Person person) {
+		System.out.println("person.id = " + person.getId());
+		personService.save(person);
+		return "redirect:/adminEdit";
 	}
 }

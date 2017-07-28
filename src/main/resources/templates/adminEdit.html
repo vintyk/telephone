@@ -17,21 +17,25 @@
     <div class="row">
         <h1>Administrator</h1>
         <h6>(Spring Security protected)</h6>
-        <h6 th:inline="text">role: [[${#httpServletRequest.remoteUser}]]!</h6>
+        <h6 th:inline="text">User name: [[${#httpServletRequest.remoteUser}]]!</h6>
         <table class="table table-hover">
             <thead class="thead-inverse">
             <tr>
                 <th scope="row">#</th>
-                <th>First name</th>
-                <th>Last name</th>
-                <th>Number</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Shot number</th>
+                <th>City number (if exist)</th>
+                <th>Mobile number (if exist)</th>
             </tr>
             </thead>
             <tr th:each="person : ${persons}">
                 <td th:text="${person.id}"></td>
                 <td th:text="${person.firstName}"></td>
                 <td th:text="${person.lastName}"></td>
-                <td th:text="${person.number}"></td>
+                <td th:text="${person.numberShot}"></td>
+                <td th:text="${person.numberCity}"></td>
+                <td th:text="${person.numberMobil}"></td>
             </tr>
         </table>
 
@@ -43,7 +47,8 @@
                         <a class="pageLink" th:href="@{/adminEdit(pageSize=${selectedPageSize}, page=1)}">&laquo;</a>
                     </li>
                     <li th:class="${persons.number == 0} ? disabled">
-                        <a class="pageLink" th:href="@{/adminEdit(pageSize=${selectedPageSize}, page=${persons.number})}">&larr;</a>
+                        <a class="pageLink"
+                           th:href="@{/adminEdit(pageSize=${selectedPageSize}, page=${persons.number})}">&larr;</a>
                     </li>
                     <li th:class="${persons.number == (page - 1)} ? 'active pointer-disabled'"
                         th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
@@ -63,35 +68,62 @@
         </div>
 
         <div class="container">
-            <form>
+            <form id="form" role="form" th:action="@{/adminEdit/save}" method="post" th:object="${person}">
 
                 <div class="row">
 
                     <div class="form-group">
                         <label for="name" class="col-2 col-form-label">Name</label>
-                        <div class="col-10">
+                        <div class="col-md-6">
                             <input class="form-control" type="text" value="" placeholder="Name Person"
-                                   id="name"></input>
+                                   id="name" th:field="${person.firstName}"/></input>
                         </div>
                         <small id="nameHelp" class="form-text text-muted">This is name Person.</small>
                     </div>
+
                     <div class="form-group">
                         <label for="family" class="col-2 col-form-label">Family</label>
-                        <div class="col-10">
+                        <div class="col-md-6">
                             <input class="form-control" type="text" value="" placeholder="Family Person"
-                                   id="family"></input>
+                                   id="family" th:field="${person.lastName}"/></input>
                         </div>
                         <small id="fam" class="form-text text-muted">This is family Person.</small>
                     </div>
-                </div>
+
+                    <div class="form-group">
+                        <label class="col-2 col-form-label" for="telephoneShot">Shot Telephone
+                        </label>
+                        <div class="col-md-2">
+                            <input type="text" id="telephoneShot" class="form-control" placeholder="226"
+                                   th:field="${person.numberShot}"/></input>
+                        </div>
+                        <small id="telShot" class="form-text text-muted">Shot telephone.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-2 col-form-label" for="telephoneCity">City telephone
+                        </label>
+                        <div class="col-md-2">
+                            <input type="text" id="telephoneCity" class="form-control" placeholder="225-55-15"
+                                   th:field="${person.numberCity}"
+                                   pattern="[0-9]{3}-[0-9]{2}-[0-9]{2}"/></input>
+                        </div>
+                        <small id="telCity" class="form-text text-muted">City telephone.</small>
+                    </div>
+
                 <div class="form-group">
-                    <label for="telephone">Telephone (375-xx-xxx-xx-xx)
+                    <label class="col-2 col-form-label" for="telephone">Telephone (xxx-xx-xxx-xx-xx)
                     </label>
-                    <input type="text" id="telephone" class="form-control"
-                           pattern="375-[0-9]{2}-[0-9]{3}-[0-9]{2}-[0-9]{2}"/>
+                    <div class="col-md-6">
+                        <input type="text" id="telephone" class="form-control" placeholder="375-29-622-33-44"
+                               th:field="${person.numberMobil}"
+                               pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}-[0-9]{2}-[0-9]{2}"/></input>
+                    </div>
+                    <small id="tel" class="form-text text-muted">Mobile telephone.</small>
+                </div>
                 </div>
 
-                <button type="button" class="btn btn-primary btn-lg btn-block">Записать данные в БД</button>
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Записать данные в БД</button>
             </form>
         </div>
     </div>

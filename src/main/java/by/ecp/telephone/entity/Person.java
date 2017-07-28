@@ -25,13 +25,26 @@ public class Person {
 	@Setter
 	@Getter
 	private String lastName;
-	@Setter
 	@Getter
-	private String number;
+	@Setter
+	private String numberMobil;
+	@Getter
+	@Setter
+	private String numberShot;
+	@Getter
+	@Setter
+	private String numberCity;
 
-	public Person(String firstName, String lastName, String number) {
+	public Person(
+			String firstName,
+			String lastName,
+			String numberMobil,
+			String numberShot,
+			String numberCity) {
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.number = number;
+		this.numberMobil = numberMobil;
+		this.numberMobil = numberShot;
+		this.numberMobil = numberCity;
 	}
 }

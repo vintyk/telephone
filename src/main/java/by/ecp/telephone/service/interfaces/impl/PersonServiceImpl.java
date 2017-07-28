@@ -17,6 +17,12 @@ public class PersonServiceImpl implements PersonService {
 		this.personRepository = personRepository;
 	}
 
+
+	@Override
+	public void save(Person person) {
+		personRepository.save(person);
+	}
+
 	@Transactional
 	@Override
 	public Page<Person> findAllPageableOrderBylastName(Pageable pageable) {
