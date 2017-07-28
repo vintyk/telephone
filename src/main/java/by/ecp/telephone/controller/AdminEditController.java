@@ -6,10 +6,8 @@ import by.ecp.telephone.service.interfaces.PersonService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Optional;
@@ -41,7 +39,7 @@ public class AdminEditController {
 		// param. decreased by 1.
 		int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
 
-		Page<Person> persons = personService.findAllPageableOrderBylastName(new PageRequest(evalPage, evalPageSize));
+		Page<Person> persons = personService.findAllPageableOrderBylastName(new PageRequest(evalPage, 	evalPageSize));
 		Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
 		Person person = new Person();
 		modelAndView.addObject("persons", persons);
@@ -50,6 +48,12 @@ public class AdminEditController {
 		modelAndView.addObject("pageSizes", PAGE_SIZES);
 		modelAndView.addObject("pager", pager);
 		return modelAndView;
+	}
+	@RequestMapping(value = "/adminEdit/view/{id}")
+	public String viewContact(@PathVariable Long id, Model model) {
+		model.addAttribute("contact", this.personService.getPersonById(id));
+		model.addAttribute("activePage", "contacts");
+		return "adminEdit/view";
 	}
 
 	@RequestMapping(value = "/adminEdit/save", method = RequestMethod.POST)

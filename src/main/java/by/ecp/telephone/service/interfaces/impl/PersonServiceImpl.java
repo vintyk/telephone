@@ -6,10 +6,9 @@ import by.ecp.telephone.service.interfaces.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 public class PersonServiceImpl implements PersonService {
@@ -22,12 +21,12 @@ public class PersonServiceImpl implements PersonService {
 
 	@Override
 	public Iterable<Person> getAllPerson() {
-		return this.personRepository.findAll(Sort.by(Person.class.getSimpleName()));
+		return this.personRepository.findAll();
 	}
 
 	@Override
-	public Person getPersonById(Integer id) {
-		return null;
+	public Optional<Person> getPersonById(Long id) {
+		return this.personRepository.findById(id);
 	}
 
 	@Override
@@ -36,8 +35,8 @@ public class PersonServiceImpl implements PersonService {
 	}
 
 	@Override
-	public void deletePerson(Integer id) {
-
+	public void deletePerson(Long id) {
+		this.personRepository.deleteById(id);
 	}
 
 	@Override

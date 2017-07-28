@@ -38,7 +38,6 @@ public class PersonController {
 		// prevent exception), return initial size. Otherwise, return value of
 		// param. decreased by 1.
 		int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
-
 		Page<Person> persons = personService.findAllPageableOrderBylastName(new PageRequest(evalPage, evalPageSize));
 		Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
 

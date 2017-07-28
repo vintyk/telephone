@@ -19,7 +19,7 @@ public class Person {
 	@Getter
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long Id;
+	private Long Id;
 	@Setter
 	@Getter
 	private String firstName;

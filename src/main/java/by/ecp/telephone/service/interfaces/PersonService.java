@@ -4,11 +4,13 @@ import by.ecp.telephone.entity.Person;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Optional;
+
 public interface PersonService {
 
 	Iterable<Person> getAllPerson();
-	Person getPersonById(Integer id);
+	Optional<Person> getPersonById(Long id);
 	Person savePerson(Person contact);
-	void deletePerson(Integer id);
+	void deletePerson(Long id);
 	Page<Person> findAllPageableOrderBylastName(Pageable pageable);
 }

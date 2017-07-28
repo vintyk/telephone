@@ -51,6 +51,13 @@
                 <td th:text="${person.numberShot}"></td>
                 <td th:text="${person.numberCity}"></td>
                 <td th:text="${person.numberMobil}"></td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="...">
+                        <a th:href="${'/contacts/view/' + person.id}" class="btn btn-info"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+                        <!--<a th:href="${'/contacts/edit/' + contact.id}" class="btn btn-success"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>-->
+                        <!--<a th:href="${'/contacts/delete/' + contact.id}" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>-->
+                    </div>
+                </td>
             </tr>
         </table>
         <div class="container">

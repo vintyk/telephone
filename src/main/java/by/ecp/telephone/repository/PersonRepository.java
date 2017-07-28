@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PersonRepository extends PagingAndSortingRepository<Person, Long> {
     Page<Person> findAllByLastNameIsNotNullOrderByLastName(Pageable pageable);
+
 }
