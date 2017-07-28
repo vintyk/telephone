@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,6 +25,7 @@ public class Person {
 	private String firstName;
 	@Setter
 	@Getter
+	@NotEmpty(message = "Last Name is required.")
 	private String lastName;
 	@Getter
 	@Setter

@@ -55,7 +55,7 @@ public class AdminEditController {
 	@RequestMapping(value = "/adminEdit/save", method = RequestMethod.POST)
 	public String save( Person person) {
 		System.out.println("person.id = " + person.getId());
-		personService.save(person);
+		personService.savePerson(person);
 		return "redirect:/adminEdit";
 	}
 }

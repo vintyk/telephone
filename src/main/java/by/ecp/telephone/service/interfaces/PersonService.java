@@ -6,7 +6,9 @@ import org.springframework.data.domain.Pageable;
 
 public interface PersonService {
 
-	void save(Person person);
-
+	Iterable<Person> getAllPerson();
+	Person getPersonById(Integer id);
+	Person savePerson(Person contact);
+	void deletePerson(Integer id);
 	Page<Person> findAllPageableOrderBylastName(Pageable pageable);
 }
