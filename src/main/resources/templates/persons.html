@@ -27,6 +27,31 @@
 <!--<p th:text="'Приветствую !'" />-->
 <div class="container">
     <div class="row">
+        <ul class="nav nav-tabs">
+            <!-- в соответствии со статистикой % соотношением встречаемости заглавных букв в фамилиях -->
+            <li role="presentation"><a href="#">А</a></li>
+            <li role="presentation"><a href="#">Б</a></li>
+            <li role="presentation"><a href="#">В</a></li>
+            <li role="presentation"><a href="#">Г</a></li>
+            <li role="presentation"><a href="#">Д</a></li>
+            <li role="presentation"><a href="#">ЕЖ</a></li>
+            <li role="presentation"><a href="#">З</a></li>
+            <li role="presentation"><a href="#">И</a></li>
+            <li role="presentation"><a href="#">К</a></li>
+            <li role="presentation"><a href="#">Л</a></li>
+            <li role="presentation"><a href="#">М</a></li>
+            <li role="presentation"><a href="#">Н</a></li>
+            <li role="presentation"><a href="#">О</a></li>
+            <li role="presentation"><a href="#">П</a></li>
+            <li role="presentation"><a href="#">Р</a></li>
+            <li role="presentation"><a href="#">С</a></li>
+            <li role="presentation"><a href="#">Т</a></li>
+            <li role="presentation"><a href="#">УФ</a></li>
+            <li role="presentation"><a href="#">ХЦ</a></li>
+            <li role="presentation"><a href="#">Ч</a></li>
+            <li role="presentation"><a href="#">ШЩ</a></li>
+            <li role="presentation"><a href="#">ЭЮЯ</a></li>
+        </ul>
         <h1>Телефонный справочник</h1>
         <h6>(Spring Security protected)</h6>
 
@@ -35,16 +60,16 @@
         <table class="table table-hover">
             <thead class="thead-inverse">
             <tr>
-                <th>Имя</th>
                 <th>Фамилия</th>
+                <th>Имя</th>
                 <th>внутренний телефон</th>
                 <th>Городской телефон</th>
                 <th>Мобильный</th>
             </tr>
             </thead>
             <tr th:each="person : ${persons}">
-                <td th:text="${person.firstName}"></td>
                 <td th:text="${person.lastName}"></td>
+                <td th:text="${person.firstName}"></td>
                 <td th:text="${person.numberShot}"></td>
                 <td th:text="${person.numberCity}"></td>
                 <td th:text="${person.numberMobil}"></td>
