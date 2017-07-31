@@ -31,11 +31,7 @@ public class Pager {
         }
     }
 
-    public int getButtonsToShow() {
-        return buttonsToShow;
-    }
-
-    public void setButtonsToShow(int buttonsToShow) {
+       public void setButtonsToShow(int buttonsToShow) {
         if (buttonsToShow % 2 != 0) {
             this.buttonsToShow = buttonsToShow;
         } else {

@@ -51,9 +51,9 @@ public class AdminEditController {
 	}
 	@RequestMapping(value = "/adminEdit/view/{id}")
 	public String viewContact(@PathVariable Long id, Model model) {
-		model.addAttribute("contact", this.personService.getPersonById(id));
-		model.addAttribute("activePage", "contacts");
-		return "adminEdit/view";
+		model.addAttribute("person", this.personService.getPersonById(id));
+		model.addAttribute("activePage", this.personService.getAllPerson());
+		return "view";
 	}
 
 	@RequestMapping(value = "/adminEdit/save", method = RequestMethod.POST)
