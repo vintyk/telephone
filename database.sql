@@ -25,12 +25,12 @@ DROP TABLE IF EXISTS `person`;
 CREATE TABLE `person` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(50) DEFAULT NULL,
-  `last_name` varchar(50) DEFAULT NULL,
+  `last_name` varchar(50) NOT NULL,
   `number_mobil` varchar(50) DEFAULT NULL,
   `number_city` varchar(255) DEFAULT NULL,
   `number_shot` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,33 +39,8 @@ CREATE TABLE `person` (
 
 LOCK TABLES `person` WRITE;
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
-INSERT INTO `person` VALUES (1,'Ушаков','Виталий','375-29-624-47-44','265-77-65','332'),(2,'Валерий','Нечай','375-44-345-66-77','265-77-44','345'),(3,'fff','ffff','375-33-444-55-66','265-77-33','656'),(4,'kkk','kkkkkkkk','375-21-333-11-55','223-66-54','786'),(5,'hghg','hghgh','375-29-883-44-55','265-77-77','4345'),(6,'Арнольд','Шварцнегер','555-55-882-77-77','265-77-00','334'),(7,'Абдула','Амиль ибн Махмуд','375-44-656-77-87','276-77-55','345');
+INSERT INTO `person` VALUES (1,'Виталий','Ушаков','375-29-624-47-44','265-77-65','332'),(2,'Валерий','Нечай','375-44-345-66-77','265-77-44','345'),(6,'Арнольд','Шварцнегер','555-55-882-77-77','265-77-00','334'),(7,'Абдула','Амиль ибн Махмуд','375-44-656-77-87','276-77-55','345'),(8,'Джон','Леннон','','234-76-65','112'),(9,'Ярослав','Зыскунов','','','133'),(10,'Евгений','Фюрер','375-44-992-88-77','','222'),(11,'Андрей','Подкоблучник','','','112'),(12,'Дональд','Трамп','','','998'),(13,'Владимир ','Агутин','','','111'),(14,'Дмитрий','Неспавший','','288-99-22','223'),(15,'Валерий','Сюткин','','','987'),(16,'Михаил','Затворный','375-29-777-22-33','','444');
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `users`
---
-
-DROP TABLE IF EXISTS `users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(150) NOT NULL,
-  `password` varchar(150) NOT NULL,
-  `privilege` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `users`
---
-
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -77,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-28 12:12:23
+-- Dump completed on 2017-07-31  8:18:34
