@@ -1,49 +1,90 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
+    <link href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+    <script src="webjars/jquery/1.11.1/jquery.min.js"></script>
+    <link href="../static/js/bootstrap.min.js" th:href="@{/css/bootstrap.min.js}" rel="stylesheet" media="screen"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>View</title>
-    <link href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" rel="stylesheet" media="screen"> </link>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('h1').animate({
+                fontSize: '46px'
+            }, "slow");
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('h1').animate({
+                fontSize: '40px'
+            }, "slow");
+        });
+    </script>
 </head>
 <body>
 
-<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+    <div class="row">
+
+        <div class="form-group">
+            <div class="alert alert-success" role="alert">
+                <h1>View</h1>
+                <div class="form-group">
+                    <label for="inputId">ID</label>
+                    <input type="text" class="form-control" id="inputId" placeholder="ID" th:field="*{person.id}"
+                           name="id" disabled="disabled"/>
+                </div>
+                <div class="form-group">
+                <label for="inputLastName">Last Name</label>
+                <input type="text" class="form-control" id="inputLastName" placeholder="Last Name"
+                       th:field="*{person.lastName}" name="lastName" disabled="disabled"/>
+            </div>
+                <div class="form-group">
+                    <label for="inputFirstName">First Name</label>
+                    <input type="text" class="form-control" id="inputFirstName" placeholder="First Name"
+                           th:field="*{person.firstName}" name="firstName" disabled="disabled"/>
+                </div>
+                <div class="form-group">
+                    <label for="numberShot">Shot Number</label>
+                    <input type="text" class="form-control" id="numberShot" placeholder="3451"
+                           th:field="*{person.numberShot}" name="numberShot" disabled="disabled"/>
+                </div>
+                <div class="form-group">
+                    <label for="numberCity">City Number</label>
+                    <input type="text" class="form-control" id="numberCity" placeholder="249-98-73"
+                           th:field="*{person.numberCity}" name="numberCity" disabled="disabled"/>
+                </div>
+                <div class="form-group">
+                    <label for="inputMobileNumber">Mobile Number</label>
+                    <input type="text" class="form-control" id="inputMobileNumber" placeholder="Mobile No."
+                           th:field="*{person.numberMobil}" name="mobileNumber" disabled="disabled"/>
+                </div>
+                <p><a href="/adminEdit" class="btn btn-primary" role="button">Back</a>
+                    <a th:href="@{'/adminEdit/edit/' + ${person.id}}" class="btn btn-outline-success" role="button">Edit</a>
+                </p>
+
+                <div class="text-right">
+                    <!--<a th:href="@{'/adminEdit/edit/' + ${person.id}}" class="btn btn-primary">Edit</a>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!--<div class="container">-->
-    <!--<div class="row">-->
-        <!--<div class="form-group">-->
-            <!--<div class="panel-body">-->
-                <!--<div class="form-group">-->
-                    <!--<label for="inputId">ID</label>-->
-                    <!--<input type="text" class="form-control" id="inputId" placeholder="ID" th:field="*{person.id}"-->
-                           <!--name="id" disabled="disabled"/>-->
-                <!--</div>-->
-                <!--<div class="form-group">-->
-                    <!--<label for="inputLastName">Last Name</label>-->
-                    <!--<input type="text" class="form-control" id="inputLastName" placeholder="Last Name"-->
-                           <!--th:field="*{person.lastName}" name="lastName" disabled="disabled"/>-->
-                <!--</div>-->
-                <!--<div class="form-group">-->
-                    <!--<label for="inputFirstName">First Name</label>-->
-                    <!--<input type="text" class="form-control" id="inputFirstName" placeholder="First Name"-->
-                           <!--th:field="*{person.firstName}" name="firstName" disabled="disabled"/>-->
-                <!--</div>-->
-                <!--<div class="form-group">-->
-                    <!--<label for="inputMobileNumber">Mobile Number</label>-->
-                    <!--<input type="text" class="form-control" id="inputMobileNumber" placeholder="Mobile No."-->
-                           <!--th:field="*{person.numberMobil}" name="mobileNumber" disabled="disabled"/>-->
-                <!--</div>-->
-                <!--<div class="form-group">-->
-                    <!--<label for="numberShot">Shot Number</label>-->
-                    <!--<input type="text" class="form-control" id="numberShot" placeholder="3451"-->
-                           <!--th:field="*{person.numberShot}" name="numberShot" disabled="disabled"/>-->
-                <!--</div>-->
-                <!--<div class="text-right">-->
-                    <!--<a href="/adminEdit" th:href="@{/adminEdit}" class="btn btn-default">Back</a>-->
-                    <!--&lt;!&ndash;<a th:href="@{'/adminEdit/edit/' + ${person.id}}" class="btn btn-primary">Edit</a>&ndash;&gt;-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
+<!--<div class="row">-->
+
+<!--<div class="col-md-12">-->
+<!--<input class="form-control" type="text" value="" placeholder="Name Person"-->
+<!--id="name" th:field="${person.firstName}"/>-->
+<!--</div>-->
+
+<!--</div>-->
 <!--</div>-->
 </body>
 </html>

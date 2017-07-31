@@ -10,7 +10,8 @@ public interface PersonService {
 
 	Iterable<Person> getAllPerson();
 	Optional<Person> getPersonById(Long id);
-	Person savePerson(Person contact);
+	void savePerson(Person person);
+	void update(Person person1, Person person2);
 	void deletePerson(Long id);
 	Page<Person> findAllPageableOrderBylastName(Pageable pageable);
 }

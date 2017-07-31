@@ -30,8 +30,13 @@ public class PersonServiceImpl implements PersonService {
 	}
 
 	@Override
-	public Person savePerson(Person contact) {
-		return this.personRepository.save(contact);
+	public void savePerson(Person person) {
+		this.personRepository.save(person);
+	}
+
+	@Override
+	public void update(Person person1, Person person2) {
+
 	}
 
 	@Override

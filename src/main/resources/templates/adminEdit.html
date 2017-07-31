@@ -6,22 +6,6 @@
 <head>
     <title>Persons</title>
     <link href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    </link>
-    <script src="webjars/jquery/1.11.1/jquery.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('h1').animate({
-                fontSize: '46px'
-            }, "slow");
-        });
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('h1').animate({
-                fontSize: '40px'
-            }, "slow");
-        });
-    </script>
 </head>
 
 <body>
@@ -55,6 +39,7 @@
                     <div class="btn-group" role="group" aria-label="...">
                         <a th:href="${'/adminEdit/view/' + person.id}" class="btn btn-info"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
                         <a th:href="${'/adminEdit/edit/' + person.id}" class="btn btn-success"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                        <a th:href="${'/adminEdit/clone/' + person.id}" class="btn btn-success"><span class="glyphicon glyphicon-transfer" aria-hidden="true"></span></a>
                         <a th:href="${'/adminEdit/delete/' + person.id}" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
                     </div>
                 </td>
@@ -93,7 +78,6 @@
             <form id="form" role="form" th:action="@{/adminEdit/save}" method="post" th:object="${person}">
 
                 <div class="row">
-
                     <div class="form-group">
                         <label for="name" class="col-2 col-form-label">Name</label>
                         <div class="col-md-6">
