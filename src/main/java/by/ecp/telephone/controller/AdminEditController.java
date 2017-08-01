@@ -102,18 +102,16 @@ public class AdminEditController {
 			personEdit.setNumberShot(personOptional.get().getNumberShot());
 			personEdit.setNumberCity(personOptional.get().getNumberCity());
 			personEdit.setNumberMobil(personOptional.get().getNumberMobil());
-			model.addAttribute("person", personEdit);
+//			model.addAttribute("person", Optional.of(personEdit));
+						model.addAttribute("person", personEdit);
 		} else {
 			return "adminEdit";
 		}
 		return "edit";
 	}
-	@RequestMapping(value = "/adminEdit/edit/update/", method = RequestMethod.POST)
+	@RequestMapping(value = "/adminEdit/edit/update", method = RequestMethod.POST)
 	public String updatePerson(Person person) {
 		this.personService.savePerson(person);
 		return "redirect:/adminEdit";
 	}
-
-
-
 }

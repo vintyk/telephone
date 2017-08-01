@@ -1,17 +1,15 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <title>Persons</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" rel="stylesheet" media="screen"> </link>
     <script src="webjars/jquery/1.11.1/jquery.min.js"></script>
 
-    <script type="text/javascript">
-        $('#pageSizeSelect').change(function(evt) {
-            window.location.replace("/?pageSize=" + this.value + "&page=1");
-        });
-    </script>
-    <script type="text/javascript">
+    <script th:inline="javascript">
         $(document).ready(function() {
             $('h1').animate({
                 fontSize: '42px'
@@ -24,10 +22,15 @@
 
 <div th:replace="fragments/header :: header"/></div>
 <!--<p th:text="'Приветствую !'" />-->
+<li><a href="#" th:href="@{/product/new}" sec:authorize="hasRole('ROLE_ADMIN')">Create Product</a></li>
+<li><a href="#" th:href="@{/product/new}" sec:authorize="hasRole('ADMIN')">Create Product</a></li>
+
+
 <div class="container">
     <div class="row">
         <ul class="nav nav-tabs">
             <!-- в соответствии со статистикой % соотношением встречаемости заглавных букв в фамилиях -->
+            <li role="presentation"><a href="#">Аll</a></li>
             <li role="presentation"><a href="#">А</a></li>
             <li role="presentation"><a href="#">Б</a></li>
             <li role="presentation"><a href="#">В</a></li>
@@ -104,10 +107,9 @@
     <div th:replace="fragments/footer :: footer"/>
 </div>
 
-<!--<script th:src="@{//static/js/app.js}"></script>-->
-<!--<script th:src="@{//static/js/bootstrap.min.js}"></script>-->
-<!--<script th:src="@{//static/js/npm.js}"></script>-->
-
+<script th:src="@{../static/js/app.js}"></script>
+<script th:src="@{../static/js/bootstrap.min.js}"></script>
+<script th:src="@{/static/js/jquery-3.2.1.min.js}"></script>
 
 </body>
 </html>

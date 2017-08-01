@@ -12,16 +12,21 @@
             <div class="navbar-header">
                 <a class="navbar-brand" th:href="@{/}">ТЕЛЕФОННЫЙ СПРАВОЧНИК</a>
             </div>
-            <div id="navbar" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a th:href="@{/login}">Войти</a></li>
-                </ul>
-                <ul class="nav navbar-nav">
-                    <li class="active"><a th:href="@{/adminEdit}">Администратор</a></li>
-                </ul>
-                <ul class="nav navbar-nav">
-                    <li class="active"><a th:href="@{/logout}">Выйти</a></li>
-                </ul>
+
+            <!--<div class="form-group" th:if="${'ADMIN'.equals(isAdmin) and myObjct.name!=null}">-->
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a th:href="@{/login}">Войти</a></li>
+                    </ul>
+
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a th:href="@{/adminEdit}">Администратор</a></li>
+                    </ul>
+
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a th:href="@{/logout}">Выйти</a></li>
+                    </ul>
+                <!--</div>-->
             </div>
         </div>
     </nav>
