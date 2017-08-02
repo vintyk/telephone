@@ -16,11 +16,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/resources/**", "/login", "/").permitAll()
-                .antMatchers("/adminEdit/**").hasAnyRole("ADMIN")
+                .antMatchers("/resources/**").permitAll()
+                .antMatchers("/resources/**", "/adminEdit/**").hasAnyRole("ADMIN")
+                .antMatchers("/resources/**", "/login", "/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/login").loginProcessingUrl("/login")
+                .formLogin()
+                .loginPage("/login")
+                .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/", true)
                 .and()
                 .logout()
@@ -39,8 +42,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public UserDetailsService userDetailsService() {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(User.withUsername("user").password("1").roles("USER").build());
+        manager.createUser(User.withUsername("user").password("user").roles("USER").build());
         manager.createUser(User.withUsername("admin").password("qwerty").roles("ADMIN").build());
+        manager.createUser(User.withUsername("administrator").password("qwerty").roles("ADMIN").build());
         manager.createUser(User.withUsername("vinty@i.ua").password("1").roles("ADMIN").build());
         return manager;
     }

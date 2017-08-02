@@ -35,6 +35,18 @@ public class PersonServiceImpl implements PersonService {
 	}
 
 	@Override
+	public void savePersonAlphabet(Person person) {
+		Person personWithAlphabetDigit = new Person();
+		personWithAlphabetDigit.setFirstName(person.getFirstName());
+		personWithAlphabetDigit.setLastName(person.getLastName());
+		personWithAlphabetDigit.setNumberShot(person.getNumberShot());
+		personWithAlphabetDigit.setNumberCity(person.getNumberCity());
+		personWithAlphabetDigit.setNumberMobil(person.getNumberMobil());
+		personWithAlphabetDigit.setAlphabet(cutFromWordFirstChar(person.getLastName()));
+		this.personRepository.save(personWithAlphabetDigit);
+	}
+
+	@Override
 	public void update(Person person1, Person person2) {
 
 	}
@@ -48,4 +60,25 @@ public class PersonServiceImpl implements PersonService {
 	public Page<Person> findAllPageableOrderBylastName(Pageable pageable) {
 		return personRepository.findAllByLastNameIsNotNullOrderByLastName(pageable);
 	}
+	@Override
+	public Page<Person> findAllByAlphabetEquals(Pageable pageable, String searchResult) {
+		return personRepository.findAllByAlphabetEquals(pageable, searchResult);
+	}
+
+	public String cutFromWordFirstChar(String word){
+		String result = word.toLowerCase().substring(0,1);
+		if (result.equals("ж")){
+			result = "е";
+		}else if (result.equals("ф")){
+			result = "у";
+		}else if (result.equals("ц")){
+			result = "х";
+		}else if (result.equals("щ")){
+			result = "ш";
+		}else if (result.equals("ю") || result.equals("я")){
+			result = "э";
+		}
+		return result;
+	}
+
 }

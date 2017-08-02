@@ -21,38 +21,36 @@
 <body>
 
 <div th:replace="fragments/header :: header"/></div>
-<!--<p th:text="'Приветствую !'" />-->
-<li><a href="#" th:href="@{/product/new}" sec:authorize="hasRole('ROLE_ADMIN')">Create Product</a></li>
-<li><a href="#" th:href="@{/product/new}" sec:authorize="hasRole('ADMIN')">Create Product</a></li>
-
+<!--<li><a href="#" th:href="@{/product/new}" sec:authorize="hasRole('ROLE_ADMIN')">Create Product</a></li>-->
+<!--<li><a href="#" th:href="@{/product/new}" sec:authorize="hasRole('ADMIN')">Create Product</a></li>-->
 
 <div class="container">
     <div class="row">
         <ul class="nav nav-tabs">
             <!-- в соответствии со статистикой % соотношением встречаемости заглавных букв в фамилиях -->
-            <li role="presentation"><a href="#">Аll</a></li>
-            <li role="presentation"><a href="#">А</a></li>
-            <li role="presentation"><a href="#">Б</a></li>
-            <li role="presentation"><a href="#">В</a></li>
-            <li role="presentation"><a href="#">Г</a></li>
-            <li role="presentation"><a href="#">Д</a></li>
-            <li role="presentation"><a href="#">ЕЖ</a></li>
-            <li role="presentation"><a href="#">З</a></li>
-            <li role="presentation"><a href="#">И</a></li>
-            <li role="presentation"><a href="#">К</a></li>
-            <li role="presentation"><a href="#">Л</a></li>
-            <li role="presentation"><a href="#">М</a></li>
-            <li role="presentation"><a href="#">Н</a></li>
-            <li role="presentation"><a href="#">О</a></li>
-            <li role="presentation"><a href="#">П</a></li>
-            <li role="presentation"><a href="#">Р</a></li>
-            <li role="presentation"><a href="#">С</a></li>
-            <li role="presentation"><a href="#">Т</a></li>
-            <li role="presentation"><a href="#">УФ</a></li>
-            <li role="presentation"><a href="#">ХЦ</a></li>
-            <li role="presentation"><a href="#">Ч</a></li>
-            <li role="presentation"><a href="#">ШЩ</a></li>
-            <li role="presentation"><a href="#">ЭЮЯ</a></li>
+            <li role="presentation"><a href="/" >Аll</a></li>
+            <li role="presentation"><a th:href="@{/а}">А</a></li>
+            <li role="presentation"><a th:href="@{/б}">Б</a></li>
+            <li role="presentation"><a th:href="@{/в}">В</a></li>
+            <li role="presentation"><a th:href="@{/г}">Г</a></li>
+            <li role="presentation"><a th:href="@{/д}">Д</a></li>
+            <li role="presentation"><a th:href="@{/е}">ЕЖ</a></li>
+            <li role="presentation"><a th:href="@{/з}">З</a></li>
+            <li role="presentation"><a th:href="@{/и}">И</a></li>
+            <li role="presentation"><a th:href="@{/к}">К</a></li>
+            <li role="presentation"><a th:href="@{/л}">Л</a></li>
+            <li role="presentation"><a th:href="@{/м}">М</a></li>
+            <li role="presentation"><a th:href="@{/н}">Н</a></li>
+            <li role="presentation"><a th:href="@{/о}">О</a></li>
+            <li role="presentation"><a th:href="@{/п}">П</a></li>
+            <li role="presentation"><a th:href="@{/р}">Р</a></li>
+            <li role="presentation"><a th:href="@{/с}">С</a></li>
+            <li role="presentation"><a th:href="@{/т}">Т</a></li>
+            <li role="presentation"><a th:href="@{/у}">УФ</a></li>
+            <li role="presentation"><a th:href="@{/х}">ХЦ</a></li>
+            <li role="presentation"><a th:href="@{/ч}">Ч</a></li>
+            <li role="presentation"><a th:href="@{/ш}">ШЩ</a></li>
+            <li role="presentation"><a th:href="@{/э}">ЭЮЯ</a></li>
         </ul>
         <h1>Телефонный справочник</h1>
         <h6>(Spring Security protected)</h6>

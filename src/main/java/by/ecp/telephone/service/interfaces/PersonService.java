@@ -11,7 +11,9 @@ public interface PersonService {
 	Iterable<Person> getAllPerson();
 	Optional<Person> getPersonById(Long id);
 	void savePerson(Person person);
+	void savePersonAlphabet(Person person);
 	void update(Person person1, Person person2);
 	void deletePerson(Long id);
 	Page<Person> findAllPageableOrderBylastName(Pageable pageable);
+	Page<Person> findAllByAlphabetEquals(Pageable pageable, String searchResult);
 }
