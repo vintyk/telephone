@@ -22,11 +22,17 @@
                       th:object="${person}">
                     <div class="alert alert-success" role="alert">
                         <input type="hidden" th:field="*{id}"/>
-                        <input type="hidden" th:field="*{alphabet}"/>
+                        <!--<input type="hidden" th:field="*{alphabet}"/>-->
                         <div class="col-md-3">
                             <label for="inputId">ID</label>
-                            <input type="text" class="form-control" id="inputId" placeholder="ID" th:field="*{id}"
+                            <input type="text" class="form-control" disabled="disabled" id="inputId" placeholder="ID" th:field="*{id}"
                                    name="id"/>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="alphabet">Алфавитный указатель</label>
+                            <input type="text" class="form-control"  id="alphabet" placeholder="alphabet" th:field="*{alphabet}"
+                                   name="alphabet" pattern="[а-я]{1}" />
+                            <small id="alphabetic" class="form-text text-muted">Измените в случае смены фамилии</small>
                         </div>
                     </div>
                     <div class="alert alert-warning" role="alert">
@@ -48,13 +54,13 @@
                         </div>
                         <div class="col-md-6">
                             <label for="numberShot">Городской номер</label>
-                            <input type="text" class="form-control" id="numberShot" placeholder="3451"
-                                   th:field="*{numberCity}" name="numberShot"/>
+                            <input type="text" class="form-control" id="numberShot" placeholder="xxx-xx-xx"
+                                   th:field="*{numberCity}" pattern="[0-9]{3}-[0-9]{2}-[0-9]{2}" name="numberShot"/>
                         </div>
                         <div class="col-md-6">
                             <label for="inputMobileNumber">Мобильный номер</label>
-                            <input type="text" class="form-control" id="inputMobileNumber" placeholder="Mobile No."
-                                   th:field="*{numberMobil}" name="mobileNumber"/>
+                            <input type="text" class="form-control" id="inputMobileNumber" placeholder="xxx-xx-xxx-xx-xx"
+                                   th:field="*{numberMobil}" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}-[0-9]{2}-[0-9]{2}" name="mobileNumber"/>
                         </div>
                     </div>
 

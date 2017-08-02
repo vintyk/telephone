@@ -12,6 +12,6 @@ import java.util.Optional;
 @Repository
 public interface PersonRepository extends PagingAndSortingRepository<Person, Long> {
     Page<Person> findAllByLastNameIsNotNullOrderByLastName(Pageable pageable);
-    Page<Person> findAllByAlphabetEquals(Pageable pageable, String searchResult);
+    Page<Person> findAllByAlphabetEqualsOrderByLastName(Pageable pageable, String searchResult);
 
 }

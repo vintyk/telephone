@@ -50,7 +50,7 @@ public class PersonController {
 		int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
 		int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
 
-		Page<Person> persons = personService.findAllByAlphabetEquals(new PageRequest(evalPage, evalPageSize), searchResult);
+		Page<Person> persons = personService.findAllByAlphabetEqualsOrderByLastName(new PageRequest(evalPage, evalPageSize), searchResult);
 		Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
 		Person person = new Person();
 		modelAndView.addObject("persons", persons);

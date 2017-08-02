@@ -47,11 +47,6 @@ public class PersonServiceImpl implements PersonService {
 	}
 
 	@Override
-	public void update(Person person1, Person person2) {
-
-	}
-
-	@Override
 	public void deletePerson(Long id) {
 		this.personRepository.deleteById(id);
 	}
@@ -61,10 +56,9 @@ public class PersonServiceImpl implements PersonService {
 		return personRepository.findAllByLastNameIsNotNullOrderByLastName(pageable);
 	}
 	@Override
-	public Page<Person> findAllByAlphabetEquals(Pageable pageable, String searchResult) {
-		return personRepository.findAllByAlphabetEquals(pageable, searchResult);
+	public Page<Person> findAllByAlphabetEqualsOrderByLastName(Pageable pageable, String searchResult) {
+		return personRepository.findAllByAlphabetEqualsOrderByLastName(pageable, searchResult);
 	}
-
 	public String cutFromWordFirstChar(String word){
 		String result = word.toLowerCase().substring(0,1);
 		if (result.equals("ж")){
@@ -80,5 +74,4 @@ public class PersonServiceImpl implements PersonService {
 		}
 		return result;
 	}
-
 }

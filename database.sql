@@ -29,8 +29,9 @@ CREATE TABLE `person` (
   `number_mobil` varchar(50) DEFAULT NULL,
   `number_city` varchar(255) DEFAULT NULL,
   `number_shot` varchar(255) DEFAULT NULL,
+  `alphabet` varchar(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,8 +40,33 @@ CREATE TABLE `person` (
 
 LOCK TABLES `person` WRITE;
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
-INSERT INTO `person` VALUES (1,'Виталий','Ушаков','375-29-624-47-44','265-77-65','332'),(2,'Валерий','Нечай','375-44-345-66-77','265-77-44','345'),(6,'Арнольд','Шварцнегер','555-55-882-77-77','265-77-00','334'),(7,'Абдула','Амиль ибн Махмуд','375-44-656-77-87','276-77-55','345'),(8,'Джон','Леннон','','234-76-65','112'),(9,'Ярослав','Зыскунов','','','133'),(10,'Евгений','Фюрер','375-44-992-88-77','','222'),(11,'Андрей','Подкоблучник','','','112'),(12,'Дональд','Трамп','','','998'),(13,'Владимир ','Агутин','','','111'),(14,'Дмитрий','Неспавший','','288-99-22','223'),(15,'Валерий','Сюткин','','','987'),(16,'Михаил','Затворный','375-29-777-22-33','','444');
+INSERT INTO `person` VALUES (2,'Валерий','Нечай','375-44-345-66-77','265-77-44','345','н'),(6,'Арнольд','Шварцнегер','555-55-882-77-77','265-77-00','334','ш'),(8,'Джон','Леннон','','234-76-65','112','л'),(9,'Ярослав','Зыскунов','','','133','з'),(10,'Евгений','Фюрер','375-44-992-88-77','','222','у'),(11,'Андрей','Подкоблучник','','','112','п'),(12,'Дональд','Трамп','','','998','т'),(14,'Дмитрий','Неспавший','','288-99-22','223','н'),(17,'Игорь','Престолов','','223-77-34','114','п'),(18,'Аль','Пачинок','','298-87-99','767','п'),(20,'Антон','Зарецкий','','223-43-21','112','з'),(41,'Абдул','Каримов','','289-99-81','121','к'),(43,'Леонид','Утесов','375-29-212-33-44','221-65-43','112','у'),(44,'Светлана','Зыскунова','','','188','з'),(47,'Шамиль','Нечай','','989-99-81','089','н'),(48,'Дмитрий','Берюк','','238-98-00','676','б'),(49,'Виталий','Ушаков','','','222','у'),(54,'Шамиль','Басаев','','989-99-81','111','б'),(62,'Абдул','Басков','','','111','б'),(68,'Дмитрий','Багиев','375-29-655-44-77','245-78-93','565','б');
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(150) NOT NULL,
+  `password` varchar(150) NOT NULL,
+  `privilege` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +78,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-31  8:18:34
+-- Dump completed on 2017-08-02 15:42:16
