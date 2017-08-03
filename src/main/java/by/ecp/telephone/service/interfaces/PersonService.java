@@ -8,11 +8,19 @@ import java.util.Optional;
 
 public interface PersonService {
 
-	Iterable<Person> getAllPerson();
-	Optional<Person> getPersonById(Long id);
-	void savePerson(Person person);
-	void savePersonAlphabet(Person person);
-	void deletePerson(Long id);
-	Page<Person> findAllPageableOrderBylastName(Pageable pageable);
-	Page<Person> findAllByAlphabetEqualsOrderByLastName(Pageable pageable, String searchResult);
+    Iterable<Person> getAllPerson();
+
+    Optional<Person> getPersonById(Long id);
+
+    void savePerson(Person person);
+
+    void savePersonAlphabet(Person person);
+
+    void deletePerson(Long id);
+
+    Page<Person> findAllPageableOrderBylastName(Pageable pageable);
+
+    Page<Person> findAllByAlphabetEqualsOrderByLastName(Pageable pageable, String searchResult);
+
+    Page<Person> findAllByLastNameContainsOrderByLastName(Pageable pageable, String searchRes);
 }

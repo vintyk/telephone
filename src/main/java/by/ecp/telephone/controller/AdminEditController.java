@@ -45,25 +45,6 @@ public class AdminEditController {
         return modelAndView;
     }
 
-//    @GetMapping("/adminEdit/search/{searchResult}")
-//    public ModelAndView showPersonsPageSearch(@PathVariable String searchResult,
-//                                              @RequestParam("pageSize") Optional<Integer> pageSize,
-//                                              @RequestParam("page") Optional<Integer> page) {
-//        ModelAndView modelAndView = new ModelAndView("adminEdit");
-//        int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
-//        int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
-//
-//        Page<Person> persons = personService.findAllByAlphabetEquals(new PageRequest(evalPage, evalPageSize), searchResult);
-//        Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
-//        Person person = new Person();
-//        modelAndView.addObject("persons", persons);
-//        modelAndView.addObject("person", person);
-//        modelAndView.addObject("selectedPageSize", evalPageSize);
-//        modelAndView.addObject("pageSizes", PAGE_SIZES);
-//        modelAndView.addObject("pager", pager);
-//        return modelAndView;
-//    }
-
     @RequestMapping(value = "/adminEdit/save", method = RequestMethod.POST)
     public String save(Person person) {
         personService.savePersonAlphabet(person);

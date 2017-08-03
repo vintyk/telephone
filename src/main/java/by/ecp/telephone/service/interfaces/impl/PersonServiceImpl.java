@@ -13,65 +13,73 @@ import java.util.Optional;
 @Service
 public class PersonServiceImpl implements PersonService {
 
-	private PersonRepository personRepository;
-	@Autowired
-	public PersonServiceImpl(PersonRepository personRepository) {
-		this.personRepository = personRepository;
-	}
+    private PersonRepository personRepository;
 
-	@Override
-	public Iterable<Person> getAllPerson() {
-		return this.personRepository.findAll();
-	}
+    @Autowired
+    public PersonServiceImpl(PersonRepository personRepository) {
+        this.personRepository = personRepository;
+    }
 
-	@Override
-	public Optional<Person> getPersonById(Long id) {
-		return this.personRepository.findById(id);
-	}
+    @Override
+    public Iterable<Person> getAllPerson() {
+        return this.personRepository.findAll();
+    }
 
-	@Override
-	public void savePerson(Person person) {
-		this.personRepository.save(person);
-	}
+    @Override
+    public Optional<Person> getPersonById(Long id) {
+        return this.personRepository.findById(id);
+    }
 
-	@Override
-	public void savePersonAlphabet(Person person) {
-		Person personWithAlphabetDigit = new Person();
-		personWithAlphabetDigit.setFirstName(person.getFirstName());
-		personWithAlphabetDigit.setLastName(person.getLastName());
-		personWithAlphabetDigit.setNumberShot(person.getNumberShot());
-		personWithAlphabetDigit.setNumberCity(person.getNumberCity());
-		personWithAlphabetDigit.setNumberMobil(person.getNumberMobil());
-		personWithAlphabetDigit.setAlphabet(cutFromWordFirstChar(person.getLastName()));
-		this.personRepository.save(personWithAlphabetDigit);
-	}
+    @Override
+    public void savePerson(Person person) {
+        this.personRepository.save(person);
+    }
 
-	@Override
-	public void deletePerson(Long id) {
-		this.personRepository.deleteById(id);
-	}
+    @Override
+    public void savePersonAlphabet(Person person) {
+        Person personWithAlphabetDigit = new Person();
+        personWithAlphabetDigit.setFirstName(person.getFirstName());
+        personWithAlphabetDigit.setLastName(person.getLastName());
+        personWithAlphabetDigit.setNumberShot(person.getNumberShot());
+        personWithAlphabetDigit.setNumberCity(person.getNumberCity());
+        personWithAlphabetDigit.setNumberMobil(person.getNumberMobil());
+        personWithAlphabetDigit.setAlphabet(cutFromWordFirstChar(person.getLastName()));
+        this.personRepository.save(personWithAlphabetDigit);
+    }
 
-	@Override
-	public Page<Person> findAllPageableOrderBylastName(Pageable pageable) {
-		return personRepository.findAllByLastNameIsNotNullOrderByLastName(pageable);
-	}
-	@Override
-	public Page<Person> findAllByAlphabetEqualsOrderByLastName(Pageable pageable, String searchResult) {
-		return personRepository.findAllByAlphabetEqualsOrderByLastName(pageable, searchResult);
-	}
-	public String cutFromWordFirstChar(String word){
-		String result = word.toLowerCase().substring(0,1);
-		if (result.equals("ж")){
-			result = "е";
-		}else if (result.equals("ф")){
-			result = "у";
-		}else if (result.equals("ц")){
-			result = "х";
-		}else if (result.equals("щ")){
-			result = "ш";
-		}else if (result.equals("ю") || result.equals("я")){
-			result = "э";
-		}
-		return result;
-	}
+    @Override
+    public void deletePerson(Long id) {
+        this.personRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<Person> findAllPageableOrderBylastName(Pageable pageable) {
+        return personRepository.findAllByLastNameIsNotNullOrderByLastName(pageable);
+    }
+
+    @Override
+    public Page<Person> findAllByAlphabetEqualsOrderByLastName(Pageable pageable, String searchResult) {
+        return personRepository.findAllByAlphabetEqualsOrderByLastName(pageable, searchResult);
+    }
+
+    @Override
+    public Page<Person> findAllByLastNameContainsOrderByLastName(Pageable pageable, String searchRes) {
+        return personRepository.findAllByLastNameContainsOrderByLastName(pageable, searchRes);
+    }
+
+    public String cutFromWordFirstChar(String word) {
+        String result = word.toLowerCase().substring(0, 1);
+        if (result.equals("ж")) {
+            result = "е";
+        } else if (result.equals("ф")) {
+            result = "у";
+        } else if (result.equals("ц")) {
+            result = "х";
+        } else if (result.equals("щ")) {
+            result = "ш";
+        } else if (result.equals("ю") || result.equals("я")) {
+            result = "э";
+        }
+        return result;
+    }
 }

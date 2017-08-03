@@ -13,5 +13,6 @@ import java.util.Optional;
 public interface PersonRepository extends PagingAndSortingRepository<Person, Long> {
     Page<Person> findAllByLastNameIsNotNullOrderByLastName(Pageable pageable);
     Page<Person> findAllByAlphabetEqualsOrderByLastName(Pageable pageable, String searchResult);
+    Page<Person> findAllByLastNameContainsOrderByLastName(Pageable pageable, String searchRes);
 
 }

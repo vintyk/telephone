@@ -21,13 +21,9 @@
 <body>
 
 <div th:replace="fragments/header :: header"/></div>
-<!--<li><a href="#" th:href="@{/product/new}" sec:authorize="hasRole('ROLE_ADMIN')">Create Product</a></li>-->
-<!--<li><a href="#" th:href="@{/product/new}" sec:authorize="hasRole('ADMIN')">Create Product</a></li>-->
-
 <div class="container">
     <div class="row">
         <ul class="nav nav-tabs">
-            <!-- в соответствии со статистикой % соотношением встречаемости заглавных букв в фамилиях -->
             <li role="presentation"><a href="/" >Аll</a></li>
             <li role="presentation"><a th:href="@{/а}">А</a></li>
             <li role="presentation"><a th:href="@{/б}">Б</a></li>
@@ -88,7 +84,8 @@
                 </li>
                 <li th:class="${persons.number == (page - 1)} ? 'active pointer-disabled'"
                     th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
-                    <a class="pageLink" th:href="@{/(pageSize=${selectedPageSize}, page=${page})}"
+                    <!--/*@thymesVar id="litera" type=""*/-->
+                    <a class="pageLink" th:href="@{/${litera}(pageSize=${selectedPageSize}, page=${page})}"
                        th:text="${page}"></a>
                 </li>
                 <li th:class="${persons.number + 1 == persons.totalPages} ? disabled">
