@@ -4,6 +4,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>Header</title>
+    <meta charset="utf-8" />
 </head>
 <body>
 <div th:fragment="header">
@@ -26,17 +27,17 @@
                     <li class="active"><a th:href="@{/logout}"
                                           sec:authorize="hasRole('ROLE_ADMIN')">Выйти</a></li>
                 </ul>
-                <ul class="nav navbar-nav">
-                <li role="presentation"><a th:href="@{/search/Ad}">Search</a></li>
-                </ul>
-                    <!--<div class="form-group">-->
-                        <!--<input type="text" class="form-control" placeholder="Search" autofocus th:field="${lastName}">-->
-                    <!--</div>-->
-                    <!--<button type="submit" class="btn btn-default">Submit</button>-->
-                <!--</div>-->
+
+                <form class="navbar-form navbar-left" th:action="@{/}" method="post">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search" id="litera" name="litera">
+                    </div>
+                    <button type="submit" class="btn btn-default">Поиск по фамилии</button>
+                </form>
             </div>
         </div>
-    </nav>
+</div>
+</nav>
 </div>
 </body>
 </html>
