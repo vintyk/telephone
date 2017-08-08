@@ -3,13 +3,18 @@ package by.ecp.telephone.controller;
 import by.ecp.telephone.entity.Pager;
 import by.ecp.telephone.entity.Person;
 import by.ecp.telephone.service.interfaces.PersonService;
+import org.springframework.context.annotation.Bean;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,10 +23,12 @@ public class AdminEditController {
 
     private static final int BUTTONS_TO_SHOW = 5;
     private static final int INITIAL_PAGE = 0;
-    private static final int INITIAL_PAGE_SIZE = 5;
+    private static final int INITIAL_PAGE_SIZE = 10;
     private static final int[] PAGE_SIZES = {10, 15, 50};
-
+    public static String searchR = "";
     private PersonService personService;
+
+
 
     public AdminEditController(PersonService personService) {
         this.personService = personService;
@@ -116,5 +123,30 @@ public class AdminEditController {
     public String updatePerson(Person person) {
         this.personService.savePerson(person);
         return "redirect:/adminEdit";
+    }
+
+    @GetMapping("/adminEdit/{searchResult}")
+    public ModelAndView showPersonsPageSearchByChar(
+            HttpSession httpSession,
+            @PathVariable String searchResult,
+            @RequestParam("pageSize") Optional<Integer> pageSize,
+            @RequestParam("page") Optional<Integer> page) {
+        ModelAndView modelAndView = new ModelAndView("adminEdit");
+        int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
+        int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
+
+            Page<Person> persons = personService.findAllByLastNameContainsOrderByLastName(new PageRequest(evalPage, evalPageSize), searchResult);
+            Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
+            Person person = new Person();
+            modelAndView.addObject("person", person);
+            modelAndView.addObject("persons", persons);
+            modelAndView.addObject("selectedPageSize", evalPageSize);
+            modelAndView.addObject("pageSizes", PAGE_SIZES);
+            modelAndView.addObject("pager", pager);
+            return modelAndView;
+    }
+    @PostMapping(path = "/adminEdit")
+    public String search(@RequestParam String litera){
+        return "redirect:adminEdit/"+litera;
     }
 }

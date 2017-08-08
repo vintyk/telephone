@@ -4,35 +4,55 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <head>
-    <title>Persons</title>
+    <title>Admin</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="../static/js/bootstrap.min.js" th:href="@{/css/bootstrap.min.js}" rel="stylesheet" media="screen"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!--<link href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" rel="stylesheet" media="screen">-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <!--<link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>-->
+
     <link href="../static/js/jquery-3.2.1.min.js" th:href="@{/js/jquery-3.2.1.min.js}" rel="stylesheet" media="screen"/>
     <script src="webjars/jquery/1.11.1/jquery.min.js"></script>
-
-
 
 </head>
 
 <body>
 
-<div th:replace="fragments/header :: header"/>
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" th:href="@{/}">ТЕЛЕФОННЫЙ СПРАВОЧНИК</a>
 
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/logout}">Выйти</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" th:action="@{/adminEdit}" method="post">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" id="litera" name="litera" autofocus="autofocus">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
+        </form>
+    </div>
+</nav>
 <div class="container">
     <div class="row">
-        <h1>Administrator</h1>
-        <h6>(Spring Security protected)</h6>
-        <h6 th:inline="text">User name: [[${#httpServletRequest.remoteUser}]]!</h6>
+
+        <h1>Администратор</h1>
+        <h6 th:inline="text">пользователь: [[${#httpServletRequest.remoteUser}]]</h6>
         <table class="table table-hover">
             <thead class="thead-inverse">
             <tr>
                 <th scope="row">#</th>
-                <th>Last Name</th>
-                <th>First Name</th>
-                <th>Shot number</th>
-                <th>City number (if exist)</th>
-                <th>Mobile number (if exist)</th>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <th>Внутренний номер</th>
+                <th>Городской номер</th>
+                <th>Мобильный номер</th>
             </tr>
             </thead>
             <tr th:each="person : ${persons}">
@@ -44,110 +64,100 @@
                 <td th:text="${person.numberMobil}"></td>
                 <td>
                     <div class="btn-group" role="group" aria-label="...">
-                        <a th:href="${'/adminEdit/view/' + person.id}" class="btn btn-info" data-toggle="tooltip" title="VIEW Person"><span class="glyphicon glyphicon-eye-open" aria-hidden="true" ></span></a>
-                        <a th:href="${'/adminEdit/edit/' + person.id}" class="btn btn-success" data-toggle="tooltip" title="EDIT Person"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                        <a th:href="${'/adminEdit/clone/' + person.id}" class="btn btn-success" data-toggle="tooltip" title="CLONE Person"><span class="glyphicon glyphicon-transfer" aria-hidden="true"></span></a>
-                        <a th:href="${'/adminEdit/delete/' + person.id}" class="btn btn-danger" data-toggle="tooltip" title="DELETE Person"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                        <a th:href="${'/adminEdit/view/' + person.id}"
+                           title="VIEW Person"><span class="badge badge-default">Просмотр</span></a>
+                        <a th:href="${'/adminEdit/edit/' + person.id}"
+                           title="EDIT Person"><span class="badge badge-success">Именить</span></a>
+                        <a th:href="${'/adminEdit/clone/' + person.id}"
+                           title="CLONE Person"><span class="badge badge-default">Клонировать</span></a>
+                        <a th:href="${'/adminEdit/delete/' + person.id}"
+                           title="DELETE Person"><span class="badge badge-danger">Удалить</span></a>
                     </div>
                 </td>
             </tr>
         </table>
         <div class="container">
-        <div class="row">
+            <div class="row">
 
-            <div th:if="${persons.totalPages != 1}" class="form-group col-md-11 pagination-centered">
-                <ul class="pagination">
-                    <li th:class="${persons.number == 0} ? disabled">
-                        <a class="pageLink" th:href="@{/adminEdit(pageSize=${selectedPageSize}, page=1)}">&laquo;</a>
-                    </li>
-                    <li th:class="${persons.number == 0} ? disabled">
-                        <a class="pageLink"
-                           th:href="@{/adminEdit(pageSize=${selectedPageSize}, page=${persons.number})}">&larr;</a>
-                    </li>
-                    <li th:class="${persons.number == (page - 1)} ? 'active pointer-disabled'"
-                        th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
-                        <a class="pageLink" th:href="@{/adminEdit(pageSize=${selectedPageSize}, page=${page})}"
-                           th:text="${page}"></a>
-                    </li>
-                    <li th:class="${persons.number + 1 == persons.totalPages} ? disabled">
-                        <a class="pageLink"
-                           th:href="@{/adminEdit(pageSize=${selectedPageSize}, page=${persons.number + 2})}">&rarr;</a>
-                    </li>
-                    <li th:class="${persons.number + 1 == persons.totalPages} ? disabled">
-                        <a class="pageLink"
-                           th:href="@{/adminEdit(pageSize=${selectedPageSize}, page=${persons.totalPages})}">&raquo;</a>
-                    </li>
-                </ul>
+                <div th:if="${persons.totalPages != 1}" class="form-group">
+                    <ul class="pagination">
+                        <li th:class="${persons.number == 0} ? disabled">
+                            <a class="page-link"
+                               th:href="@{/adminEdit(pageSize=${selectedPageSize}, page=1)}">&laquo;</a>
+                        </li>
+                        <li th:class="${persons.number == 0} ? disabled">
+                            <a class="page-link"
+                               th:href="@{/adminEdit(pageSize=${selectedPageSize}, page=${persons.number})}">&larr;</a>
+                        </li>
+                        <li th:class="${persons.number == (page - 1)} ? 'active pointer-disabled'"
+                            th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
+                            <a class="page-link" th:href="@{/adminEdit(pageSize=${selectedPageSize}, page=${page})}"
+                               th:text="${page}"></a>
+                        </li>
+                        <li th:class="${persons.number + 1 == persons.totalPages} ? disabled">
+                            <a class="page-link"
+                               th:href="@{/adminEdit(pageSize=${selectedPageSize}, page=${persons.number + 2})}">&rarr;</a>
+                        </li>
+                        <li th:class="${persons.number + 1 == persons.totalPages} ? disabled">
+                            <a class="page-link"
+                               th:href="@{/adminEdit(pageSize=${selectedPageSize}, page=${persons.totalPages})}">&raquo;</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-
-
             <form id="form" role="form" th:action="@{/adminEdit/save}" method="post" th:object="${person}">
-
-                <div class="row">
-                    <div class="form-group">
-                        <label for="name" class="col-2 col-form-label">Name</label>
-                        <div class="col-md-6">
-                            <input class="form-control" type="text" value="" placeholder="Name Person"
-                                   id="name" th:field="${person.firstName}"/></input>
-                        </div>
-                        <small id="nameHelp" class="form-text text-muted">This is name Person.</small>
+                <div class="form-group row">
+                    <label for="name" class="col-2 col-form-label">Name</label>
+                    <div class="col-6">
+                        <input class="form-control" type="text" value="" placeholder="Name Person"
+                               id="name" th:field="${person.firstName}"/></input>
                     </div>
-
-                    <div class="form-group">
-                        <label for="family" class="col-2 col-form-label">Family*</label>
-                        <div class="col-md-6">
-                            <input class="form-control" type="text" value="" placeholder="Family Person*"
-                                   id="family" th:field="${person.lastName}" required="required"/></input>
-                        </div>
-                        <small id="fam" class="form-text text-muted">This is family Person. Field is required!</small>
+                    <small id="nameHelp" class="form-text text-muted">This is name Person.</small>
+                </div>
+                <div class="form-group row">
+                    <label for="family" class="col-2 col-form-label">Family*</label>
+                    <div class="col-6">
+                        <input class="form-control" type="text" value="" placeholder="Family Person*"
+                               id="family" th:field="${person.lastName}" required="required"/></input>
                     </div>
-
-                    <div class="form-group">
-                        <label class="col-2 col-form-label" for="telephoneShot">Shot number
-                        </label>
-                        <div class="col-md-2">
-                            <input type="text" id="telephoneShot" class="form-control" placeholder="226"
-                                   th:field="${person.numberShot}"/></input>
-                        </div>
-                        <small id="telShot" class="form-text text-muted">Shot telephone.</small>
+                    <small id="fam" class="form-text text-muted">This is family Person. Field is required!</small>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label" for="telephoneShot">Shot number
+                    </label>
+                    <div class="col-2">
+                        <input type="text" id="telephoneShot" class="form-control" placeholder="226"
+                               th:field="${person.numberShot}"/></input>
                     </div>
-
-                    <div class="form-group">
-                        <label class="col-2 col-form-label" for="telephoneCity">City number
-                        </label>
-                        <div class="col-md-2">
-                            <input type="text" id="telephoneCity" class="form-control" placeholder="225-55-15"
-                                   th:field="${person.numberCity}"
-                                   pattern="[0-9]{3}-[0-9]{2}-[0-9]{2}"/></input>
-                        </div>
-                        <small id="telCity" class="form-text text-muted">City telephone.</small>
+                    <small id="telShot" class="form-text text-muted">Shot telephone.</small>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label" for="telephoneCity">City number
+                    </label>
+                    <div class="col-2">
+                        <input type="text" id="telephoneCity" class="form-control" placeholder="225-55-15"
+                               th:field="${person.numberCity}"
+                               pattern="[0-9]{3}-[0-9]{2}-[0-9]{2}"/></input>
                     </div>
-
-                <div class="form-group">
+                    <small id="telCity" class="form-text text-muted">City telephone.</small>
+                </div>
+                <div class="form-group row">
                     <label class="col-2 col-form-label" for="telephone">Mobile Telephone
                     </label>
-                    <div class="col-md-2">
+                    <div class="col-2">
                         <input type="text" id="telephone" class="form-control" placeholder="375-29-622-33-44"
                                th:field="${person.numberMobil}"
                                pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}-[0-9]{2}-[0-9]{2}"/></input>
                     </div>
                     <small id="tel" class="form-text text-muted">(xxx-xx-xxx-xx-xx)</small>
                 </div>
-                </div>
-
                 <button type="submit" class="btn btn-primary btn-lg btn-block">Записать данные в БД</button>
             </form>
         </div>
     </div>
+    <!--<div th:replace="fragments/footer :: footer"/>-->
+    <h6>(Spring Security protected)</h6>
 
-
-
-
-
-
-
-    <div th:replace="fragments/footer :: footer"/>
     developer: vinty1978@gmail.com
 </div>
 

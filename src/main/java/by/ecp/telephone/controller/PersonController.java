@@ -101,12 +101,6 @@ public class PersonController {
         modelAndView.addObject("pager", pager);
         return modelAndView;
     }
-
-    //    @RequestMapping(value = "/", method = RequestMethod.POST)
-//    public String reciveSearchResult(@RequestParam String searchBody, ModelMap model) {
-//        model.addAttribute(SEARCH_BODY, searchBody);
-//        return modelAndView;
-//    }
     @PostMapping(path = "/")
     public String search(@RequestParam String litera){
         return "redirect:"+litera;

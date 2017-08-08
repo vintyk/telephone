@@ -8,29 +8,37 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.web.filter.CharacterEncodingFilter;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+        CharacterEncodingFilter filter = new CharacterEncodingFilter();
+        filter.setEncoding("UTF-8");
+        filter.setForceEncoding(true);
+        http.addFilterBefore(filter, CsrfFilter.class);
+        http
+//                .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/resources/**").permitAll()
-                .antMatchers("/resources/**", "/adminEdit/**").hasAnyRole("ADMIN")
+                .antMatchers("/resources/**", "/webjars/**").permitAll()
+                .antMatchers("/resources/**", "/adminEdit/**", "/webjars/**").hasAnyRole("ADMIN")
                 .antMatchers("/resources/**", "/login", "/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/", true)
+                .defaultSuccessUrl("/adminEdit", true)
                 .and()
                 .logout()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/")
         ;
     }
+
     @Override
     public void configure(WebSecurity web) throws Exception {
         //Web resources
@@ -38,6 +46,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/static/css/**");
         web.ignoring().antMatchers("/static/js/**");
         web.ignoring().antMatchers("/static/pic/**");
+        web.ignoring().antMatchers("/webjars/**");
+        web.ignoring().antMatchers("/bootstrap/**");
+        web.ignoring().antMatchers("/3.3.7-1/**");
+        web.ignoring().antMatchers("/css/**");
+
     }
     @Bean
     public UserDetailsService userDetailsService() {
@@ -48,4 +61,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         manager.createUser(User.withUsername("vinty@i.ua").password("1").roles("ADMIN").build());
         return manager;
     }
+
 }
