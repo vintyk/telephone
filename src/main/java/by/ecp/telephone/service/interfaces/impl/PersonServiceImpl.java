@@ -32,6 +32,8 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public void savePerson(Person person) {
+        person.getLastName();
+        person.getAlphabet();
         this.personRepository.save(person);
     }
 

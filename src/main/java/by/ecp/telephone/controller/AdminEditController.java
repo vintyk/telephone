@@ -46,11 +46,33 @@ public class AdminEditController {
         modelAndView.addObject("pager", pager);
         return modelAndView;
     }
+    @GetMapping("/adminEdit2")
+    public ModelAndView showPersonsPage2(@RequestParam("pageSize") Optional<Integer> pageSize,
+                                        @RequestParam("page") Optional<Integer> page) {
+        ModelAndView modelAndView = new ModelAndView("adminEdit2");
+        int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
+        int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
+
+        Page<Person> persons = personService.findAllPageableOrderBylastName(new PageRequest(evalPage, evalPageSize));
+        Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
+        Person person = new Person();
+        modelAndView.addObject("persons", persons);
+        modelAndView.addObject("person", person);
+        modelAndView.addObject("selectedPageSize", evalPageSize);
+        modelAndView.addObject("pageSizes", PAGE_SIZES);
+        modelAndView.addObject("pager", pager);
+        return modelAndView;
+    }
 
     @RequestMapping(value = "/adminEdit/save", method = RequestMethod.POST)
     public String save(Person person) {
         personService.savePersonAlphabet(person);
         return "redirect:/adminEdit";
+    }
+    @RequestMapping(value = "/adminEdit2/save", method = RequestMethod.POST)
+    public String save2(Person person) {
+        personService.savePersonAlphabet(person);
+        return "redirect:/adminEdit2";
     }
 
     @RequestMapping(value = "/adminEdit/delete/{id}", method = RequestMethod.GET)
@@ -106,16 +128,22 @@ public class AdminEditController {
             personEdit.setNumberCity(personOptional.get().getNumberCity());
             personEdit.setNumberMobil(personOptional.get().getNumberMobil());
             personEdit.setAlphabet(personOptional.get().getAlphabet());
-//			model.addAttribute("person", Optional.of(personEdit));
-            model.addAttribute("person", personEdit);
+			model.addAttribute("person", Optional.of(personEdit));
+//            model.addAttribute("person", personEdit);
         } else {
             return "adminEdit";
         }
         return "edit";
     }
 
-    @RequestMapping(value = "/adminEdit/edit/update", method = RequestMethod.POST)
-    public String updatePerson(Person person) {
+//    @RequestMapping(value = "/adminEdit/edit/update", method = RequestMethod.POST, produces = "text/html; charset=utf-8")
+//    public String updatePerson(Person person) {
+//        this.personService.savePerson(person);
+//        return "redirect:/adminEdit";
+//    }
+
+    @PostMapping(path = "/adminEdit/edit/update", produces = "text/html; charset=utf-8")
+    public String updatePerson(Person person){
         this.personService.savePerson(person);
         return "redirect:/adminEdit";
     }

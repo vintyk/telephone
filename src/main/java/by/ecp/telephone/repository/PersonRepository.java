@@ -14,5 +14,4 @@ public interface PersonRepository extends PagingAndSortingRepository<Person, Lon
     Page<Person> findAllByLastNameIsNotNullOrderByLastName(Pageable pageable);
     Page<Person> findAllByAlphabetEqualsOrderByLastName(Pageable pageable, String searchResult);
     Page<Person> findAllByLastNameContainsOrderByLastName(Pageable pageable, String searchRes);
-
 }
