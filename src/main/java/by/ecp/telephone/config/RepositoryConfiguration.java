@@ -14,7 +14,7 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 @Configuration
 @EnableAutoConfiguration
 @EntityScan(basePackages = {"by.ecp.telephone.entity"})
-@EnableJpaRepositories(basePackages = {"by.ecp.telephone.repository"})
+@EnableJpaRepositories(basePackages = {"by.ecp.telephone"})
 @EnableTransactionManagement
 public class RepositoryConfiguration {
 

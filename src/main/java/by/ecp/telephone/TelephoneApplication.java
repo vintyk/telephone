@@ -16,20 +16,22 @@ public class TelephoneApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TelephoneApplication.class, args);
 	}
-	@Bean
-	public ViewResolver viewResolver() {
-		ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
-		templateResolver.setTemplateMode("XHTML");
-		templateResolver.setPrefix("templates/");
-		templateResolver.setSuffix(".html");
 
-		SpringTemplateEngine engine = new SpringTemplateEngine();
-		engine.setTemplateResolver(templateResolver);
+//	@Bean
+//	public ViewResolver viewResolver() {
+//		ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+//		templateResolver.setTemplateMode("XHTML");
+//		templateResolver.setPrefix("templates/");
+//		templateResolver.setSuffix(".html");
+//
+//		SpringTemplateEngine engine = new SpringTemplateEngine();
+//		engine.setTemplateResolver(templateResolver);
+//
+//		ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+//		viewResolver.setTemplateEngine(engine);
+//		return viewResolver;
+//	}
 
-		ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-		viewResolver.setTemplateEngine(engine);
-		return viewResolver;
-	}
 	@Bean
 	public FilterRegistrationBean filterRegistrationBean() {
 		FilterRegistrationBean registrationBean = new FilterRegistrationBean();

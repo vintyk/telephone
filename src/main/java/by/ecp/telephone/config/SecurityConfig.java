@@ -18,20 +18,20 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final HttpEncodingProperties httpEncodingProperties;
-
-    @Autowired
-    public SecurityConfig(HttpEncodingProperties httpEncodingProperties) {
-        this.httpEncodingProperties = httpEncodingProperties;
-    }
-
-    @Bean
-    public CharacterEncodingFilter characterEncodingFilter() {
-        CharacterEncodingFilter filter = new CharacterEncodingFilter();
-        filter.setEncoding("UTF-8");
-        filter.setForceEncoding(true);
-        return filter;
-    }
+//    private final HttpEncodingProperties httpEncodingProperties;
+//
+//    @Autowired
+//    public SecurityConfig(HttpEncodingProperties httpEncodingProperties) {
+//        this.httpEncodingProperties = httpEncodingProperties;
+//    }
+//
+//    @Bean
+//    public CharacterEncodingFilter characterEncodingFilter() {
+//        CharacterEncodingFilter filter = new CharacterEncodingFilter();
+//        filter.setEncoding("UTF-8");
+//        filter.setForceEncoding(true);
+//        return filter;
+//    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

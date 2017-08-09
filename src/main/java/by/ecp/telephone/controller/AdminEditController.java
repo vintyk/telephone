@@ -148,6 +148,14 @@ public class AdminEditController {
         return "redirect:/adminEdit";
     }
 
+//    @PostMapping(path = "/adminEdit/edit/update", produces = "text/html; charset=utf-8")
+//    public String updatePerson(@RequestParam){
+//        this.personService.savePerson(person);
+//        return "redirect:/adminEdit";
+//    }
+
+
+
     @GetMapping("/adminEdit/{searchResult}")
     public ModelAndView showPersonsPageSearchByChar(
             HttpSession httpSession,

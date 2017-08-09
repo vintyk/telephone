@@ -6,10 +6,7 @@ import by.ecp.telephone.service.interfaces.PersonService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -30,7 +27,9 @@ public class PersonController {
         this.personService = studentService;
     }
 
-    @GetMapping("/")
+    //    @GetMapping("/")
+    @RequestMapping(value = "/", produces = "text/plain;charset=UTF-8", method = RequestMethod.GET)
+    @ResponseBody
     public ModelAndView showPersonsPage(
             HttpSession httpSession,
             @RequestParam("pageSize") Optional<Integer> pageSize,
@@ -51,7 +50,9 @@ public class PersonController {
         return modelAndView;
     }
 
-    @GetMapping("/{searchResult}")
+    //    @GetMapping("/{searchResult}")
+    @RequestMapping(value = "/{searchResult}", produces = "text/plain;charset=UTF-8", method = RequestMethod.GET)
+    @ResponseBody
     public ModelAndView showPersonsPageSearchByChar(
             HttpSession httpSession,
             @PathVariable String searchResult,
@@ -101,8 +102,29 @@ public class PersonController {
         modelAndView.addObject("pager", pager);
         return modelAndView;
     }
+
     @PostMapping(path = "/")
-    public String search(@RequestParam String litera){
-        return "redirect:"+litera;
+    public ModelAndView search(@RequestParam String litera,
+                               HttpSession httpSession,
+                               @RequestParam("pageSize") Optional<Integer> pageSize,
+                               @RequestParam("page") Optional<Integer> page) {
+        ModelAndView modelAndView = new ModelAndView("persons");
+        int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
+        int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
+
+        if ((litera.length() > 1)) {
+            searchR = litera;
+
+                Page<Person> persons = personService.findAllByLastNameContainsOrderByLastName(new PageRequest(evalPage, evalPageSize), litera);
+                Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
+                Person person = new Person();
+                modelAndView.addObject("litera", httpSession.getAttribute("litera"));
+                modelAndView.addObject("persons", persons);
+                modelAndView.addObject("person", person);
+                modelAndView.addObject("selectedPageSize", evalPageSize);
+                modelAndView.addObject("pageSizes", PAGE_SIZES);
+                modelAndView.addObject("pager", pager);
+                return modelAndView;
+        }return modelAndView;
     }
 }
