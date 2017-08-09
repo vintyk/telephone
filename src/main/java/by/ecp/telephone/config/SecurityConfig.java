@@ -1,7 +1,11 @@
 package by.ecp.telephone.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.http.HttpEncodingProperties;
+import org.springframework.boot.web.servlet.filter.OrderedCharacterEncodingFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -14,14 +18,29 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    private final HttpEncodingProperties httpEncodingProperties;
+
+    @Autowired
+    public SecurityConfig(HttpEncodingProperties httpEncodingProperties) {
+        this.httpEncodingProperties = httpEncodingProperties;
+    }
+
+    @Bean
+    public CharacterEncodingFilter characterEncodingFilter() {
         CharacterEncodingFilter filter = new CharacterEncodingFilter();
         filter.setEncoding("UTF-8");
         filter.setForceEncoding(true);
-        http.addFilterBefore(filter, CsrfFilter.class);
+        return filter;
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+//        CharacterEncodingFilter filter = new CharacterEncodingFilter();
+//        filter.setEncoding("UTF-8");
+//        filter.setForceEncoding(true);
+//        http.addFilterBefore(filter, CsrfFilter.class);
         http
-//                .csrf().disable()
+                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/resources/**", "/webjars/**").permitAll()
                 .antMatchers("/resources/**", "/adminEdit/**", "/webjars/**").hasAnyRole("ADMIN")
