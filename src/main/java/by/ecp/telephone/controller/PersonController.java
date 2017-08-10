@@ -112,9 +112,7 @@ public class PersonController {
         int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
         int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
 
-        if ((litera.length() > 1)) {
             searchR = litera;
-
                 Page<Person> persons = personService.findAllByLastNameContainsOrderByLastName(new PageRequest(evalPage, evalPageSize), litera);
                 Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
                 Person person = new Person();
@@ -125,6 +123,5 @@ public class PersonController {
                 modelAndView.addObject("pageSizes", PAGE_SIZES);
                 modelAndView.addObject("pager", pager);
                 return modelAndView;
-        }return modelAndView;
     }
 }

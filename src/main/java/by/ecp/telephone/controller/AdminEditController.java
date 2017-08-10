@@ -24,31 +24,36 @@ public class AdminEditController {
     private PersonService personService;
 
 
-
     public AdminEditController(PersonService personService) {
         this.personService = personService;
     }
 
-    @GetMapping("/adminEdit")
-    public ModelAndView showPersonsPage(@RequestParam("pageSize") Optional<Integer> pageSize,
-                                        @RequestParam("page") Optional<Integer> page) {
+    @RequestMapping(value = "/adminEdit", produces = "text/plain;charset=UTF-8", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView showPersonsPage(
+            HttpSession httpSession,
+            @RequestParam("pageSize") Optional<Integer> pageSize,
+            @RequestParam("page") Optional<Integer> page) {
         ModelAndView modelAndView = new ModelAndView("adminEdit");
         int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
         int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
-
         Page<Person> persons = personService.findAllPageableOrderBylastName(new PageRequest(evalPage, evalPageSize));
         Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
         Person person = new Person();
-        modelAndView.addObject("persons", persons);
+        searchR = "";
+        httpSession.setAttribute("litera", "");
         modelAndView.addObject("person", person);
+        modelAndView.addObject("persons", persons);
         modelAndView.addObject("selectedPageSize", evalPageSize);
         modelAndView.addObject("pageSizes", PAGE_SIZES);
         modelAndView.addObject("pager", pager);
         return modelAndView;
     }
+
+
     @GetMapping("/adminEdit2")
     public ModelAndView showPersonsPage2(@RequestParam("pageSize") Optional<Integer> pageSize,
-                                        @RequestParam("page") Optional<Integer> page) {
+                                         @RequestParam("page") Optional<Integer> page) {
         ModelAndView modelAndView = new ModelAndView("adminEdit2");
         int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
         int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
@@ -69,6 +74,7 @@ public class AdminEditController {
         personService.savePersonAlphabet(person);
         return "redirect:/adminEdit";
     }
+
     @RequestMapping(value = "/adminEdit2/save", method = RequestMethod.POST)
     public String save2(Person person) {
         personService.savePersonAlphabet(person);
@@ -128,7 +134,7 @@ public class AdminEditController {
             personEdit.setNumberCity(personOptional.get().getNumberCity());
             personEdit.setNumberMobil(personOptional.get().getNumberMobil());
             personEdit.setAlphabet(personOptional.get().getAlphabet());
-			model.addAttribute("person", Optional.of(personEdit));
+            model.addAttribute("person", Optional.of(personEdit));
 //            model.addAttribute("person", personEdit);
         } else {
             return "adminEdit";
@@ -136,27 +142,14 @@ public class AdminEditController {
         return "edit";
     }
 
-//    @RequestMapping(value = "/adminEdit/edit/update", method = RequestMethod.POST, produces = "text/html; charset=utf-8")
-//    public String updatePerson(Person person) {
-//        this.personService.savePerson(person);
-//        return "redirect:/adminEdit";
-//    }
-
     @PostMapping(path = "/adminEdit/edit/update", produces = "text/html; charset=utf-8")
-    public String updatePerson(Person person){
+    public String updatePerson(Person person) {
         this.personService.savePerson(person);
         return "redirect:/adminEdit";
     }
 
-//    @PostMapping(path = "/adminEdit/edit/update", produces = "text/html; charset=utf-8")
-//    public String updatePerson(@RequestParam){
-//        this.personService.savePerson(person);
-//        return "redirect:/adminEdit";
-//    }
-
-
-
-    @GetMapping("/adminEdit/{searchResult}")
+    @RequestMapping(value = "/adminEdit/{searchResult}", produces = "text/plain;charset=UTF-8", method = RequestMethod.GET)
+    @ResponseBody
     public ModelAndView showPersonsPageSearchByChar(
             HttpSession httpSession,
             @PathVariable String searchResult,
@@ -166,18 +159,66 @@ public class AdminEditController {
         int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
         int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
 
+        if (searchResult.equals("${litera}")) {
+            searchResult = searchR;
+            if (searchResult.equals("")) {
+                Page<Person> persons = personService.findAllPageableOrderBylastName(new PageRequest(evalPage, evalPageSize));
+                Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
+                Person person = new Person();
+                modelAndView.addObject("litera", httpSession.getAttribute("litera"));
+                modelAndView.addObject("persons", persons);
+                modelAndView.addObject("person", person);
+                modelAndView.addObject("selectedPageSize", evalPageSize);
+                modelAndView.addObject("pageSizes", PAGE_SIZES);
+                modelAndView.addObject("pager", pager);
+                return modelAndView;
+            }
+        }
+        searchR = searchResult;
+        if (searchR.length() > 0) {
+            httpSession.setAttribute("litera", searchR);
+        }
+        if (searchR.length() > 1) {
             Page<Person> persons = personService.findAllByLastNameContainsOrderByLastName(new PageRequest(evalPage, evalPageSize), searchResult);
             Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
             Person person = new Person();
-            modelAndView.addObject("person", person);
             modelAndView.addObject("persons", persons);
             modelAndView.addObject("selectedPageSize", evalPageSize);
             modelAndView.addObject("pageSizes", PAGE_SIZES);
             modelAndView.addObject("pager", pager);
             return modelAndView;
+        }
+        Page<Person> persons = personService.findAllByAlphabetEqualsOrderByLastName(new PageRequest(evalPage, evalPageSize), searchResult);
+        Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
+        Person person = new Person();
+        modelAndView.addObject("litera", httpSession.getAttribute("litera"));
+        modelAndView.addObject("persons", persons);
+        modelAndView.addObject("person", person);
+        modelAndView.addObject("selectedPageSize", evalPageSize);
+        modelAndView.addObject("pageSizes", PAGE_SIZES);
+        modelAndView.addObject("pager", pager);
+        return modelAndView;
     }
+
     @PostMapping(path = "/adminEdit")
-    public String search(@RequestParam String litera){
-        return "redirect:adminEdit/"+litera;
+    public ModelAndView search(@RequestParam String litera,
+                               HttpSession httpSession,
+                               @RequestParam("pageSize") Optional<Integer> pageSize,
+                               @RequestParam("page") Optional<Integer> page) {
+        ModelAndView modelAndView = new ModelAndView("adminEdit");
+        int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
+        int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
+
+        searchR = litera;
+        Page<Person> persons = personService.findAllByLastNameContainsOrderByLastName(new PageRequest(evalPage, evalPageSize), litera);
+        Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
+        Person person = new Person();
+        modelAndView.addObject("litera", httpSession.getAttribute("litera"));
+        modelAndView.addObject("persons", persons);
+        modelAndView.addObject("person", person);
+        modelAndView.addObject("selectedPageSize", evalPageSize);
+        modelAndView.addObject("pageSizes", PAGE_SIZES);
+        modelAndView.addObject("pager", pager);
+        return modelAndView;
     }
 }
