@@ -45,6 +45,7 @@
                 <th scope="row">#</th>
                 <th>Фамилия</th>
                 <th>Имя</th>
+                <th>Отчество</th>
                 <th>Внутренний номер</th>
                 <th>Городской номер</th>
                 <th>Мобильный номер</th>
@@ -54,6 +55,7 @@
                 <td th:text="${person.id}"></td>
                 <td th:text="${person.lastName}"></td>
                 <td th:text="${person.firstName}"></td>
+                <td th:text="${person.sName}"></td>
                 <td th:text="${person.numberShot}"></td>
                 <td th:text="${person.numberCity}"></td>
                 <td th:text="${person.numberMobil}"></td>
@@ -102,42 +104,50 @@
             </div>
             <form th:action="@{/adminEdit/save}" method="post" th:object="${person}">
                 <div class="form-group row">
-                    <label for="name" class="col-2 col-form-label">Name</label>
+                    <label for="name" class="col-2 col-form-label">Имя</label>
                     <div class="col-6">
-                        <input class="form-control" type="text" value="" placeholder="Name Person"
+                        <input class="form-control" type="text" value="" placeholder="Иван"
                                id="name" th:field="${person.firstName}"/></input>
                     </div>
-                    <small id="nameHelp" class="form-text text-muted">This is name Person.</small>
+                    <!--<small id="nameHelp" class="form-text text-muted">This is name Person.</small>-->
                 </div>
                 <div class="form-group row">
-                    <label for="family" class="col-2 col-form-label">Family*</label>
+                    <label for="family" class="col-2 col-form-label">Фамилия*</label>
                     <div class="col-6">
-                        <input class="form-control" type="text" value="" placeholder="Family Person*"
+                        <input class="form-control" type="text" value="" placeholder="Иванов*"
                                id="family" th:field="${person.lastName}" required="required"/></input>
                     </div>
-                    <small id="fam" class="form-text text-muted">This is family Person. Field is required!</small>
+                    <small id="sNamePers" class="form-text text-muted">Поле обязательно для заполнения!</small>
                 </div>
                 <div class="form-group row">
-                    <label class="col-2 col-form-label" for="telephoneShot">Shot number
+                    <label for="sName" class="col-2 col-form-label">Отчество</label>
+                    <div class="col-6">
+                        <input class="form-control" type="text" value="" placeholder="Иванович"
+                               id="sName" th:field="${person.sName}" /></input>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label" for="telephoneShot">Короткий номер
                     </label>
                     <div class="col-2">
                         <input type="text" id="telephoneShot" class="form-control" placeholder="226"
                                th:field="${person.numberShot}"/></input>
                     </div>
-                    <small id="telShot" class="form-text text-muted">Shot telephone.</small>
+                    <small id="telShot" class="form-text text-muted">Внутренний рабочий номер</small>
                 </div>
                 <div class="form-group row">
-                    <label class="col-2 col-form-label" for="telephoneCity">City number
+                    <label class="col-2 col-form-label" for="telephoneCity">Городской номер
                     </label>
                     <div class="col-2">
                         <input type="text" id="telephoneCity" class="form-control" placeholder="225-55-15"
-                               th:field="${person.numberCity}"
-                               pattern="[0-9]{3}-[0-9]{2}-[0-9]{2}"/></input>
+                               th:field="${person.numberCity}"/></input>
+                               <!--pattern="[0-9]{3}-[0-9]{2}-[0-9]{2}"-->
                     </div>
-                    <small id="telCity" class="form-text text-muted">City telephone.</small>
+                    <small id="telCity" class="form-text text-muted">Городской номер в международном формате</small>
                 </div>
                 <div class="form-group row">
-                    <label class="col-2 col-form-label" for="telephone">Mobile Telephone
+                    <label class="col-2 col-form-label" for="telephone">Мобильный телефон
                     </label>
                     <div class="col-2">
                         <input type="text" id="telephone" class="form-control" placeholder="375-29-622-33-44"

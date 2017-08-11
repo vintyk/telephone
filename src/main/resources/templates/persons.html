@@ -58,6 +58,7 @@
             <tr>
                 <th>Фамилия</th>
                 <th>Имя</th>
+                <th>Отчество</th>
                 <th>внутренний телефон</th>
                 <th>Городской телефон</th>
                 <th>Мобильный</th>
@@ -66,6 +67,7 @@
             <tr th:each="person : ${persons}">
                 <td th:text="${person.lastName}"></td>
                 <td th:text="${person.firstName}"></td>
+                <td th:text="${person.sName}"></td>
                 <td th:text="${person.numberShot}"></td>
                 <td th:text="${person.numberCity}"></td>
                 <td th:text="${person.numberMobil}"></td>

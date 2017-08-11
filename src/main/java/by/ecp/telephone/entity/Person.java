@@ -13,6 +13,7 @@ public class Person extends BaseEntity {
     private String firstName;
     @NotEmpty(message = "Last Name is required.")
     private String lastName;
+    private String sName;
     private String numberMobil;
     private String numberShot;
     private String numberCity;
@@ -26,6 +27,7 @@ public class Person extends BaseEntity {
                   String alphabet) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.sName = sName;
         this.numberMobil = numberMobil;
         this.numberShot = numberShot;
         this.numberCity = numberCity;

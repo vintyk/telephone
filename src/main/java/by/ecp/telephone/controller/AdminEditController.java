@@ -18,7 +18,7 @@ public class AdminEditController {
 
     private static final int BUTTONS_TO_SHOW = 5;
     private static final int INITIAL_PAGE = 0;
-    private static final int INITIAL_PAGE_SIZE = 10;
+    private static final int INITIAL_PAGE_SIZE = 7;
     private static final int[] PAGE_SIZES = {10, 15, 50};
     public static String searchR = "";
     private PersonService personService;
@@ -182,6 +182,7 @@ public class AdminEditController {
             Page<Person> persons = personService.findAllByLastNameContainsOrderByLastName(new PageRequest(evalPage, evalPageSize), searchResult);
             Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
             Person person = new Person();
+            modelAndView.addObject("person", person);
             modelAndView.addObject("persons", persons);
             modelAndView.addObject("selectedPageSize", evalPageSize);
             modelAndView.addObject("pageSizes", PAGE_SIZES);

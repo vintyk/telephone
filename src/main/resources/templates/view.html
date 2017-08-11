@@ -59,6 +59,11 @@
                                th:field="*{person.firstName}" name="firstName" disabled="disabled"/>
                     </div>
                     <div class="col-md-6">
+                        <label for="sName">Отчество</label>
+                        <input type="text" class="form-control" id="sName" placeholder="S Name"
+                               th:field="*{person.sName}" name="sName" disabled="disabled"/>
+                    </div>
+                    <div class="col-md-6">
                         <label for="numberShot">Короткий номер</label>
                         <input type="text" class="form-control" id="numberShot" placeholder="3451"
                                th:field="*{person.numberShot}" name="numberShot" disabled="disabled"/>
