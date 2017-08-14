@@ -1,5 +1,6 @@
 package by.ecp.telephone.service.interfaces.impl;
 
+import by.ecp.telephone.dto.PersonDto;
 import by.ecp.telephone.entity.Person;
 import by.ecp.telephone.repository.PersonRepository;
 import by.ecp.telephone.service.interfaces.PersonService;
@@ -38,15 +39,15 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public void savePersonAlphabet(Person person) {
+    public void savePersonAlphabet(PersonDto personDto) {
         Person personWithAlphabetDigit = new Person();
-        personWithAlphabetDigit.setFirstName(person.getFirstName());
-        personWithAlphabetDigit.setLastName(person.getLastName());
-        personWithAlphabetDigit.setSName(person.getSName());
-        personWithAlphabetDigit.setNumberShot(person.getNumberShot());
-        personWithAlphabetDigit.setNumberCity(person.getNumberCity());
-        personWithAlphabetDigit.setNumberMobil(person.getNumberMobil());
-        personWithAlphabetDigit.setAlphabet(cutFromWordFirstChar(person.getLastName()));
+        personWithAlphabetDigit.setFirstName(personDto.getFirstName());
+        personWithAlphabetDigit.setLastName(personDto.getLastName());
+        personWithAlphabetDigit.setSName(personDto.getSName());
+        personWithAlphabetDigit.setNumberShot(personDto.getNumberShot());
+        personWithAlphabetDigit.setNumberCity(personDto.getNumberCity());
+        personWithAlphabetDigit.setNumberMobil(personDto.getNumberMobil());
+        personWithAlphabetDigit.setAlphabet(cutFromWordFirstChar(personDto.getLastName()));
         this.personRepository.save(personWithAlphabetDigit);
     }
 

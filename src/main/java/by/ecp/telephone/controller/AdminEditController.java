@@ -1,5 +1,6 @@
 package by.ecp.telephone.controller;
 
+import by.ecp.telephone.dto.PersonDto;
 import by.ecp.telephone.entity.Pager;
 import by.ecp.telephone.entity.Person;
 import by.ecp.telephone.service.interfaces.PersonService;
@@ -39,30 +40,11 @@ public class AdminEditController {
         int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
         Page<Person> persons = personService.findAllPageableOrderBylastName(new PageRequest(evalPage, evalPageSize));
         Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
-        Person person = new Person();
+        PersonDto personDto = new PersonDto();
         searchR = "";
         httpSession.setAttribute("litera", "");
-        modelAndView.addObject("person", person);
+        modelAndView.addObject("person", personDto);
         modelAndView.addObject("persons", persons);
-        modelAndView.addObject("selectedPageSize", evalPageSize);
-        modelAndView.addObject("pageSizes", PAGE_SIZES);
-        modelAndView.addObject("pager", pager);
-        return modelAndView;
-    }
-
-
-    @GetMapping("/adminEdit2")
-    public ModelAndView showPersonsPage2(@RequestParam("pageSize") Optional<Integer> pageSize,
-                                         @RequestParam("page") Optional<Integer> page) {
-        ModelAndView modelAndView = new ModelAndView("adminEdit2");
-        int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
-        int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
-
-        Page<Person> persons = personService.findAllPageableOrderBylastName(new PageRequest(evalPage, evalPageSize));
-        Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
-        Person person = new Person();
-        modelAndView.addObject("persons", persons);
-        modelAndView.addObject("person", person);
         modelAndView.addObject("selectedPageSize", evalPageSize);
         modelAndView.addObject("pageSizes", PAGE_SIZES);
         modelAndView.addObject("pager", pager);
@@ -70,15 +52,9 @@ public class AdminEditController {
     }
 
     @RequestMapping(value = "/adminEdit/save", method = RequestMethod.POST)
-    public String save(Person person) {
-        personService.savePersonAlphabet(person);
+    public String save(PersonDto personDto) {
+        personService.savePersonAlphabet(personDto);
         return "redirect:/adminEdit";
-    }
-
-    @RequestMapping(value = "/adminEdit2/save", method = RequestMethod.POST)
-    public String save2(Person person) {
-        personService.savePersonAlphabet(person);
-        return "redirect:/adminEdit2";
     }
 
     @RequestMapping(value = "/adminEdit/delete/{id}", method = RequestMethod.GET)
