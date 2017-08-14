@@ -18,6 +18,7 @@ public class Person extends BaseEntity {
     private String numberShot;
     private String numberCity;
     private String alphabet;
+    private String presentPosition;
 
     public Person(String firstName,
                   String lastName,

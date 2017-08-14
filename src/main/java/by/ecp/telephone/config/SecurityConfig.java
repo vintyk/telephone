@@ -69,6 +69,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/bootstrap/**");
         web.ignoring().antMatchers("/3.3.7-1/**");
         web.ignoring().antMatchers("/css/**");
+        web.ignoring().antMatchers("/js/**");
 
     }
     @Bean
