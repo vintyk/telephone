@@ -3,6 +3,7 @@ package by.ecp.telephone.entity;
 import lombok.*;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
@@ -13,6 +14,7 @@ public class Person extends BaseEntity {
     private String firstName;
     @NotEmpty(message = "Last Name is required.")
     private String lastName;
+    @Column(name = "s_name")
     private String sName;
     private String numberMobil;
     private String numberShot;

@@ -42,6 +42,7 @@ public class PersonServiceImpl implements PersonService {
         Person personWithAlphabetDigit = new Person();
         personWithAlphabetDigit.setFirstName(person.getFirstName());
         personWithAlphabetDigit.setLastName(person.getLastName());
+        personWithAlphabetDigit.setSName(person.getSName());
         personWithAlphabetDigit.setNumberShot(person.getNumberShot());
         personWithAlphabetDigit.setNumberCity(person.getNumberCity());
         personWithAlphabetDigit.setNumberMobil(person.getNumberMobil());
@@ -69,7 +70,7 @@ public class PersonServiceImpl implements PersonService {
         return personRepository.findAllByLastNameContainsOrderByLastName(pageable, searchRes);
     }
 
-    public String cutFromWordFirstChar(String word) {
+    private String cutFromWordFirstChar(String word) {
         String result = word.toLowerCase().substring(0, 1);
         if (result.equals("ж")) {
             result = "е";

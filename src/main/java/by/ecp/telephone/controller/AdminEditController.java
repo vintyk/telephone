@@ -94,6 +94,7 @@ public class AdminEditController {
             Person personEdit = new Person();
             personEdit.setFirstName(personOptional.get().getFirstName());
             personEdit.setLastName(personOptional.get().getLastName());
+            personEdit.setSName(personOptional.get().getSName());
             personEdit.setNumberShot(personOptional.get().getNumberShot());
             personEdit.setNumberCity(personOptional.get().getNumberCity());
             personEdit.setNumberMobil(personOptional.get().getNumberMobil());
@@ -111,6 +112,7 @@ public class AdminEditController {
             person.setId(personOptional.get().getId());
             person.setFirstName(personOptional.get().getFirstName());
             person.setLastName(personOptional.get().getLastName());
+            person.setSName(personOptional.get().getSName());
             person.setNumberShot(personOptional.get().getNumberShot());
             person.setNumberCity(personOptional.get().getNumberCity());
             person.setNumberMobil(personOptional.get().getNumberMobil());
@@ -130,6 +132,7 @@ public class AdminEditController {
             personEdit.setId(personOptional.get().getId());
             personEdit.setFirstName(personOptional.get().getFirstName());
             personEdit.setLastName(personOptional.get().getLastName());
+            personEdit.setSName(personOptional.get().getSName());
             personEdit.setNumberShot(personOptional.get().getNumberShot());
             personEdit.setNumberCity(personOptional.get().getNumberCity());
             personEdit.setNumberMobil(personOptional.get().getNumberMobil());
