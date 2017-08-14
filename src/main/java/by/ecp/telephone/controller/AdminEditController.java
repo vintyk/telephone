@@ -67,7 +67,8 @@ public class AdminEditController {
     public String clonePerson(@PathVariable Long id) {
         Optional<Person> personOptional = this.personService.getPersonById(id);
         if (personOptional.isPresent()) {
-            Person personEdit = new Person();
+            PersonDto personEdit = new PersonDto();
+            personEdit.setId(personOptional.get().getId());
             personEdit.setFirstName(personOptional.get().getFirstName());
             personEdit.setLastName(personOptional.get().getLastName());
             personEdit.setSName(personOptional.get().getSName());
@@ -75,7 +76,7 @@ public class AdminEditController {
             personEdit.setNumberCity(personOptional.get().getNumberCity());
             personEdit.setNumberMobil(personOptional.get().getNumberMobil());
             personEdit.setAlphabet(personOptional.get().getAlphabet());
-            this.personService.savePerson(personEdit);
+            this.personService.savePersonClone(personEdit);
         }
         return "redirect:/adminEdit";
     }
@@ -122,8 +123,8 @@ public class AdminEditController {
     }
 
     @PostMapping(path = "/adminEdit/edit/update", produces = "text/html; charset=utf-8")
-    public String updatePerson(Person person) {
-        this.personService.savePerson(person);
+    public String updatePerson(PersonDto personDto) {
+        this.personService.savePerson(personDto);
         return "redirect:/adminEdit";
     }
 

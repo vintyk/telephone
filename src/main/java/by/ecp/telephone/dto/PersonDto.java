@@ -1,13 +1,18 @@
 package by.ecp.telephone.dto;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import by.ecp.telephone.entity.BaseEntity;
+import lombok.*;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Data
 @NoArgsConstructor
 @ToString
 public class PersonDto {
+
+    private Long id;
     private String firstName;
     private String lastName;
     private String sName;

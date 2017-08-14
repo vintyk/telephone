@@ -32,9 +32,28 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public void savePerson(Person person) {
-        person.getLastName();
-        person.getAlphabet();
+    public void savePerson(PersonDto personDto) {
+        Person person = new Person();
+        person.setId(personDto.getId());
+        person.setFirstName(personDto.getFirstName());
+        person.setLastName(personDto.getLastName());
+        person.setSName(personDto.getSName());
+        person.setNumberShot(personDto.getNumberShot());
+        person.setNumberCity(personDto.getNumberCity());
+        person.setNumberMobil(personDto.getNumberMobil());
+        person.setAlphabet(personDto.getAlphabet());
+        this.personRepository.save(person);
+    }
+    @Override
+    public void savePersonClone(PersonDto personDto) {
+        Person person = new Person();
+        person.setFirstName(personDto.getFirstName());
+        person.setLastName(personDto.getLastName());
+        person.setSName(personDto.getSName());
+        person.setNumberShot(personDto.getNumberShot());
+        person.setNumberCity(personDto.getNumberCity());
+        person.setNumberMobil(personDto.getNumberMobil());
+        person.setAlphabet(personDto.getAlphabet());
         this.personRepository.save(person);
     }
 

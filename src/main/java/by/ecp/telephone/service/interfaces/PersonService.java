@@ -13,7 +13,9 @@ public interface PersonService {
 
     Optional<Person> getPersonById(Long id);
 
-    void savePerson(Person person);
+    void savePerson(PersonDto personDto);
+
+    void savePersonClone(PersonDto personDto);
 
     void savePersonAlphabet(PersonDto person);
 
