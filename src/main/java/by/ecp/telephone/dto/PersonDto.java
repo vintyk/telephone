@@ -1,11 +1,8 @@
 package by.ecp.telephone.dto;
 
-import by.ecp.telephone.entity.BaseEntity;
-import lombok.*;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @NoArgsConstructor
@@ -21,4 +18,24 @@ public class PersonDto {
     private String numberCity;
     private String alphabet;
     private String presentPosition;
+
+    public PersonDto(Long id,
+                     String firstName,
+                     String lastName,
+                     String sName,
+                     String numberMobil,
+                     String numberShot,
+                     String numberCity,
+                     String alphabet,
+                     String presentPosition) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.sName = sName;
+        this.numberMobil = numberMobil;
+        this.numberShot = numberShot;
+        this.numberCity = numberCity;
+        this.alphabet = alphabet;
+        this.presentPosition = presentPosition;
+    }
 }

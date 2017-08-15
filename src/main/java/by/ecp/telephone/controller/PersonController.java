@@ -1,5 +1,6 @@
 package by.ecp.telephone.controller;
 
+import by.ecp.telephone.dto.PersonDto;
 import by.ecp.telephone.entity.Pager;
 import by.ecp.telephone.entity.Person;
 import by.ecp.telephone.service.interfaces.PersonService;
@@ -37,12 +38,16 @@ public class PersonController {
         ModelAndView modelAndView = new ModelAndView("persons");
         int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
         int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
-        Page<Person> persons = personService.findAllPageableOrderBylastName(new PageRequest(evalPage, evalPageSize));
-        Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
-        Person person = new Person();
+        Page<PersonDto> persons = personService.findAllPageableOrderBylastName(new PageRequest(evalPage, evalPageSize));
+
+        Pager pager = new Pager(persons
+                .getTotalPages(),
+                persons.getNumber(),
+                BUTTONS_TO_SHOW);
+        PersonDto personDto = new PersonDto();
         searchR = "";
         httpSession.setAttribute("litera", "");
-        modelAndView.addObject("person", person);
+        modelAndView.addObject("person", personDto);
         modelAndView.addObject("persons", persons);
         modelAndView.addObject("selectedPageSize", evalPageSize);
         modelAndView.addObject("pageSizes", PAGE_SIZES);
@@ -65,12 +70,12 @@ public class PersonController {
         if (searchResult.equals("${litera}")) {
             searchResult = searchR;
             if (searchResult.equals("")) {
-                Page<Person> persons = personService.findAllPageableOrderBylastName(new PageRequest(evalPage, evalPageSize));
+                Page<PersonDto> persons = personService.findAllPageableOrderBylastName(new PageRequest(evalPage, evalPageSize));
                 Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
-                Person person = new Person();
+                PersonDto personDto = new PersonDto();
                 modelAndView.addObject("litera", httpSession.getAttribute("litera"));
                 modelAndView.addObject("persons", persons);
-                modelAndView.addObject("person", person);
+                modelAndView.addObject("person", personDto);
                 modelAndView.addObject("selectedPageSize", evalPageSize);
                 modelAndView.addObject("pageSizes", PAGE_SIZES);
                 modelAndView.addObject("pager", pager);
@@ -82,21 +87,21 @@ public class PersonController {
             httpSession.setAttribute("litera", searchR);
         }
         if (searchR.length() > 1) {
-            Page<Person> persons = personService.findAllByLastNameContainsOrderByLastName(new PageRequest(evalPage, evalPageSize), searchResult);
+            Page<PersonDto> persons = personService.findAllByLastNameContainsOrderByLastName(new PageRequest(evalPage, evalPageSize), searchResult);
             Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
-            Person person = new Person();
+            PersonDto personDto = new PersonDto();
             modelAndView.addObject("persons", persons);
             modelAndView.addObject("selectedPageSize", evalPageSize);
             modelAndView.addObject("pageSizes", PAGE_SIZES);
             modelAndView.addObject("pager", pager);
             return modelAndView;
         }
-        Page<Person> persons = personService.findAllByAlphabetEqualsOrderByLastName(new PageRequest(evalPage, evalPageSize), searchResult);
+        Page<PersonDto> persons = personService.findAllByAlphabetEqualsOrderByLastName(new PageRequest(evalPage, evalPageSize), searchResult);
         Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
-        Person person = new Person();
+        PersonDto personDto = new PersonDto();
         modelAndView.addObject("litera", httpSession.getAttribute("litera"));
         modelAndView.addObject("persons", persons);
-        modelAndView.addObject("person", person);
+        modelAndView.addObject("person", personDto);
         modelAndView.addObject("selectedPageSize", evalPageSize);
         modelAndView.addObject("pageSizes", PAGE_SIZES);
         modelAndView.addObject("pager", pager);
@@ -113,12 +118,12 @@ public class PersonController {
         int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
 
             searchR = litera;
-                Page<Person> persons = personService.findAllByLastNameContainsOrderByLastName(new PageRequest(evalPage, evalPageSize), litera);
+                Page<PersonDto> persons = personService.findAllByLastNameContainsOrderByLastName(new PageRequest(evalPage, evalPageSize), litera);
                 Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
-                Person person = new Person();
+                PersonDto personDto = new PersonDto();
                 modelAndView.addObject("litera", httpSession.getAttribute("litera"));
                 modelAndView.addObject("persons", persons);
-                modelAndView.addObject("person", person);
+                modelAndView.addObject("person", personDto);
                 modelAndView.addObject("selectedPageSize", evalPageSize);
                 modelAndView.addObject("pageSizes", PAGE_SIZES);
                 modelAndView.addObject("pager", pager);

@@ -20,7 +20,7 @@ $(document).ready(function () {
     function ajaxGet() {
         $.ajax({
             type: "GET",
-            url: url + "/greeting",
+            url: url + "/handbooks",
             success: function (data) {
                 // fill data to Modal Body
                 fillData(data);

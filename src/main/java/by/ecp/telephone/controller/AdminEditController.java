@@ -38,7 +38,7 @@ public class AdminEditController {
         ModelAndView modelAndView = new ModelAndView("adminEdit");
         int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
         int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
-        Page<Person> persons = personService.findAllPageableOrderBylastName(new PageRequest(evalPage, evalPageSize));
+        Page<PersonDto> persons = personService.findAllPageableOrderBylastName(new PageRequest(evalPage, evalPageSize));
         Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
         PersonDto personDto = new PersonDto();
         searchR = "";
@@ -67,16 +67,16 @@ public class AdminEditController {
     public String clonePerson(@PathVariable Long id) {
         Optional<Person> personOptional = this.personService.getPersonById(id);
         if (personOptional.isPresent()) {
-            PersonDto personEdit = new PersonDto();
-            personEdit.setId(personOptional.get().getId());
-            personEdit.setFirstName(personOptional.get().getFirstName());
-            personEdit.setLastName(personOptional.get().getLastName());
-            personEdit.setSName(personOptional.get().getSName());
-            personEdit.setNumberShot(personOptional.get().getNumberShot());
-            personEdit.setNumberCity(personOptional.get().getNumberCity());
-            personEdit.setNumberMobil(personOptional.get().getNumberMobil());
-            personEdit.setAlphabet(personOptional.get().getAlphabet());
-            this.personService.savePersonClone(personEdit);
+            PersonDto personEditDto = new PersonDto();
+            personEditDto.setId(personOptional.get().getId());
+            personEditDto.setFirstName(personOptional.get().getFirstName());
+            personEditDto.setLastName(personOptional.get().getLastName());
+            personEditDto.setSName(personOptional.get().getSName());
+            personEditDto.setNumberShot(personOptional.get().getNumberShot());
+            personEditDto.setNumberCity(personOptional.get().getNumberCity());
+            personEditDto.setNumberMobil(personOptional.get().getNumberMobil());
+            personEditDto.setAlphabet(personOptional.get().getAlphabet());
+            this.personService.savePersonClone(personEditDto);
         }
         return "redirect:/adminEdit";
     }
@@ -85,16 +85,16 @@ public class AdminEditController {
     public String viewContact(@PathVariable Long id, Model model) {
         Optional<Person> personOptional = this.personService.getPersonById(id);
         if (personOptional.isPresent()) {
-            Person person = new Person();
-            person.setId(personOptional.get().getId());
-            person.setFirstName(personOptional.get().getFirstName());
-            person.setLastName(personOptional.get().getLastName());
-            person.setSName(personOptional.get().getSName());
-            person.setNumberShot(personOptional.get().getNumberShot());
-            person.setNumberCity(personOptional.get().getNumberCity());
-            person.setNumberMobil(personOptional.get().getNumberMobil());
-            person.setAlphabet(personOptional.get().getAlphabet());
-            model.addAttribute("person", person);
+            PersonDto personDto = new PersonDto();
+            personDto.setId(personOptional.get().getId());
+            personDto.setFirstName(personOptional.get().getFirstName());
+            personDto.setLastName(personOptional.get().getLastName());
+            personDto.setSName(personOptional.get().getSName());
+            personDto.setNumberShot(personOptional.get().getNumberShot());
+            personDto.setNumberCity(personOptional.get().getNumberCity());
+            personDto.setNumberMobil(personOptional.get().getNumberMobil());
+            personDto.setAlphabet(personOptional.get().getAlphabet());
+            model.addAttribute("person", personDto);
         } else {
             return "adminEdit";
         }
@@ -105,16 +105,16 @@ public class AdminEditController {
     public String editPerson(@PathVariable Long id, Model model) {
         Optional<Person> personOptional = this.personService.getPersonById(id);
         if (personOptional.isPresent()) {
-            Person personEdit = new Person();
-            personEdit.setId(personOptional.get().getId());
-            personEdit.setFirstName(personOptional.get().getFirstName());
-            personEdit.setLastName(personOptional.get().getLastName());
-            personEdit.setSName(personOptional.get().getSName());
-            personEdit.setNumberShot(personOptional.get().getNumberShot());
-            personEdit.setNumberCity(personOptional.get().getNumberCity());
-            personEdit.setNumberMobil(personOptional.get().getNumberMobil());
-            personEdit.setAlphabet(personOptional.get().getAlphabet());
-            model.addAttribute("person", Optional.of(personEdit));
+            PersonDto personEditDto = new PersonDto();
+            personEditDto.setId(personOptional.get().getId());
+            personEditDto.setFirstName(personOptional.get().getFirstName());
+            personEditDto.setLastName(personOptional.get().getLastName());
+            personEditDto.setSName(personOptional.get().getSName());
+            personEditDto.setNumberShot(personOptional.get().getNumberShot());
+            personEditDto.setNumberCity(personOptional.get().getNumberCity());
+            personEditDto.setNumberMobil(personOptional.get().getNumberMobil());
+            personEditDto.setAlphabet(personOptional.get().getAlphabet());
+            model.addAttribute("person", Optional.of(personEditDto));
 //            model.addAttribute("person", personEdit);
         } else {
             return "adminEdit";
@@ -142,12 +142,12 @@ public class AdminEditController {
         if (searchResult.equals("${litera}")) {
             searchResult = searchR;
             if (searchResult.equals("")) {
-                Page<Person> persons = personService.findAllPageableOrderBylastName(new PageRequest(evalPage, evalPageSize));
+                Page<PersonDto> persons = personService.findAllPageableOrderBylastName(new PageRequest(evalPage, evalPageSize));
                 Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
-                Person person = new Person();
+                PersonDto personDto = new PersonDto();
                 modelAndView.addObject("litera", httpSession.getAttribute("litera"));
                 modelAndView.addObject("persons", persons);
-                modelAndView.addObject("person", person);
+                modelAndView.addObject("person", personDto);
                 modelAndView.addObject("selectedPageSize", evalPageSize);
                 modelAndView.addObject("pageSizes", PAGE_SIZES);
                 modelAndView.addObject("pager", pager);
@@ -159,22 +159,22 @@ public class AdminEditController {
             httpSession.setAttribute("litera", searchR);
         }
         if (searchR.length() > 1) {
-            Page<Person> persons = personService.findAllByLastNameContainsOrderByLastName(new PageRequest(evalPage, evalPageSize), searchResult);
+            Page<PersonDto> persons = personService.findAllByLastNameContainsOrderByLastName(new PageRequest(evalPage, evalPageSize), searchResult);
             Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
-            Person person = new Person();
-            modelAndView.addObject("person", person);
+            PersonDto personDto = new PersonDto();
+            modelAndView.addObject("person", personDto);
             modelAndView.addObject("persons", persons);
             modelAndView.addObject("selectedPageSize", evalPageSize);
             modelAndView.addObject("pageSizes", PAGE_SIZES);
             modelAndView.addObject("pager", pager);
             return modelAndView;
         }
-        Page<Person> persons = personService.findAllByAlphabetEqualsOrderByLastName(new PageRequest(evalPage, evalPageSize), searchResult);
+        Page<PersonDto> persons = personService.findAllByAlphabetEqualsOrderByLastName(new PageRequest(evalPage, evalPageSize), searchResult);
         Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
-        Person person = new Person();
+        PersonDto personDto = new PersonDto();
         modelAndView.addObject("litera", httpSession.getAttribute("litera"));
         modelAndView.addObject("persons", persons);
-        modelAndView.addObject("person", person);
+        modelAndView.addObject("person", personDto);
         modelAndView.addObject("selectedPageSize", evalPageSize);
         modelAndView.addObject("pageSizes", PAGE_SIZES);
         modelAndView.addObject("pager", pager);
@@ -191,12 +191,12 @@ public class AdminEditController {
         int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
 
         searchR = litera;
-        Page<Person> persons = personService.findAllByLastNameContainsOrderByLastName(new PageRequest(evalPage, evalPageSize), litera);
+        Page<PersonDto> persons = personService.findAllByLastNameContainsOrderByLastName(new PageRequest(evalPage, evalPageSize), litera);
         Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
-        Person person = new Person();
+        PersonDto personDto = new PersonDto();
         modelAndView.addObject("litera", httpSession.getAttribute("litera"));
         modelAndView.addObject("persons", persons);
-        modelAndView.addObject("person", person);
+        modelAndView.addObject("person", personDto);
         modelAndView.addObject("selectedPageSize", evalPageSize);
         modelAndView.addObject("pageSizes", PAGE_SIZES);
         modelAndView.addObject("pager", pager);

@@ -4,12 +4,16 @@ import by.ecp.telephone.dto.PersonDto;
 import by.ecp.telephone.entity.Person;
 import by.ecp.telephone.repository.PersonRepository;
 import by.ecp.telephone.service.interfaces.PersonService;
+import com.sun.javafx.scene.layout.region.Margins;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PersonServiceImpl implements PersonService {
@@ -44,6 +48,7 @@ public class PersonServiceImpl implements PersonService {
         person.setAlphabet(personDto.getAlphabet());
         this.personRepository.save(person);
     }
+
     @Override
     public void savePersonClone(PersonDto personDto) {
         Person person = new Person();
@@ -75,33 +80,84 @@ public class PersonServiceImpl implements PersonService {
         this.personRepository.deleteById(id);
     }
 
-    @Override
-    public Page<Person> findAllPageableOrderBylastName(Pageable pageable) {
-        return personRepository.findAllByLastNameIsNotNullOrderByLastName(pageable);
-    }
 
     @Override
-    public Page<Person> findAllByAlphabetEqualsOrderByLastName(Pageable pageable, String searchResult) {
-        return personRepository.findAllByAlphabetEqualsOrderByLastName(pageable, searchResult);
-    }
+    public Page<PersonDto> findAllPageableOrderBylastName(Pageable pageable) {
+        Page<Person> personPage = personRepository.findAllByLastNameIsNotNullOrderByLastName(pageable);
+        int totalElements = (int) personPage.getTotalElements();
+        return new PageImpl<PersonDto>(personPage
+                .stream()
+                .map(person -> new PersonDto(
+                        person.getId(),
+                        person.getFirstName(),
+                        person.getLastName(),
+                        person.getSName(),
+                        person.getNumberMobil(),
+                        person.getNumberShot(),
+                        person.getNumberCity(),
+                        person.getAlphabet(),
+                        person.getPresentPosition()))
+                .collect(Collectors.toList()), pageable, totalElements);
+        }
+
 
     @Override
-    public Page<Person> findAllByLastNameContainsOrderByLastName(Pageable pageable, String searchRes) {
-        return personRepository.findAllByLastNameContainsOrderByLastName(pageable, searchRes);
+    public Page<PersonDto> findAllByAlphabetEqualsOrderByLastName(Pageable pageable, String searchResult) {
+        Page<Person> personPage = personRepository.findAllByAlphabetEqualsOrderByLastName(pageable, searchResult);
+        int totalElements = (int) personPage.getTotalElements();
+        return new PageImpl<PersonDto>(personPage
+                .stream()
+                .map(person -> new PersonDto(
+                        person.getId(),
+                        person.getFirstName(),
+                        person.getLastName(),
+                        person.getSName(),
+                        person.getNumberMobil(),
+                        person.getNumberShot(),
+                        person.getNumberCity(),
+                        person.getAlphabet(),
+                        person.getPresentPosition()))
+                .collect(Collectors.toList()), pageable, totalElements);
+        }
+
+    @Override
+    public Page<PersonDto> findAllByLastNameContainsOrderByLastName(Pageable pageable, String searchRes) {
+        Page<Person> personPage = personRepository.findAllByLastNameContainsOrderByLastName(pageable, searchRes);
+        int totalElements = (int) personPage.getTotalElements();
+        return new PageImpl<PersonDto>(personPage
+                .stream()
+                .map(person -> new PersonDto(
+                        person.getId(),
+                        person.getFirstName(),
+                        person.getLastName(),
+                        person.getSName(),
+                        person.getNumberMobil(),
+                        person.getNumberShot(),
+                        person.getNumberCity(),
+                        person.getAlphabet(),
+                        person.getPresentPosition()))
+                .collect(Collectors.toList()), pageable, totalElements);
     }
 
     private String cutFromWordFirstChar(String word) {
         String result = word.toLowerCase().substring(0, 1);
-        if (result.equals("ж")) {
-            result = "е";
-        } else if (result.equals("ф")) {
-            result = "у";
-        } else if (result.equals("ц")) {
-            result = "х";
-        } else if (result.equals("щ")) {
-            result = "ш";
-        } else if (result.equals("ю") || result.equals("я")) {
-            result = "э";
+        switch (result) {
+            case "ж":
+                result = "е";
+                break;
+            case "ф":
+                result = "у";
+                break;
+            case "ц":
+                result = "х";
+                break;
+            case "щ":
+                result = "ш";
+                break;
+            case "ю":
+            case "я":
+                result = "э";
+                break;
         }
         return result;
     }

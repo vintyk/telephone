@@ -21,9 +21,9 @@ public interface PersonService {
 
     void deletePerson(Long id);
 
-    Page<Person> findAllPageableOrderBylastName(Pageable pageable);
+    Page<PersonDto> findAllPageableOrderBylastName(Pageable pageable);
 
-    Page<Person> findAllByAlphabetEqualsOrderByLastName(Pageable pageable, String searchResult);
+    Page<PersonDto> findAllByAlphabetEqualsOrderByLastName(Pageable pageable, String searchResult);
 
-    Page<Person> findAllByLastNameContainsOrderByLastName(Pageable pageable, String searchRes);
+    Page<PersonDto> findAllByLastNameContainsOrderByLastName(Pageable pageable, String searchRes);
 }
