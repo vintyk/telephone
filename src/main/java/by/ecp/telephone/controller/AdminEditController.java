@@ -3,7 +3,10 @@ package by.ecp.telephone.controller;
 import by.ecp.telephone.dto.PersonDto;
 import by.ecp.telephone.entity.Pager;
 import by.ecp.telephone.entity.Person;
+import by.ecp.telephone.entity.PresentPosition;
 import by.ecp.telephone.service.interfaces.PersonService;
+import by.ecp.telephone.service.interfaces.PresentPositionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -23,11 +27,18 @@ public class AdminEditController {
     private static final int[] PAGE_SIZES = {10, 15, 50};
     public static String searchR = "";
     private PersonService personService;
+    private PresentPositionService presentPositionService;
 
-
-    public AdminEditController(PersonService personService) {
+    @Autowired
+    public AdminEditController(PersonService personService, PresentPositionService presentPositionService) {
+        this.personService = personService;
         this.personService = personService;
     }
+
+//    @ModelAttribute("listAllPositions")
+//    public Iterable<PresentPosition> listAllPositions(){
+//        return presentPositionService.getAllPresentPosition();
+//    }
 
     @RequestMapping(value = "/adminEdit", produces = "text/plain;charset=UTF-8", method = RequestMethod.GET)
     @ResponseBody

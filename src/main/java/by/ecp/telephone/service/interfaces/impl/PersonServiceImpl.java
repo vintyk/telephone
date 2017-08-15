@@ -2,16 +2,15 @@ package by.ecp.telephone.service.interfaces.impl;
 
 import by.ecp.telephone.dto.PersonDto;
 import by.ecp.telephone.entity.Person;
+import by.ecp.telephone.entity.PresentPosition;
 import by.ecp.telephone.repository.PersonRepository;
 import by.ecp.telephone.service.interfaces.PersonService;
-import com.sun.javafx.scene.layout.region.Margins;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -38,6 +37,9 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public void savePerson(PersonDto personDto) {
         Person person = new Person();
+        PresentPosition presentPosition = new PresentPosition();
+        presentPosition.setId(personDto.getId());
+
         person.setId(personDto.getId());
         person.setFirstName(personDto.getFirstName());
         person.setLastName(personDto.getLastName());
@@ -46,12 +48,17 @@ public class PersonServiceImpl implements PersonService {
         person.setNumberCity(personDto.getNumberCity());
         person.setNumberMobil(personDto.getNumberMobil());
         person.setAlphabet(personDto.getAlphabet());
+
+        person.setPresentPosition(presentPosition);
         this.personRepository.save(person);
     }
 
     @Override
     public void savePersonClone(PersonDto personDto) {
         Person person = new Person();
+        PresentPosition presentPosition = new PresentPosition();
+        presentPosition.setId(personDto.getId());
+
         person.setFirstName(personDto.getFirstName());
         person.setLastName(personDto.getLastName());
         person.setSName(personDto.getSName());
@@ -59,12 +66,17 @@ public class PersonServiceImpl implements PersonService {
         person.setNumberCity(personDto.getNumberCity());
         person.setNumberMobil(personDto.getNumberMobil());
         person.setAlphabet(personDto.getAlphabet());
+
+        person.setPresentPosition(presentPosition);
         this.personRepository.save(person);
     }
 
     @Override
     public void savePersonAlphabet(PersonDto personDto) {
         Person personWithAlphabetDigit = new Person();
+        PresentPosition presentPosition = new PresentPosition();
+        presentPosition.setId(personDto.getId());
+
         personWithAlphabetDigit.setFirstName(personDto.getFirstName());
         personWithAlphabetDigit.setLastName(personDto.getLastName());
         personWithAlphabetDigit.setSName(personDto.getSName());
@@ -72,6 +84,8 @@ public class PersonServiceImpl implements PersonService {
         personWithAlphabetDigit.setNumberCity(personDto.getNumberCity());
         personWithAlphabetDigit.setNumberMobil(personDto.getNumberMobil());
         personWithAlphabetDigit.setAlphabet(cutFromWordFirstChar(personDto.getLastName()));
+
+        personWithAlphabetDigit.setPresentPosition(presentPosition);
         this.personRepository.save(personWithAlphabetDigit);
     }
 
@@ -96,7 +110,7 @@ public class PersonServiceImpl implements PersonService {
                         person.getNumberShot(),
                         person.getNumberCity(),
                         person.getAlphabet(),
-                        person.getPresentPosition()))
+                        person.getPresentPosition().getId()))
                 .collect(Collectors.toList()), pageable, totalElements);
         }
 
@@ -116,7 +130,7 @@ public class PersonServiceImpl implements PersonService {
                         person.getNumberShot(),
                         person.getNumberCity(),
                         person.getAlphabet(),
-                        person.getPresentPosition()))
+                        person.getPresentPosition().getId()))
                 .collect(Collectors.toList()), pageable, totalElements);
         }
 
@@ -135,7 +149,7 @@ public class PersonServiceImpl implements PersonService {
                         person.getNumberShot(),
                         person.getNumberCity(),
                         person.getAlphabet(),
-                        person.getPresentPosition()))
+                        person.getPresentPosition().getId()))
                 .collect(Collectors.toList()), pageable, totalElements);
     }
 

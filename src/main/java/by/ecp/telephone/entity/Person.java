@@ -5,6 +5,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 @NoArgsConstructor
@@ -20,14 +22,17 @@ public class Person extends BaseEntity {
     private String numberShot;
     private String numberCity;
     private String alphabet;
-    private String presentPosition;
+    @ManyToOne
+    @JoinColumn(name = "present_position_id", nullable = false)
+    private PresentPosition presentPosition;
 
     public Person(String firstName,
                   String lastName,
                   String numberMobil,
                   String numberShot,
                   String numberCity,
-                  String alphabet) {
+                  String alphabet,
+                  PresentPosition presentPosition){
         this.firstName = firstName;
         this.lastName = lastName;
         this.sName = sName;
@@ -35,5 +40,6 @@ public class Person extends BaseEntity {
         this.numberShot = numberShot;
         this.numberCity = numberCity;
         this.alphabet = alphabet;
+        this.presentPosition = presentPosition;
     }
 }

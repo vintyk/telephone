@@ -16,12 +16,7 @@
         <!--});-->
     <!--</script>-->
     <!--<style th:inline="text"> body{ background: url{[[@{/static/pic/fon.jpg}]]} no-repeat center center fixed; } </style>-->
-    <style th:inline="text">
-        body{
-        background: url{[[@{/pic/fon.jpg}]]}
-        no-repeat center center fixed;
-        }
-    </style>
+
 </head>
 <body>
 
@@ -66,9 +61,10 @@
                 <th>Фамилия</th>
                 <th>Имя</th>
                 <th>Отчество</th>
-                <th>внутренний телефон</th>
-                <th>Городской телефон</th>
+                <th>внутренний</th>
+                <th>Городской</th>
                 <th>Мобильный</th>
+                <th>Должность</th>
             </tr>
             </thead>
             <tr th:each="person : ${persons}">
@@ -78,6 +74,7 @@
                 <td th:text="${person.numberShot}"></td>
                 <td th:text="${person.numberCity}"></td>
                 <td th:text="${person.numberMobil}"></td>
+                <td th:text="${person.presentPosition}"></td>
             </tr>
         </table>
     </div>

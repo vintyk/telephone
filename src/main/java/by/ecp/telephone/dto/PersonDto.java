@@ -17,7 +17,7 @@ public class PersonDto {
     private String numberShot;
     private String numberCity;
     private String alphabet;
-    private String presentPosition;
+    private Long presentPosition;
 
     public PersonDto(Long id,
                      String firstName,
@@ -27,7 +27,7 @@ public class PersonDto {
                      String numberShot,
                      String numberCity,
                      String alphabet,
-                     String presentPosition) {
+                     Long presentPosition) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
