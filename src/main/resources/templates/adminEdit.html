@@ -78,7 +78,7 @@
                 <td>
                     <div class="btn-group" role="group" aria-label="...">
                         <a th:href="${'/adminEdit/view/' + person.id}"
-                           title="VIEW Person"><span class="badge badge-default">Просмотр</span></a>
+                           title="VIEW Person"><span class="badge badge-default" data-toggle="tooltip" data-placement="top" title="Tooltip on top" >Просмотр</span></a>
                         <a th:href="${'/adminEdit/edit/' + person.id}"
                            title="EDIT Person"><span class="badge badge-success">Именить</span></a>
                         <a th:href="${'/adminEdit/clone/' + person.id}"
@@ -200,8 +200,31 @@
     <br>
     <small id="info" class="form-text text-muted">developer: Ushakov Vitaly</small>
     <small id="info2" class="form-text text-muted">vinty1978@gmail.com</small>
-</div>
 
+    <button type="button" class="btn btn-primary" id="btnId">Open Modal</button>
+
+    <div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    Тут тоже что-то написано...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
