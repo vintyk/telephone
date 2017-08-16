@@ -1,5 +1,6 @@
 package by.ecp.telephone.service.interfaces.impl;
 
+import by.ecp.telephone.dto.PresentPositionDto;
 import by.ecp.telephone.entity.PresentPosition;
 import by.ecp.telephone.repository.PersonRepository;
 import by.ecp.telephone.repository.PresentPositionRepository;
@@ -32,7 +33,9 @@ public class PresentPositionServiceImpl implements PresentPositionService {
     }
 
     @Override
-    public PresentPosition savePresentPosition(PresentPosition presentPosition) {
+    public PresentPosition savePresentPosition(PresentPositionDto presentPositionDto) {
+        PresentPosition presentPosition = new PresentPosition();
+        presentPosition.setName(presentPositionDto.getName());
         return presentPositionRepository.save(presentPosition);
     }
 

@@ -60,9 +60,42 @@
 </nav>
 
 <div class="container">
-    <h1>Bootstrap Modal</h1>
-    <!-- Trigger the modal with a button -->
-    <button type="button" class="btn btn-primary" id="btnId">Open Modal</button>
+    <h2>Справочники</h2>
+    <br>
+    <div class="jumbotron">
+        <h1 class="display-4">Должности</h1>
+        <p class="lead">Должность не должна дублироваться с уже находящимися в списке (255 максимальное число
+            символов)</p>
+
+        <div class="form-group row">
+            <label for="presentPosition" class="col-2 col-form-label">Должность</label>
+            <div class="col-8">
+                <select class="form-control" id="presentPosition">
+                    <option th:each="presentPosition : ${listAllPositions}"
+                            th:value="${presentPosition.id}"
+                            th:text="${presentPosition.name}">
+                    </option>
+                </select>
+            </div>
+        </div>
+        <hr class="my-4">
+        <h3>Ввести новую должность</h3>
+        <form th:action="@{/handbooks/savePresentPosition}" method="post" th:object="${newPresentPosition}">
+            <div class="form-group row">
+                <label for="family" class="col-2 col-form-label">Новая должность</label>
+                <div class="col-6">
+                    <input class="form-control" type="text" value="" placeholder="начальник департамента"
+                           id="family" th:field="${newPresentPosition.name}" required="required"/></input>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Записать данные в БД</button>
+        </form>
+    </div>
+</div>
+
+
+<!-- Trigger the modal with a button -->
+<button type="button" class="btn btn-primary" id="btnId">Open Modal</button>
 
 <div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
