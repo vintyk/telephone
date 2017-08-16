@@ -26,4 +26,6 @@ public interface PersonService {
     Page<PersonDto> findAllByAlphabetEqualsOrderByLastName(Pageable pageable, String searchResult);
 
     Page<PersonDto> findAllByLastNameContainsOrderByLastName(Pageable pageable, String searchRes);
+
+    Person findPersonByLastName(String lastName);
 }

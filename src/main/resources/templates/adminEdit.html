@@ -83,7 +83,8 @@
                 <td>
                     <div class="btn-group" role="group" aria-label="...">
                         <a th:href="${'/adminEdit/view/' + person.id}"
-                           title="VIEW Person"><span class="badge badge-default" data-toggle="tooltip" data-placement="top" title="Просмотреть без изменений (безопасно)" >View</span></a>
+                           title="VIEW Person"><span class="badge badge-default" data-toggle="tooltip"
+                                                     data-placement="top" title="Просмотреть без изменений (безопасно)">View</span></a>
                         <a th:href="${'/adminEdit/edit/' + person.id}"
                            title="Изменить запись"><span class="badge badge-success">Edit</span></a>
                         <a th:href="${'/adminEdit/clone/' + person.id}"
@@ -132,14 +133,7 @@
                     <blockquote class="card-blockquote">
 
                         <form th:action="@{/adminEdit/save}" method="post" th:object="${person}">
-                            <div class="form-group row">
-                                <label for="name" class="col-2 col-form-label">Имя</label>
-                                <div class="col-6">
-                                    <input class="form-control" type="text" value="" placeholder="Иван"
-                                           id="name" th:field="${person.firstName}"/></input>
-                                </div>
-                                <small id="nameSmall" class="form-text text-muted">(50 символов максимум)</small>
-                            </div>
+
                             <div class="form-group row">
                                 <label for="family" class="col-2 col-form-label">Фамилия*</label>
                                 <div class="col-6">
@@ -151,6 +145,15 @@
                                 </small>
                             </div>
                             <div class="form-group row">
+                                <label for="name" class="col-2 col-form-label">Имя</label>
+                                <div class="col-6">
+                                    <input class="form-control" type="text" value="" placeholder="Иван"
+                                           id="name" th:field="${person.firstName}"/></input>
+                                </div>
+                                <small id="nameSmall" class="form-text text-muted">(50 символов максимум)</small>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="sName" class="col-2 col-form-label">Отчество</label>
                                 <div class="col-6">
                                     <input class="form-control" type="text" value="" placeholder="Иванович"
@@ -158,31 +161,18 @@
                                 </div>
                                 <small id="sNameSmall" class="form-text text-muted">(100)</small>
                             </div>
+
                             <div class="form-group row">
-                                <!--<label for="presentPosition" class="col-2 col-form-label">Должность*</label>-->
-                                <!--<div class="col-6">-->
-                                    <!--<input class="form-control" type="text" value="" placeholder="Специалист*"-->
-                                           <!--id="presentPosition" th:field="${person.presentPosition}" required="required"/></input>-->
-                                <!--</div>-->
-                                <!--<small id="presentPositionSmall" class="form-text text-muted">Поле обязательно для заполнения!-->
-                                    <!--(50)-->
-                                <!--</small>-->
+                                <label for="presentPosition" class="col-2 col-form-label">Должность</label>
+                                <div class="col-6">
+                                    <select class="form-control" id="presentPosition" th:field="*{presentPosition}">
+                                        <option th:each="presentPosition : ${listAllPositions}"
+                                                th:value="${presentPosition.id}"
+                                                th:text="${presentPosition.name}">
+                                        </option>
+                                    </select>
 
-
-
-
-
-                                <!--<select th:field="*{presentPosition}">-->
-                                    <!--<option th:each="presentPosition : ${listAllPositions}"-->
-                                            <!--th:value="${presentPosition.id}"-->
-                                            <!--th:text="'Должность '+${presentPosition.name}">-->
-                                    <!--</option>-->
-                                <!--</select>-->
-
-
-
-
-
+                                </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-2 col-form-label" for="telephoneShot">Короткий номер
@@ -234,7 +224,8 @@
 
     <button type="button" class="btn btn-primary" id="btnId">Open Modal</button>
 
-    <div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog" role="document">
 
             <div class="modal-content">

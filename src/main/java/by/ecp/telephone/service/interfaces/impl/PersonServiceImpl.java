@@ -10,10 +10,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Transactional
 @Service
 public class PersonServiceImpl implements PersonService {
 
@@ -38,7 +40,7 @@ public class PersonServiceImpl implements PersonService {
     public void savePerson(PersonDto personDto) {
         Person person = new Person();
         PresentPosition presentPosition = new PresentPosition();
-        presentPosition.setId(personDto.getId());
+        presentPosition.setId(personDto.getPresentPosition());
 
         person.setId(personDto.getId());
         person.setFirstName(personDto.getFirstName());
@@ -57,7 +59,7 @@ public class PersonServiceImpl implements PersonService {
     public void savePersonClone(PersonDto personDto) {
         Person person = new Person();
         PresentPosition presentPosition = new PresentPosition();
-        presentPosition.setId(personDto.getId());
+        presentPosition.setId(personDto.getPresentPosition());
 
         person.setFirstName(personDto.getFirstName());
         person.setLastName(personDto.getLastName());
@@ -75,7 +77,7 @@ public class PersonServiceImpl implements PersonService {
     public void savePersonAlphabet(PersonDto personDto) {
         Person personWithAlphabetDigit = new Person();
         PresentPosition presentPosition = new PresentPosition();
-        presentPosition.setId(personDto.getId());
+        presentPosition.setId(personDto.getPresentPosition());
 
         personWithAlphabetDigit.setFirstName(personDto.getFirstName());
         personWithAlphabetDigit.setLastName(personDto.getLastName());
@@ -151,6 +153,11 @@ public class PersonServiceImpl implements PersonService {
                         person.getAlphabet(),
                         person.getPresentPosition().getId()))
                 .collect(Collectors.toList()), pageable, totalElements);
+    }
+
+    @Override
+    public Person findPersonByLastName(String lastName) {
+        return personRepository.findPersonByLastName(lastName);
     }
 
     private String cutFromWordFirstChar(String word) {

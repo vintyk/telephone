@@ -4,6 +4,7 @@ import by.ecp.telephone.dto.PersonDto;
 import by.ecp.telephone.entity.Pager;
 import by.ecp.telephone.entity.Person;
 import by.ecp.telephone.entity.PresentPosition;
+import by.ecp.telephone.repository.PresentPositionRepository;
 import by.ecp.telephone.service.interfaces.PersonService;
 import by.ecp.telephone.service.interfaces.PresentPositionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,18 +28,18 @@ public class AdminEditController {
     private static final int[] PAGE_SIZES = {10, 15, 50};
     public static String searchR = "";
     private PersonService personService;
-    private PresentPositionService presentPositionService;
+    private PresentPositionRepository presentPositionRepository;
 
     @Autowired
-    public AdminEditController(PersonService personService, PresentPositionService presentPositionService) {
+    public AdminEditController(PersonService personService, PresentPositionRepository presentPositionRepository) {
         this.personService = personService;
-        this.personService = personService;
+        this.presentPositionRepository = presentPositionRepository;
     }
 
-//    @ModelAttribute("listAllPositions")
-//    public Iterable<PresentPosition> listAllPositions(){
-//        return presentPositionService.getAllPresentPosition();
-//    }
+    @ModelAttribute("listAllPositions")
+    public Iterable<PresentPosition> listAllPositions(){
+        return presentPositionRepository.findAll();
+    }
 
     @RequestMapping(value = "/adminEdit", produces = "text/plain;charset=UTF-8", method = RequestMethod.GET)
     @ResponseBody
@@ -49,11 +50,15 @@ public class AdminEditController {
         ModelAndView modelAndView = new ModelAndView("adminEdit");
         int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
         int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
+
         Page<PersonDto> persons = personService.findAllPageableOrderBylastName(new PageRequest(evalPage, evalPageSize));
+//        Iterable<PresentPosition> presentPositions = presentPositionRepository.findAll();
         Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
         PersonDto personDto = new PersonDto();
+
         searchR = "";
         httpSession.setAttribute("litera", "");
+//        modelAndView.addObject("listAllPositions", presentPositions);
         modelAndView.addObject("person", personDto);
         modelAndView.addObject("persons", persons);
         modelAndView.addObject("selectedPageSize", evalPageSize);
@@ -87,6 +92,7 @@ public class AdminEditController {
             personEditDto.setNumberCity(personOptional.get().getNumberCity());
             personEditDto.setNumberMobil(personOptional.get().getNumberMobil());
             personEditDto.setAlphabet(personOptional.get().getAlphabet());
+            personEditDto.setPresentPosition(personOptional.get().getPresentPosition().getId());
             this.personService.savePersonClone(personEditDto);
         }
         return "redirect:/adminEdit";
@@ -105,6 +111,7 @@ public class AdminEditController {
             personDto.setNumberCity(personOptional.get().getNumberCity());
             personDto.setNumberMobil(personOptional.get().getNumberMobil());
             personDto.setAlphabet(personOptional.get().getAlphabet());
+            personDto.setPresentPosition(personOptional.get().getPresentPosition().getId());
             model.addAttribute("person", personDto);
         } else {
             return "adminEdit";
@@ -125,6 +132,7 @@ public class AdminEditController {
             personEditDto.setNumberCity(personOptional.get().getNumberCity());
             personEditDto.setNumberMobil(personOptional.get().getNumberMobil());
             personEditDto.setAlphabet(personOptional.get().getAlphabet());
+            personEditDto.setPresentPosition(personOptional.get().getPresentPosition().getId());
             model.addAttribute("person", Optional.of(personEditDto));
 //            model.addAttribute("person", personEdit);
         } else {

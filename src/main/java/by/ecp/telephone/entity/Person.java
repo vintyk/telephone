@@ -3,10 +3,7 @@ package by.ecp.telephone.entity;
 import lombok.*;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
@@ -22,7 +19,7 @@ public class Person extends BaseEntity {
     private String numberShot;
     private String numberCity;
     private String alphabet;
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "present_position_id", nullable = false)
     private PresentPosition presentPosition;
 

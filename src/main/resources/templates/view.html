@@ -63,6 +63,17 @@
                         <input type="text" class="form-control" id="sName" placeholder="S Name"
                                th:field="*{person.sName}" name="sName" disabled="disabled"/>
                     </div>
+
+                    <div class="col-6">
+                        <label for="presentPosition">Должность</label>
+                        <select class="form-control" id="presentPosition" disabled="disabled">
+                            <option th:each="presentPosition : ${listAllPositions}"
+                                    th:value="${presentPosition.id}"
+                                    th:text="${presentPosition.name}">
+                            </option>
+                        </select>
+                    </div>
+
                     <div class="col-md-6">
                         <label for="numberShot">Короткий номер</label>
                         <input type="text" class="form-control" id="numberShot" placeholder="3451"
