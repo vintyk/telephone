@@ -38,7 +38,7 @@ public class PersonController {
         ModelAndView modelAndView = new ModelAndView("persons");
         int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
         int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
-        Page<PersonDto> persons = personService.findAllPageableOrderBylastName(new PageRequest(evalPage, evalPageSize));
+        Page<PersonDto> persons = personService.findAllPageableOrderBylastNameStringPresentPosition(new PageRequest(evalPage, evalPageSize));
 
         Pager pager = new Pager(persons
                 .getTotalPages(),
@@ -70,7 +70,7 @@ public class PersonController {
         if (searchResult.equals("${litera}")) {
             searchResult = searchR;
             if (searchResult.equals("")) {
-                Page<PersonDto> persons = personService.findAllPageableOrderBylastName(new PageRequest(evalPage, evalPageSize));
+                Page<PersonDto> persons = personService.findAllPageableOrderBylastNameStringPresentPosition(new PageRequest(evalPage, evalPageSize));
                 Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
                 PersonDto personDto = new PersonDto();
                 modelAndView.addObject("litera", httpSession.getAttribute("litera"));
@@ -87,7 +87,7 @@ public class PersonController {
             httpSession.setAttribute("litera", searchR);
         }
         if (searchR.length() > 1) {
-            Page<PersonDto> persons = personService.findAllByLastNameContainsOrderByLastName(new PageRequest(evalPage, evalPageSize), searchResult);
+            Page<PersonDto> persons = personService.findAllByLastNameContainsOrderByLastNameStringPresentPosition(new PageRequest(evalPage, evalPageSize), searchResult);
             Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
             PersonDto personDto = new PersonDto();
             modelAndView.addObject("persons", persons);
@@ -96,7 +96,7 @@ public class PersonController {
             modelAndView.addObject("pager", pager);
             return modelAndView;
         }
-        Page<PersonDto> persons = personService.findAllByAlphabetEqualsOrderByLastName(new PageRequest(evalPage, evalPageSize), searchResult);
+        Page<PersonDto> persons = personService.findAllByAlphabetEqualsOrderByLastNameStringPresentPosition(new PageRequest(evalPage, evalPageSize), searchResult);
         Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
         PersonDto personDto = new PersonDto();
         modelAndView.addObject("litera", httpSession.getAttribute("litera"));
@@ -118,7 +118,7 @@ public class PersonController {
         int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
 
             searchR = litera;
-                Page<PersonDto> persons = personService.findAllByLastNameContainsOrderByLastName(new PageRequest(evalPage, evalPageSize), litera);
+                Page<PersonDto> persons = personService.findAllByLastNameContainsOrderByLastNameStringPresentPosition(new PageRequest(evalPage, evalPageSize), litera);
                 Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
                 PersonDto personDto = new PersonDto();
                 modelAndView.addObject("litera", httpSession.getAttribute("litera"));

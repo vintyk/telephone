@@ -18,16 +18,17 @@ public class PersonDto {
     private String numberCity;
     private String alphabet;
     private Long presentPosition;
+    private String presentPositionS;
 
     public PersonDto(Long id,
-                     String firstName,
-                     String lastName,
-                     String sName,
-                     String numberMobil,
-                     String numberShot,
-                     String numberCity,
-                     String alphabet,
-                     Long presentPosition) {
+                      String firstName,
+                      String lastName,
+                      String sName,
+                      String numberMobil,
+                      String numberShot,
+                      String numberCity,
+                      String alphabet,
+                      Long presentPosition) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -37,5 +38,24 @@ public class PersonDto {
         this.numberCity = numberCity;
         this.alphabet = alphabet;
         this.presentPosition = presentPosition;
+    }
+    public PersonDto(Long id,
+                     String firstName,
+                     String lastName,
+                     String sName,
+                     String numberMobil,
+                     String numberShot,
+                     String numberCity,
+                     String alphabet,
+                     String presentPositionS) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.sName = sName;
+        this.numberMobil = numberMobil;
+        this.numberShot = numberShot;
+        this.numberCity = numberCity;
+        this.alphabet = alphabet;
+        this.presentPositionS = presentPositionS;
     }
 }
