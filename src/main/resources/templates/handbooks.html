@@ -59,41 +59,68 @@
     </div>
 </nav>
 
-<div class="container">
+<div class="container-fluid">
     <h2>Справочники</h2>
     <br>
-    <div class="jumbotron">
-        <h1 class="display-4">Должности</h1>
-        <p class="lead">Должность не должна дублироваться с уже находящимися в списке (255 максимальное число
-            символов)</p>
 
-        <div class="form-group row">
-            <label for="presentPosition" class="col-2 col-form-label">Должность</label>
-            <div class="col-8">
-                <select class="form-control" id="presentPosition">
-                    <option th:each="presentPosition : ${listAllPositions}"
-                            th:value="${presentPosition.id}"
-                            th:text="${presentPosition.name}">
-                    </option>
-                </select>
+        <div class="jumbotron">
+            <h1 class="display-4">Должности</h1>
+            <p class="lead">Должность не должна дублироваться с уже находящимися в списке (255 максимальное число
+                символов)</p>
+
+            <!--<div class="form-group row">-->
+            <!--<label for="presentPosition" class="col-2 col-form-label">Должность</label>-->
+            <!--<div class="col-8">-->
+            <!--<select class="form-control" id="presentPosition">-->
+            <!--<option th:each="presentPosition : ${listAllPositions}"-->
+            <!--th:value="${presentPosition.id}"-->
+            <!--th:text="${presentPosition.name}">-->
+            <!--</option>-->
+            <!--<a th:href="${'/handbooks/savePresentPosition/' + presentPosition.id}"-->
+            <!--title="Удалить запись. Операция необратима!"><span class="badge badge-danger">Del</span></a>-->
+            <!--</select>-->
+            <div class="row">
+            <div class="col-6">
+                <table class="table table-hover">
+                    <thead class="thead-default">
+                    <tr>
+                        <th scope="row">ID</th>
+                        <th>Наименование должности</th>
+                    </tr>
+                    </thead>
+                    <tr th:each="presentPosition : ${listAllPositions}">
+                        <td th:text="${presentPosition.id}"></td>
+                        <td th:text="${presentPosition.name}"></td>
+                        <td>
+                            <a th:href="${'/handbooks/deletePresentPosition/' + presentPosition.id}"
+                               title="Удалить запись. Операция необратима!"><span class="badge badge-danger">Удаление из справочника</span></a>
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <!--</div>-->
+            <!--</div>-->
+            <div class="col-6">
+                <h3>Ввести новую должность</h3>
+                <form th:action="@{/handbooks/savePresentPosition}" method="post" th:object="${newPresentPosition}">
+                    <div class="form-group row">
+                        <label for="family" class="col-2 col-form-label">Новая должность</label>
+                        <div class="col-6">
+                            <input class="form-control" type="text" value="" placeholder="начальник департамента"
+                                   id="family" th:field="${newPresentPosition.name}" required="required"/></input>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Записать данные в БД</button>
+                </form>
             </div>
         </div>
         <hr class="my-4">
-        <h3>Ввести новую должность</h3>
-        <form th:action="@{/handbooks/savePresentPosition}" method="post" th:object="${newPresentPosition}">
-            <div class="form-group row">
-                <label for="family" class="col-2 col-form-label">Новая должность</label>
-                <div class="col-6">
-                    <input class="form-control" type="text" value="" placeholder="начальник департамента"
-                           id="family" th:field="${newPresentPosition.name}" required="required"/></input>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary btn-lg btn-block">Записать данные в БД</button>
-        </form>
     </div>
 </div>
-
-
+</div>
+</div>
 <!-- Trigger the modal with a button -->
 <button type="button" class="btn btn-primary" id="btnId">Open Modal</button>
 
