@@ -53,13 +53,5 @@ public class PresentPositionRepositoryTest {
                     System.out.println("-------------------"+p);
                 }
                 assertEquals(count, 2);
-
-//        Iterable<PresentPosition> presentPositionsFromService = presentPositionService.listAllPresentPosition();
-//        int count2 = 0;
-//        for (PresentPosition p2 : presentPositionsFromService){
-//            count2++;
-//            System.out.println("-------------------"+p2);
-//        }
-//        assertEquals(count2, 2);
     }
 }

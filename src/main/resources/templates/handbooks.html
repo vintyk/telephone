@@ -63,23 +63,23 @@
     <h2>Справочники</h2>
     <br>
 
-        <div class="jumbotron">
-            <h1 class="display-4">Должности</h1>
-            <p class="lead">Должность не должна дублироваться с уже находящимися в списке (255 максимальное число
-                символов)</p>
+    <div class="jumbotron">
+        <h1 class="display-4">Должности</h1>
+        <p class="lead">Должность не должна дублироваться с уже находящимися в списке (255 максимальное число
+            символов)</p>
 
-            <!--<div class="form-group row">-->
-            <!--<label for="presentPosition" class="col-2 col-form-label">Должность</label>-->
-            <!--<div class="col-8">-->
-            <!--<select class="form-control" id="presentPosition">-->
-            <!--<option th:each="presentPosition : ${listAllPositions}"-->
-            <!--th:value="${presentPosition.id}"-->
-            <!--th:text="${presentPosition.name}">-->
-            <!--</option>-->
-            <!--<a th:href="${'/handbooks/savePresentPosition/' + presentPosition.id}"-->
-            <!--title="Удалить запись. Операция необратима!"><span class="badge badge-danger">Del</span></a>-->
-            <!--</select>-->
-            <div class="row">
+        <!--<div class="form-group row">-->
+        <!--<label for="presentPosition" class="col-2 col-form-label">Должность</label>-->
+        <!--<div class="col-8">-->
+        <!--<select class="form-control" id="presentPosition">-->
+        <!--<option th:each="presentPosition : ${listAllPositions}"-->
+        <!--th:value="${presentPosition.id}"-->
+        <!--th:text="${presentPosition.name}">-->
+        <!--</option>-->
+        <!--<a th:href="${'/handbooks/savePresentPosition/' + presentPosition.id}"-->
+        <!--title="Удалить запись. Операция необратима!"><span class="badge badge-danger">Del</span></a>-->
+        <!--</select>-->
+        <div class="row">
             <div class="col-6">
                 <table class="table table-hover">
                     <thead class="thead-default">
@@ -106,50 +106,88 @@
                 <h3>Ввести новую должность</h3>
                 <form th:action="@{/handbooks/savePresentPosition}" method="post" th:object="${newPresentPosition}">
                     <div class="form-group row">
-                        <label for="family" class="col-2 col-form-label">Новая должность</label>
+                        <label for="present" class="col-2 col-form-label">Уникальное наименование</label>
                         <div class="col-6">
                             <input class="form-control" type="text" value="" placeholder="начальник департамента"
-                                   id="family" th:field="${newPresentPosition.name}" required="required"/></input>
+                                   id="present" th:field="${newPresentPosition.name}" required="required"/></input>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">Записать данные в БД</button>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Внести должность в справочник
+                    </button>
                 </form>
             </div>
         </div>
         <hr class="my-4">
     </div>
-</div>
-</div>
-</div>
-<!-- Trigger the modal with a button -->
-<button type="button" class="btn btn-primary" id="btnId">Open Modal</button>
 
-<div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
 
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p id="greetingId"></p>
-                Тут тоже что-то написано...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+<div class="jumbotron">
+    <h1 class="display-4">Наименование отделения</h1>
+    <p class="lead">Отделение, филиал - это город в котором находится отделение. Например: "Гродненский филиал №1",
+        "Отделение Минска - Колядичи". Указывайте самую верхнюю структуру выше которой в вашей организации ничего
+        нет.(255 максимальное число символов)</p>
+
+    <div class="row">
+        <div class="col-6">
+            <table class="table table-hover">
+                <thead class="thead-default">
+                <tr>
+                    <th scope="row">ID</th>
+                    <th>Наименование Отделения</th>
+                </tr>
+                </thead>
+                <tr th:each="branches : ${listAllBranches}">
+                    <td th:text="${branches.id}"></td>
+                    <td th:text="${branches.name}"></td>
+                    <td>
+                        <a th:href="${'/handbooks/deleteBranch/' + branches.id}"
+                           title="Удалить запись. Операция необратима!"><span class="badge badge-danger">Удаление из справочника</span></a>
+
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-6">
+            <h3>Ввести новое отделение</h3>
+            <form th:action="@{/handbooks/saveBranch}" method="post" th:object="${newBranch}">
+                <div class="form-group row">
+                    <label for="branch" class="col-2 col-form-label">Уникальное наименование</label>
+                    <div class="col-6">
+                        <input class="form-control" type="text" value="" placeholder="Отделение - Колядичи"
+                               id="branch" th:field="${newBranch.name}" required="required"/></input>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Внести отделение в справочник</button>
+            </form>
         </div>
     </div>
+    <hr class="my-4">
 </div>
 </div>
 
-<!--<script src="../../resources/static/js/tether.min.js" th:src="@{/js/tether.min.js}"></script>-->
-<!--<script src="../../resources/static/jquery/jquery-3.2.1.min.js" th:src="@{/jquery/jquery-3.2.1.min.js}"></script>-->
-<!--<script src="../../resources/static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>-->
-<!--<script src="../static/js/getrequest.js" th:src="@{/js/getrequest.js}"></script>-->
+
+<!--<button type="button" class="btn btn-primary" id="btnId">Open Modal</button>-->
+
+<!--<div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--<div class="modal-dialog" role="document">-->
+
+<!--<div class="modal-content">-->
+<!--<div class="modal-header">-->
+<!--<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>-->
+<!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--<span aria-hidden="true">&times;</span>-->
+<!--</button>-->
+<!--</div>-->
+<!--<div class="modal-body">-->
+<!--<p id="greetingId"></p>-->
+<!--Тут тоже что-то написано...-->
+<!--</div>-->
+<!--<div class="modal-footer">-->
+<!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+<!--<button type="button" class="btn btn-primary">Save changes</button>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
 </body>
 </html>
