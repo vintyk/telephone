@@ -18,6 +18,7 @@ public class Person extends BaseEntity {
     private String numberMobil;
     private String numberShot;
     private String numberCity;
+    @NotEmpty(message = "Alphabet is required.")
     private String alphabet;
     @OneToOne
     @JoinColumn(name = "present_position_id", nullable = false)

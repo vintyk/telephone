@@ -6,7 +6,6 @@ import lombok.ToString;
 
 @Data
 @NoArgsConstructor
-@ToString
 public class PresentPositionDto {
 
     private Long id;
