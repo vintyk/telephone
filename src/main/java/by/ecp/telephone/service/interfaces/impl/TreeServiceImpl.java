@@ -60,7 +60,7 @@ public class TreeServiceImpl implements TreeService {
     }
 
     @Override
-    public void deleteTree(Long id){
+    public void deleteTree(Long id) {
         treeRepository.deleteById(id);
     }
 }
