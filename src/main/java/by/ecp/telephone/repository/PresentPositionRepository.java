@@ -10,4 +10,5 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @Repository
 public interface PresentPositionRepository extends CrudRepository<PresentPosition, Long> {
+    Iterable<PresentPosition> findAllByNameIsNotNullOrderByName();
 }

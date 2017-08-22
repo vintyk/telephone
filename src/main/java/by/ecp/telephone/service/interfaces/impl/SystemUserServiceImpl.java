@@ -5,7 +5,7 @@ import by.ecp.telephone.repository.SystemUserRepository;
 import by.ecp.telephone.service.interfaces.SystemUserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+@Transactional
 @Service
 public class SystemUserServiceImpl implements SystemUserService {
 

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+
+<title>Admin</title>
+<head>
+    <title>Admin</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+
+    <script src="../static/js/tether.min.js" th:src="@{/js/tether.min.js}"></script>
+    <script src="../../resources/static/jquery/jquery-3.2.1.min.js" th:src="@{/jquery/jquery-3.2.1.min.js}"></script>
+    <script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+    <script src="../static/js/getrequest.js" th:src="@{/js/getrequest.js}"></script>
+
+</head>
+
+
+<body>
+
+<nav class="navbar navbar-toggleable-md bg-inverse">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" th:href="@{/}">ТЕЛЕФОННЫЙ СПРАВОЧНИК</a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="nav nav-pills" role="navigation">
+            <li class="dropdown">
+                <a class="btn btn-outline-primary" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                   aria-expanded="false">Структура предприятия</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" th:href="@{/handbooks/createTree}">Создание структуры предприятия</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" th:href="@{/handbooks/tree}">Просмотр структуры предприятия</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-outline-primary" th:href="@{/handbooks}">Справочники</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-outline-primary" th:href="@{/adminEdit}">Администратор</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-outline-secondary" th:href="@{/logout}">Выйти</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" th:action="@{/adminEdit}" method="post" th:object="${litera}">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" id="litera" name="litera"
+                   autofocus="autofocus">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск по фамилии</button>
+        </form>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <h2>Создание иерархии</h2>
+    <br>
+
+    <div class="jumbotron">
+        <h1 class="display-4">Иерархия должностей</h1>
+        <p class="lead">Иерархия должна быть уникальна и не должна дублироваться с уже находящимися в списке (255
+            максимальное число символов)</p>
+        <div class="row">
+            <div class="col-12">
+                <h3>Ввести новую запись</h3>
+                <form th:action="@{/handbooks/saveTree}" method="post" th:object="${newTree}">
+
+                    <div class="form-group row">
+                        <label for="branches" class="col-2 col-form-label">Отделение/филиал</label>
+                        <div class="col-8">
+                            <select class="form-control" id="branches" th:field="*{branchId}">
+                                <option th:each="branch : ${listAllBranches}"
+                                        th:value="${branch.id}"
+                                        th:text="${branch.name}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="chiefExecutiveName" class="col-2 col-form-label">Руководитель отделения/филиала</label>
+                        <div class="col-8">
+                            <select class="form-control" id="chiefExecutiveName" th:field="*{chiefExecutiveId}">
+                                <option th:each="chiefExecutive : ${listAllPositions}"
+                                        th:value="${chiefExecutive.id}"
+                                        th:text="${chiefExecutive.name}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="presentPosition1" class="col-2 col-form-label">Подчиненный предыдущего руководителя</label>
+                        <div class="col-8">
+                            <select class="form-control" id="presentPosition1" th:field="*{presentPosition1Id}">
+                                <option th:each="presentPosition1 : ${listAllPositions}"
+                                        th:value="${presentPosition1.id}"
+                                        th:text="${presentPosition1.name}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="presentPosition2" class="col-2 col-form-label">Подчиненный предыдущего руководителя</label>
+                        <div class="col-8">
+                            <select class="form-control" id="presentPosition2" th:field="*{presentPosition2Id}">
+                                <option th:each="presentPosition2 : ${listAllPositions}"
+                                        th:value="${presentPosition2.id}"
+                                        th:text="${presentPosition2.name}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="presentPosition3" class="col-2 col-form-label">Подчиненный предыдущего руководителя</label>
+                        <div class="col-8">
+                            <select class="form-control" id="presentPosition3" th:field="*{presentPosition3Id}">
+                                <option th:each="presentPosition3 : ${listAllPositions}"
+                                        th:value="${presentPosition3.id}"
+                                        th:text="${presentPosition3.name}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="presentPosition4" class="col-2 col-form-label">Подчиненный предыдущего руководителя</label>
+                        <div class="col-8">
+                            <select class="form-control" id="presentPosition4" th:field="*{presentPosition4Id}">
+                                <option th:each="presentPosition4 : ${listAllPositions}"
+                                        th:value="${presentPosition4.id}"
+                                        th:text="${presentPosition4.name}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="presentPosition5" class="col-2 col-form-label">Подчиненный предыдущего руководителя</label>
+                        <div class="col-8">
+                            <select class="form-control" id="presentPosition5" th:field="*{presentPosition5Id}">
+                                <option th:each="presentPosition5 : ${listAllPositions}"
+                                        th:value="${presentPosition5.id}"
+                                        th:text="${presentPosition5.name}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Внести иерархию в справочник
+                </button>
+                </form>
+            </div>
+        </div>
+        <hr class="my-4">
+    </div>
+</div>
+</body>
+</html>

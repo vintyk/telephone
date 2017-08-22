@@ -37,7 +37,7 @@ public class TreeServiceImpl implements TreeService {
     }
 
     @Override
-    public Tree saveTree(TreeDto treeDto) {
+    public void saveTree(TreeDto treeDto) {
         Tree tree = new Tree();
         Branch branch = new Branch();
         PresentPosition presentPositionChiefExecutive = new PresentPosition();
@@ -56,7 +56,13 @@ public class TreeServiceImpl implements TreeService {
         presentPosition5.setId(treeDto.getPresentPosition5Id());
 
         tree.setBranchId(branch);
-        return treeRepository.save(tree);
+        tree.setChiefExecutiveId(presentPositionChiefExecutive);
+        tree.setPresentPosition1Id(presentPosition1);
+        tree.setPresentPosition2Id(presentPosition2);
+        tree.setPresentPosition3Id(presentPosition3);
+        tree.setPresentPosition4Id(presentPosition4);
+        tree.setPresentPosition5Id(presentPosition5);
+        this.treeRepository.save(tree);
     }
 
     @Override

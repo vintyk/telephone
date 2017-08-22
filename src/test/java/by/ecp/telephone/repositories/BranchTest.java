@@ -1,9 +1,8 @@
 package by.ecp.telephone.repositories;
 
 
-import by.ecp.telephone.configuration.RepositoryConfiguration;
+import by.ecp.telephone.configuration.RepositoryConfigurationTest;
 import by.ecp.telephone.entity.Branch;
-import by.ecp.telephone.entity.PresentPosition;
 import by.ecp.telephone.repository.BranchRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +17,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = {RepositoryConfiguration.class})
+@SpringBootTest(classes = {RepositoryConfigurationTest.class})
 public class BranchTest {
     private BranchRepository branchRepository;
 

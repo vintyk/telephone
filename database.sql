@@ -16,6 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `branch`
+--
+
+DROP TABLE IF EXISTS `branch`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `branch` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `branch`
+--
+
+LOCK TABLES `branch` WRITE;
+/*!40000 ALTER TABLE `branch` DISABLE KEYS */;
+INSERT INTO `branch` VALUES (8,'Колядичи'),(9,'Минск - Логистика');
+/*!40000 ALTER TABLE `branch` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `code_city`
 --
 
@@ -53,7 +77,7 @@ CREATE TABLE `person` (
   `number_mobil` varchar(50) DEFAULT NULL,
   `number_city` varchar(255) DEFAULT NULL,
   `number_shot` varchar(255) DEFAULT NULL,
-  `alphabet` varchar(1) DEFAULT NULL,
+  `alphabet` varchar(1) NOT NULL,
   `s_name` varchar(255) DEFAULT NULL,
   `present_position_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
@@ -86,7 +110,7 @@ CREATE TABLE `present_position` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,8 +119,58 @@ CREATE TABLE `present_position` (
 
 LOCK TABLES `present_position` WRITE;
 /*!40000 ALTER TABLE `present_position` DISABLE KEYS */;
-INSERT INTO `present_position` VALUES (1,'специалист'),(2,'начальник отдела'),(11,'заведующий сектором'),(12,'Директор');
+INSERT INTO `present_position` VALUES (1,'специалист'),(2,'начальник отдела'),(11,'заведующий сектором'),(12,'Директор'),(20,'директор департамента'),(21,'начальник управления');
 /*!40000 ALTER TABLE `present_position` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tree`
+--
+
+DROP TABLE IF EXISTS `tree`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tree` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `branch_id` int(11) NOT NULL,
+  `chief_executive_id` int(11) DEFAULT NULL,
+  `present_position_1_id` int(11) DEFAULT NULL,
+  `present_position_2_id` int(11) DEFAULT NULL,
+  `present_position_3_id` int(11) DEFAULT NULL,
+  `present_position_4_id` int(11) DEFAULT NULL,
+  `present_position_5_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKtcotahgh7ypjhcjwr8ey9ns4t` (`branch_id`),
+  KEY `FKjed8d2kn7wiooy5rlfiqsee21` (`chief_executive_id`),
+  KEY `FKef31jd8neupsplh6lqatoj3np` (`present_position_1_id`),
+  KEY `FKjs5x0k58y9a7m0nh3uf1u9gow` (`present_position_2_id`),
+  KEY `FKr0qmrk2d557be0d72hbcl17f0` (`present_position_3_id`),
+  KEY `FKejs1oqawp36nvu5vcqifkuwck` (`present_position_4_id`),
+  KEY `FK3k5o782olppoy10pqxfh0fqdp` (`present_position_5_id`),
+  CONSTRAINT `FK3k5o782olppoy10pqxfh0fqdp` FOREIGN KEY (`present_position_5_id`) REFERENCES `present_position` (`id`),
+  CONSTRAINT `FKef31jd8neupsplh6lqatoj3np` FOREIGN KEY (`present_position_1_id`) REFERENCES `present_position` (`id`),
+  CONSTRAINT `FKejs1oqawp36nvu5vcqifkuwck` FOREIGN KEY (`present_position_4_id`) REFERENCES `present_position` (`id`),
+  CONSTRAINT `FKjed8d2kn7wiooy5rlfiqsee21` FOREIGN KEY (`chief_executive_id`) REFERENCES `present_position` (`id`),
+  CONSTRAINT `FKjs5x0k58y9a7m0nh3uf1u9gow` FOREIGN KEY (`present_position_2_id`) REFERENCES `present_position` (`id`),
+  CONSTRAINT `FKr0qmrk2d557be0d72hbcl17f0` FOREIGN KEY (`present_position_3_id`) REFERENCES `present_position` (`id`),
+  CONSTRAINT `FKtcotahgh7ypjhcjwr8ey9ns4t` FOREIGN KEY (`branch_id`) REFERENCES `branch` (`id`),
+  CONSTRAINT `fk_tree_branch_id_branch_id` FOREIGN KEY (`branch_id`) REFERENCES `branch` (`id`),
+  CONSTRAINT `fk_tree_chief_executive_id_present_position_id` FOREIGN KEY (`chief_executive_id`) REFERENCES `present_position` (`id`),
+  CONSTRAINT `fk_tree_present_position_1_id_present_position_id` FOREIGN KEY (`present_position_1_id`) REFERENCES `present_position` (`id`),
+  CONSTRAINT `fk_tree_present_position_2_id_present_position_id` FOREIGN KEY (`present_position_2_id`) REFERENCES `present_position` (`id`),
+  CONSTRAINT `fk_tree_present_position_3_id_present_position_id` FOREIGN KEY (`present_position_3_id`) REFERENCES `present_position` (`id`),
+  CONSTRAINT `fk_tree_present_position_4_id_present_position_id` FOREIGN KEY (`present_position_4_id`) REFERENCES `present_position` (`id`),
+  CONSTRAINT `fk_tree_present_position_5_id_present_position_id` FOREIGN KEY (`present_position_5_id`) REFERENCES `present_position` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tree`
+--
+
+LOCK TABLES `tree` WRITE;
+/*!40000 ALTER TABLE `tree` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tree` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -107,12 +181,12 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(150) NOT NULL,
-  `password` varchar(150) NOT NULL,
-  `privilege` int(11) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `privilege` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -133,4 +207,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-08-17 15:07:34
+-- Dump completed on 2017-08-18 16:25:46

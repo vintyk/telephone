@@ -38,7 +38,7 @@ public class AdminEditController {
 
     @ModelAttribute("listAllPositions")
     public Iterable<PresentPosition> listAllPositions(){
-        return presentPositionRepository.findAll();
+        return presentPositionRepository.findAllByNameIsNotNullOrderByName();
     }
 
     @RequestMapping(value = "/adminEdit", produces = "text/plain;charset=UTF-8", method = RequestMethod.GET)

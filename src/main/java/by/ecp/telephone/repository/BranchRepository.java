@@ -9,4 +9,5 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @Repository
 public interface BranchRepository extends CrudRepository<Branch, Long> {
+    Iterable<Branch> findAllByNameIsNotNullOrderByNameAsc();
 }

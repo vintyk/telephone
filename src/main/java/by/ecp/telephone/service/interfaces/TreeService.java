@@ -13,7 +13,7 @@ public interface TreeService {
 
     Optional<Tree> getTreeById(Long id);
 
-    Tree saveTree(TreeDto treeDto);
+    void saveTree(TreeDto treeDto);
 
     void deleteTree(Long id);
 }

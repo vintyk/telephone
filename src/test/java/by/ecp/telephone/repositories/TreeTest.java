@@ -1,11 +1,10 @@
 package by.ecp.telephone.repositories;
 
 
-import by.ecp.telephone.configuration.RepositoryConfiguration;
+import by.ecp.telephone.configuration.RepositoryConfigurationTest;
 import by.ecp.telephone.entity.Branch;
 import by.ecp.telephone.entity.PresentPosition;
 import by.ecp.telephone.entity.Tree;
-import by.ecp.telephone.repository.BranchRepository;
 import by.ecp.telephone.repository.TreeRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +17,7 @@ import java.util.Optional;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = {RepositoryConfiguration.class})
+@SpringBootTest(classes = {RepositoryConfigurationTest.class})
 public class TreeTest {
     private TreeRepository treeRepository;
 
