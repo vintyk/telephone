@@ -3,6 +3,7 @@ package by.ecp.telephone.service.interfaces.impl;
 import by.ecp.telephone.dto.PersonDto;
 import by.ecp.telephone.entity.Person;
 import by.ecp.telephone.entity.PresentPosition;
+import by.ecp.telephone.entity.Tree;
 import by.ecp.telephone.repository.PersonRepository;
 import by.ecp.telephone.service.interfaces.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +40,12 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public void savePerson(PersonDto personDto) {
         Person person = new Person();
+
         PresentPosition presentPosition = new PresentPosition();
         presentPosition.setId(personDto.getPresentPosition());
+
+        Tree tree = new Tree();
+        tree.setId(personDto.getTreeId());
 
         person.setId(personDto.getId());
         person.setFirstName(personDto.getFirstName());
@@ -50,16 +55,20 @@ public class PersonServiceImpl implements PersonService {
         person.setNumberCity(personDto.getNumberCity());
         person.setNumberMobil(personDto.getNumberMobil());
         person.setAlphabet(personDto.getAlphabet());
-
         person.setPresentPosition(presentPosition);
+        person.setTreeId(tree);
         this.personRepository.save(person);
     }
 
     @Override
     public void savePersonClone(PersonDto personDto) {
         Person person = new Person();
+
         PresentPosition presentPosition = new PresentPosition();
         presentPosition.setId(personDto.getPresentPosition());
+
+        Tree tree = new Tree();
+        tree.setId(personDto.getTreeId());
 
         person.setFirstName(personDto.getFirstName());
         person.setLastName(personDto.getLastName());
@@ -68,16 +77,20 @@ public class PersonServiceImpl implements PersonService {
         person.setNumberCity(personDto.getNumberCity());
         person.setNumberMobil(personDto.getNumberMobil());
         person.setAlphabet(personDto.getAlphabet());
-
         person.setPresentPosition(presentPosition);
+        person.setTreeId(tree);
         this.personRepository.save(person);
     }
 
     @Override
     public void savePersonAlphabet(PersonDto personDto) {
         Person personWithAlphabetDigit = new Person();
+
         PresentPosition presentPosition = new PresentPosition();
         presentPosition.setId(personDto.getPresentPosition());
+
+        Tree tree = new Tree();
+        tree.setId(personDto.getTreeId());
 
         personWithAlphabetDigit.setFirstName(personDto.getFirstName());
         personWithAlphabetDigit.setLastName(personDto.getLastName());
@@ -86,8 +99,8 @@ public class PersonServiceImpl implements PersonService {
         personWithAlphabetDigit.setNumberCity(personDto.getNumberCity());
         personWithAlphabetDigit.setNumberMobil(personDto.getNumberMobil());
         personWithAlphabetDigit.setAlphabet(cutFromWordFirstChar(personDto.getLastName()));
-
         personWithAlphabetDigit.setPresentPosition(presentPosition);
+        personWithAlphabetDigit.setTreeId(tree);
         this.personRepository.save(personWithAlphabetDigit);
     }
 
@@ -112,7 +125,8 @@ public class PersonServiceImpl implements PersonService {
                         person.getNumberShot(),
                         person.getNumberCity(),
                         person.getAlphabet(),
-                        person.getPresentPosition().getId()))
+                        person.getPresentPosition().getId(),
+                        person.getTreeId().getId()))
                 .collect(Collectors.toList()), pageable, totalElements);
         }
 
@@ -131,7 +145,8 @@ public class PersonServiceImpl implements PersonService {
                         person.getNumberShot(),
                         person.getNumberCity(),
                         person.getAlphabet(),
-                        person.getPresentPosition().getName()))
+                        person.getPresentPosition().getName(),
+                        person.getTreeId().getId()))
                 .collect(Collectors.toList()), pageable, totalElements);
     }
 
@@ -150,7 +165,8 @@ public class PersonServiceImpl implements PersonService {
                         person.getNumberShot(),
                         person.getNumberCity(),
                         person.getAlphabet(),
-                        person.getPresentPosition().getId()))
+                        person.getPresentPosition().getId(),
+                        person.getTreeId().getId()))
                 .collect(Collectors.toList()), pageable, totalElements);
         }
 
@@ -169,7 +185,8 @@ public class PersonServiceImpl implements PersonService {
                         person.getNumberShot(),
                         person.getNumberCity(),
                         person.getAlphabet(),
-                        person.getPresentPosition().getName()))
+                        person.getPresentPosition().getName(),
+                        person.getTreeId().getId()))
                 .collect(Collectors.toList()), pageable, totalElements);
     }
 
@@ -188,7 +205,8 @@ public class PersonServiceImpl implements PersonService {
                         person.getNumberShot(),
                         person.getNumberCity(),
                         person.getAlphabet(),
-                        person.getPresentPosition().getId()))
+                        person.getPresentPosition().getId(),
+                        person.getTreeId().getId()))
                 .collect(Collectors.toList()), pageable, totalElements);
     }
 
@@ -207,7 +225,8 @@ public class PersonServiceImpl implements PersonService {
                         person.getNumberShot(),
                         person.getNumberCity(),
                         person.getAlphabet(),
-                        person.getPresentPosition().getName()))
+                        person.getPresentPosition().getName(),
+                        person.getTreeId().getId()))
                 .collect(Collectors.toList()), pageable, totalElements);
     }
 

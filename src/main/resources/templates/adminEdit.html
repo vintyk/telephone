@@ -171,6 +171,25 @@
                                     </select>
                                 </div>
                             </div>
+
+                            <div class="form-group row">
+                                <label for="tree" class="col-2 col-form-label">Иерархия</label>
+                                <div class="col-10">
+                                    <select class="form-control" id="tree" th:field="*{treeId}">
+                                        <option th:each="tree : ${listAllTrees}"
+                                                th:value="${tree.id}"
+                                                th:text="${tree.branchId.name}+'_'
+                                                +${tree.chiefExecutiveId.name}+'_'
+                                        +${tree.presentPosition1Id.name}+'_'
+                                        +${tree.presentPosition2Id.name}+'_'
+                                        +${tree.presentPosition3Id.name}+'_'
+                                        +${tree.presentPosition4Id.name}+'_'
+                                        +${tree.presentPosition5Id.name}">
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
                             <div class="form-group row">
                                 <label class="col-2 col-form-label" for="telephoneShot">Короткий номер
                                 </label>

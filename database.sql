@@ -26,7 +26,7 @@ CREATE TABLE `branch` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -83,10 +83,8 @@ CREATE TABLE `person` (
   PRIMARY KEY (`id`),
   KEY `I_person_last_name` (`last_name`),
   KEY `I_person_alphabet` (`alphabet`),
-  KEY `FK17v1ehsksepahrads5qcyny6` (`present_position_id`),
-  CONSTRAINT `FK17v1ehsksepahrads5qcyny6` FOREIGN KEY (`present_position_id`) REFERENCES `present_position` (`id`),
-  CONSTRAINT `fk_person_present_position_id` FOREIGN KEY (`present_position_id`) REFERENCES `present_position` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2450 DEFAULT CHARSET=utf8;
+  KEY `FK17v1ehsksepahrads5qcyny6` (`present_position_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2459 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,7 +93,7 @@ CREATE TABLE `person` (
 
 LOCK TABLES `person` WRITE;
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
-INSERT INTO `person` VALUES (7,'Семен','Ушаков','375-29-566-55-44','','1015','у','Романович',1),(2410,'Рома','Ушаков','','','1015','у','',1),(2411,'Иван','Михалков','','','1015','м','',1),(2412,'Annette','Кушаков','','','1015','к','',1),(2413,'Виталий','Ушаков','375-29-624-47-44','249-96-73','8877','у','Григорьевич',12),(2414,'Annette','Ушаков','','','1015','у','',1),(2415,'Annette','Ушаков','','','1015','у','',1),(2416,'Annette','Ушаков','','','1015','у','',1),(2417,'Annette','Маршаков','','225-55-88','1015','у','Витальевич',11),(2418,'Дмитрий','Ушаков','','265-54-89','1232','у','Григорьевич',1),(2419,'Annette','Ушаков','','','1015','у','',1),(2420,'Annette','Ушаков','','','1015','у','',1),(2421,'Annette','Ушаков','','','1015','у','',1),(2422,'Алексей','Лобанов','','254-99-77','2343','у','Михайлович',11),(2423,'Annette','Ушаков','','','1015','у','',1),(2424,'Annette','Ушаков','','','1015','у','',1),(2425,'Annette','Ушаков','','','1015','у','',1),(2426,'Валентин','Ушаков','','','1015','у','',11),(2427,'Annette','Ушаков','','','1015','у','',2),(2428,'Annette','Ушаков','','','1015','у','',1),(2429,'Илья','Романенко','','265-55-77','1212','у','ЭХдуардович',1),(2430,'Annette','Ушаков','','','1015','у','',1),(2432,'Иван','Михалков','','','1015','м','',1),(2433,'Сантьяго','Князев','','225-55-88','1015','к','Витальевич',2),(2434,'Себастьян','Кац','375-44-585-66-99','223-65-32','112','к','Измаилович',2),(2446,'Себастьян','Кац','375-44-585-66-99','223-65-32','112','к','Измаилович',1),(2449,'Джорж','Абель','','','121','а','Иванович',1);
+INSERT INTO `person` VALUES (7,'Семен','Ушаков','375-29-566-55-44','','1015','у','Романович',1),(2410,'Рома','Ушаков','','','1015','у','',1),(2411,'Иван','Михалков','','','1015','м','',1),(2412,'Annette','Кушаков','','','1015','к','',1),(2413,'Виталий','Ушаков','375-29-624-47-44','249-96-73','8877','у','Григорьевич',1),(2414,'Annette','Ушаков','','','1015','у','',1),(2415,'Annette','Ушаков','','','1015','у','',1),(2416,'Annette','Ушаков','','','1015','у','',1),(2417,'Annette','Маршаков','','225-55-88','1015','у','Витальевич',1),(2418,'Дмитрий','Ушаков','','265-54-89','1232','у','Григорьевич',1),(2419,'Annette','Ушаков','','','1015','у','',1),(2420,'Annette','Ушаков','','','1015','у','',1),(2421,'Annette','Ушаков','','','1015','у','',1),(2422,'Алексей','Лобанов','','254-99-77','2343','у','Михайлович',1),(2423,'Annette','Ушаков','','','1015','у','',1),(2424,'Annette','Ушаков','','','1015','у','',1),(2425,'Annette','Ушаков','','','1015','у','',1),(2426,'Валентин','Ушаков','','','1015','у','',1),(2427,'Annette','Ушаков','','','1015','у','',1),(2428,'Annette','Ушаков','','','1015','у','',1),(2429,'Илья','Романенко','','265-55-77','1212','у','ЭХдуардович',1),(2430,'Annette','Ушаков','','','1015','у','',1),(2432,'Иван','Михалков','','','1015','м','',1),(2433,'Сантьяго','Князев','','225-55-88','1015','к','Витальевич',1),(2434,'Себастьян','Кац','375-44-585-66-99','223-65-32','112','к','Измаилович',1),(2446,'Себастьян','Кац','375-44-585-66-99','223-65-32','112','к','Измаилович',1),(2449,'Джорж','Абель','','','121','а','Иванович',1);
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,7 +108,7 @@ CREATE TABLE `present_position` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +117,7 @@ CREATE TABLE `present_position` (
 
 LOCK TABLES `present_position` WRITE;
 /*!40000 ALTER TABLE `present_position` DISABLE KEYS */;
-INSERT INTO `present_position` VALUES (1,'специалист'),(2,'начальник отдела'),(11,'заведующий сектором'),(12,'Директор'),(20,'директор департамента'),(21,'начальник управления');
+INSERT INTO `present_position` VALUES (1,'специалист'),(12,'Директор'),(20,'директор департамента маркетинга'),(23,'_неопределен'),(25,'начальник отдела маркетинга'),(26,'директор департамента автоматизации'),(27,'начальник отдела программирования'),(28,'начальник отдела администраторов'),(29,'администратор'),(30,'программист');
 /*!40000 ALTER TABLE `present_position` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -161,7 +159,7 @@ CREATE TABLE `tree` (
   CONSTRAINT `fk_tree_present_position_3_id_present_position_id` FOREIGN KEY (`present_position_3_id`) REFERENCES `present_position` (`id`),
   CONSTRAINT `fk_tree_present_position_4_id_present_position_id` FOREIGN KEY (`present_position_4_id`) REFERENCES `present_position` (`id`),
   CONSTRAINT `fk_tree_present_position_5_id_present_position_id` FOREIGN KEY (`present_position_5_id`) REFERENCES `present_position` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -170,6 +168,7 @@ CREATE TABLE `tree` (
 
 LOCK TABLES `tree` WRITE;
 /*!40000 ALTER TABLE `tree` DISABLE KEYS */;
+INSERT INTO `tree` VALUES (38,8,12,26,28,23,23,23),(42,8,12,26,27,23,23,23),(43,8,12,26,28,29,23,23);
 /*!40000 ALTER TABLE `tree` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -207,4 +206,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-08-18 16:25:46
+-- Dump completed on 2017-08-24 10:45:44

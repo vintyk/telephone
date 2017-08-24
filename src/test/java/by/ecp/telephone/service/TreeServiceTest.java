@@ -23,17 +23,17 @@ public class TreeServiceTest {
 
     @Test
     public void testSaveTree() {
-        TreeDto treeDto = new TreeDto();
-
-        treeDto.setBranchId(8L);
-        treeDto.setChiefExecutiveId(12L);
-        treeDto.setPresentPosition1Id(20L);
-        treeDto.setPresentPosition2Id(21L);
-        treeDto.setPresentPosition3Id(2L);
-        treeDto.setPresentPosition4Id(11L);
-        treeDto.setPresentPosition5Id(1L);
-
-        treeService.saveTree(treeDto);
+//        TreeDto treeDto = new TreeDto();
+//
+//        treeDto.setBranchId(8L);
+//        treeDto.setChiefExecutiveId(12L);
+//        treeDto.setPresentPosition1Id(20L);
+//        treeDto.setPresentPosition2Id(21L);
+//        treeDto.setPresentPosition3Id(2L);
+//        treeDto.setPresentPosition4Id(11L);
+//        treeDto.setPresentPosition5Id(1L);
+//
+//        treeService.saveTree(treeDto);
 
     }
 }

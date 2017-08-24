@@ -2,8 +2,10 @@ package by.ecp.telephone.repositories;
 
 
 import by.ecp.telephone.configuration.RepositoryConfigurationTest;
+import by.ecp.telephone.entity.Branch;
 import by.ecp.telephone.entity.Person;
 import by.ecp.telephone.entity.PresentPosition;
+import by.ecp.telephone.entity.Tree;
 import by.ecp.telephone.repository.PersonRepository;
 import by.ecp.telephone.repository.PresentPositionRepository;
 import org.junit.Test;
@@ -38,12 +40,23 @@ public class PersonServiceTest {
         presentPositionFromDb.setName("зав. сектором");
         assertNotNull(presentPositionFromDb);
 
+        Branch branch = new Branch();
+        branch.setId(1L);
+
+        PresentPosition chiefExecutive = new PresentPosition();
+        chiefExecutive.setId(12L);
+
+        Tree treeFromDb = new Tree();
+        treeFromDb.setId(38L);
+        treeFromDb.setBranchId(branch);
+        treeFromDb.setChiefExecutiveId(chiefExecutive);
 
         Person person = new Person();
         person.setLastName("Авдотьев");
         person.setFirstName("Андрей");
         person.setAlphabet("а");
         person.setPresentPosition(presentPositionFromDb);
+        person.setTreeId(treeFromDb);
         personRepository.save(person);
 
         Person personFromDb = personRepository.findPersonByLastName("Авдотьев");

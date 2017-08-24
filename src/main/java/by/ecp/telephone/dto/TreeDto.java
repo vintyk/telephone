@@ -22,7 +22,8 @@ public class TreeDto {
                    Long presentPosition2Id,
                    Long presentPosition3Id,
                    Long presentPosition4Id,
-                   Long presentPosition5Id) {
+                   Long presentPosition5Id
+                   ) {
         this.id = id;
         this.branchId = branchId;
         this.chiefExecutiveId = chiefExecutiveId;
@@ -31,5 +32,5 @@ public class TreeDto {
         this.presentPosition3Id = presentPosition3Id;
         this.presentPosition4Id = presentPosition4Id;
         this.presentPosition5Id = presentPosition5Id;
-    }
+        }
 }

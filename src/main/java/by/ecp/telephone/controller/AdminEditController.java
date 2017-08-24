@@ -4,9 +4,11 @@ import by.ecp.telephone.dto.PersonDto;
 import by.ecp.telephone.entity.Pager;
 import by.ecp.telephone.entity.Person;
 import by.ecp.telephone.entity.PresentPosition;
+import by.ecp.telephone.entity.Tree;
 import by.ecp.telephone.repository.PresentPositionRepository;
 import by.ecp.telephone.service.interfaces.PersonService;
 import by.ecp.telephone.service.interfaces.PresentPositionService;
+import by.ecp.telephone.service.interfaces.TreeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -29,16 +31,24 @@ public class AdminEditController {
     public static String searchR = "";
     private PersonService personService;
     private PresentPositionRepository presentPositionRepository;
+    private TreeService treeService;
 
     @Autowired
-    public AdminEditController(PersonService personService, PresentPositionRepository presentPositionRepository) {
+    public AdminEditController(PersonService personService,
+                               PresentPositionRepository presentPositionRepository,
+                               TreeService treeService) {
         this.personService = personService;
         this.presentPositionRepository = presentPositionRepository;
+        this.treeService = treeService;
     }
 
     @ModelAttribute("listAllPositions")
     public Iterable<PresentPosition> listAllPositions(){
         return presentPositionRepository.findAllByNameIsNotNullOrderByName();
+    }
+    @ModelAttribute("listAllTrees")
+    public Iterable<Tree> listAllTree(){
+        return treeService.listAllTree();
     }
 
     @RequestMapping(value = "/adminEdit", produces = "text/plain;charset=UTF-8", method = RequestMethod.GET)
@@ -93,6 +103,7 @@ public class AdminEditController {
             personEditDto.setNumberMobil(personOptional.get().getNumberMobil());
             personEditDto.setAlphabet(personOptional.get().getAlphabet());
             personEditDto.setPresentPosition(personOptional.get().getPresentPosition().getId());
+            personEditDto.setTreeId(personOptional.get().getTreeId().getId());
             this.personService.savePersonClone(personEditDto);
         }
         return "redirect:/adminEdit";
@@ -112,6 +123,7 @@ public class AdminEditController {
             personDto.setNumberMobil(personOptional.get().getNumberMobil());
             personDto.setAlphabet(personOptional.get().getAlphabet());
             personDto.setPresentPosition(personOptional.get().getPresentPosition().getId());
+            personDto.setTreeId(personOptional.get().getTreeId().getId());
             model.addAttribute("person", personDto);
         } else {
             return "adminEdit";
@@ -133,7 +145,9 @@ public class AdminEditController {
             personEditDto.setNumberMobil(personOptional.get().getNumberMobil());
             personEditDto.setAlphabet(personOptional.get().getAlphabet());
             personEditDto.setPresentPosition(personOptional.get().getPresentPosition().getId());
+            personEditDto.setTreeId(personOptional.get().getTreeId().getId());
             model.addAttribute("person", Optional.of(personEditDto));
+
 //            model.addAttribute("person", personEdit);
         } else {
             return "adminEdit";

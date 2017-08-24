@@ -23,6 +23,9 @@ public class Person extends BaseEntity {
     @OneToOne
     @JoinColumn(name = "present_position_id", nullable = false)
     private PresentPosition presentPosition;
+    @OneToOne
+    @JoinColumn(name = "tree_id", nullable = false)
+    private Tree treeId;
 
     public Person(String firstName,
                   String lastName,
@@ -30,7 +33,8 @@ public class Person extends BaseEntity {
                   String numberShot,
                   String numberCity,
                   String alphabet,
-                  PresentPosition presentPosition){
+                  PresentPosition presentPosition,
+                  Tree treeId){
         this.firstName = firstName;
         this.lastName = lastName;
         this.sName = sName;
@@ -39,5 +43,6 @@ public class Person extends BaseEntity {
         this.numberCity = numberCity;
         this.alphabet = alphabet;
         this.presentPosition = presentPosition;
+        this.treeId = treeId;
     }
 }
