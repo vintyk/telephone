@@ -1,8 +1,10 @@
 package by.ecp.telephone.controller;
 
 import by.ecp.telephone.dto.PersonDto;
+import by.ecp.telephone.entity.Branch;
 import by.ecp.telephone.entity.Pager;
 import by.ecp.telephone.entity.Person;
+import by.ecp.telephone.repository.BranchRepository;
 import by.ecp.telephone.service.interfaces.PersonService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,9 +25,16 @@ public class PersonController {
     private static final int[] PAGE_SIZES = {10, 15, 50};
     public static String searchR = "";
     private PersonService personService;
+    private BranchRepository branchRepository;
 
-    public PersonController(PersonService studentService) {
-        this.personService = studentService;
+    public PersonController(PersonService personServiceService, BranchRepository branchRepository) {
+        this.personService = personServiceService;
+        this.branchRepository = branchRepository;
+    }
+
+    @ModelAttribute("listAllBranches")
+    public Iterable<Branch> listAllBranches() {
+        return branchRepository.findAllByNameIsNotNullOrderByNameAsc();
     }
 
     //    @GetMapping("/")

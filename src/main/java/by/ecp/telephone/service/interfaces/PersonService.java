@@ -5,6 +5,7 @@ import by.ecp.telephone.entity.Person;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface PersonService {
@@ -34,4 +35,6 @@ public interface PersonService {
     Page<PersonDto> findAllByLastNameContainsOrderByLastNameStringPresentPosition(Pageable pageable, String searchRes);
 
     Person findPersonByLastName(String lastName);
+
+    List<PersonDto> findPersonByBranch(String branchId);
 }

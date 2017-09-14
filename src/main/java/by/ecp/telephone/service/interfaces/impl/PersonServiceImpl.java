@@ -13,6 +13,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -233,6 +235,25 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public Person findPersonByLastName(String lastName) {
         return personRepository.findPersonByLastName(lastName);
+    }
+
+    @Override
+    public List<PersonDto> findPersonByBranch(String branchId) {
+        List<Person> personList = personRepository.findNativeByBranch(branchId);
+        return new ArrayList<PersonDto>(personList
+                .stream()
+                .map(person -> new PersonDto(
+                        person.getId(),
+                        person.getFirstName(),
+                        person.getLastName(),
+                        person.getSName(),
+                        person.getNumberMobil(),
+                        person.getNumberShot(),
+                        person.getNumberCity(),
+                        person.getAlphabet(),
+                        person.getPresentPosition().getName(),
+                        person.getTreeId().getId()))
+                .collect(Collectors.toList()));
     }
 
     private String cutFromWordFirstChar(String word) {
