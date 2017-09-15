@@ -256,6 +256,8 @@ public class PersonServiceImpl implements PersonService {
                 .collect(Collectors.toList()));
     }
 
+
+
     private String cutFromWordFirstChar(String word) {
         String result = word.toLowerCase().substring(0, 1);
         switch (result) {

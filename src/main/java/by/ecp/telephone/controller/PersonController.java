@@ -56,6 +56,7 @@ public class PersonController {
         PersonDto personDto = new PersonDto();
         searchR = "";
         httpSession.setAttribute("litera", "");
+        httpSession.setAttribute("branchId", "");
         modelAndView.addObject("person", personDto);
         modelAndView.addObject("persons", persons);
         modelAndView.addObject("selectedPageSize", evalPageSize);

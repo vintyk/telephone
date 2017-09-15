@@ -39,9 +39,9 @@
                     <!--<small id="minTwoChar" class="form-text text-muted">Минимум 2 буквы.</small>-->
                 </form>
 
-                <form class="navbar-form navbar-left" th:action="@{'/personBranch/' + branch.id}" method="post">
+                <form class="navbar-form navbar-left" th:action="@{/personBranch}" method="post" th:object="${branchId}">
                     <div class="form-group">
-                        <select class="form-control" id="branches">
+                        <select class="form-control" th:id="branchId" th:name="branchId">
                             <option th:each="branch : ${listAllBranches}"
                                     th:value="${branch.id}"
                                     th:text="${branch.name}">
