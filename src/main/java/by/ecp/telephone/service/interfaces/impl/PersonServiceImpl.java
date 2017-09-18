@@ -256,6 +256,24 @@ public class PersonServiceImpl implements PersonService {
                 .collect(Collectors.toList()));
     }
 
+    @Override
+    public List<PersonDto> findPersonByBranchAndOffice(String branchId, String officeId) {
+        List<Person> personList = personRepository.findNativeByBranchAndOffice(branchId, officeId);
+        return new ArrayList<PersonDto>(personList
+                .stream()
+                .map(person -> new PersonDto(
+                        person.getId(),
+                        person.getFirstName(),
+                        person.getLastName(),
+                        person.getSName(),
+                        person.getNumberMobil(),
+                        person.getNumberShot(),
+                        person.getNumberCity(),
+                        person.getAlphabet(),
+                        person.getPresentPosition().getName(),
+                        person.getTreeId().getId()))
+                .collect(Collectors.toList()));
+    }
 
 
     private String cutFromWordFirstChar(String word) {

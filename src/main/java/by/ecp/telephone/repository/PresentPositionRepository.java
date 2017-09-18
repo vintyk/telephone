@@ -19,4 +19,6 @@ public interface PresentPositionRepository extends CrudRepository<PresentPositio
 
     @Query(value = "select * from present_position where id in (select distinct(t.present_position_1_id) from tree t where t.branch_id = ?1)", nativeQuery = true)
     List<PresentPosition> findNativeByPresentPosition_1(String branch_id);
+
+
 }

@@ -23,10 +23,9 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand" th:href="@{/}">ТЕЛЕФОННЫЙ СПРАВОЧНИК</a>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <form class="form-inline my-2 my-lg-0" th:action="@{/personsBranch/office}" method="post" th:object="${office}">
-            <select  th:id="office" th:name="office">
+        <form class="form-inline my-2 my-lg-0" th:action="@{/personsBranch/office}" method="post" th:object="${officeId}">
+            <select class="form-control mr-sm-2" th:id="officeId" th:name="officeId">
                 <option th:each="office : ${listAllOffices}"
                         th:value="${office.id}"
                         th:text="${office.name}">
@@ -39,7 +38,7 @@
 
 <div class="container">
     <div class="row">
-        <h1>Телефонный справочник</h1>
+        <h1 th:text="${session.branchName}+ ': '+ ${session.officeName}">...</h1>
     </div>
     <div class="row">
         <table class="table table-hover">

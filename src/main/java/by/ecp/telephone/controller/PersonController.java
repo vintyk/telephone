@@ -57,6 +57,7 @@ public class PersonController {
         searchR = "";
         httpSession.setAttribute("litera", "");
         httpSession.setAttribute("branchId", "");
+        httpSession.setAttribute("officeName", "");
         modelAndView.addObject("person", personDto);
         modelAndView.addObject("persons", persons);
         modelAndView.addObject("selectedPageSize", evalPageSize);

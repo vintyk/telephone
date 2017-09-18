@@ -38,5 +38,5 @@ public interface PersonService {
 
     List<PersonDto> findPersonByBranch(String branchId);
 
-
+    List<PersonDto> findPersonByBranchAndOffice(String branchId, String officeId);
 }
