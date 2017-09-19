@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <script src="../static/js/tether.min.js" th:src="@{/js/tether.min.js}"></script>
+    <script src="../../resources/static/jquery/jquery-3.2.1.min.js" th:src="@{/jquery/jquery-3.2.1.min.js}"></script>
+    <script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+    <script src="../static/js/getrequest.js" th:src="@{/js/getrequest.js}"></script>
+</head>
+
+<body>
+<nav class="navbar navbar-toggleable-md bg-inverse">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" th:href="@{/}">ТЕЛЕФОННЫЙ СПРАВОЧНИК</a>
+</nav>
+
+<div class="alert alert-danger" role="alert">
+    <h1><strong>Что-то пошло не так...</strong></h1> <p>Видимо, зря попытался ты сделать это последствий не просчитав...</p>
+    <p>В мире все окружающем связано между собой...</p>
+    <p>Кубик убрав снизу пирамиды на срадания обрекаешь разработчика!</p>
+
+    <p>Почувствуй силу... и администратору сообщи.</p>
+</div>
+<div><img alt=logo th:src='@{/pic/yoda.jpg}'></div>
+</body>
+</html>

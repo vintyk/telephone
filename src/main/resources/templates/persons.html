@@ -6,8 +6,8 @@
     <title>Persons</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="../static/js/jquery-3.2.1.min.js" th:href="@{/js/jquery-3.2.1.min.js}" rel="stylesheet" media="screen"/>
-    <script src="webjars/jquery/1.11.1/jquery.min.js"></script>
+    <link href="../static/js/bootstrap.min.js" th:href="@{/js/jquery-3.2.1.min.js}" rel="stylesheet" media="screen"/>
+    <script src="webjars/jquery/3.2.1/jquery.min.js"></script>
     <!--<script th:inline="javascript">-->
         <!--$(document).ready(function() {-->
             <!--$('h1').animate({-->
@@ -15,11 +15,14 @@
             <!--}, "slow");-->
         <!--});-->
     <!--</script>-->
-    <!--<style th:inline="text"> body{ background: url{[[@{/static/pic/fon.jpg}]]} no-repeat center center fixed; } </style>-->
-
+    <style type="text/css">
+        body {
+            background-image: url('/pic/2144.jpg');
+            background-size: 100%;
+        }
+    </style>
 </head>
 <body>
-
 <div th:replace="fragments/header :: header"/></div>
 <div class="container">
     <div class="row">

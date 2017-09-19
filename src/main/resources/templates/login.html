@@ -8,6 +8,13 @@
     <script src="../../resources/static/jquery/jquery-3.2.1.min.js" th:src="@{/jquery/jquery-3.2.1.min.js}"></script>
     <script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
     <script src="../static/js/getrequest.js" th:src="@{/js/getrequest.js}"></script>
+
+    <style type="text/css">
+        body {
+            background-image: url('/pic/2145.jpg');
+            background-size: 100%;
+        }
+    </style>
 </head>
 
 <body>
@@ -19,40 +26,47 @@
     </button>
     <a class="navbar-brand" th:href="@{/}">ТЕЛЕФОННЫЙ СПРАВОЧНИК</a>
 </nav>
-
-<div class="col-md-12">
-    <form th:action="@{/login}" method="post">
-        <div>
-            <div th:if="${param.error}">
-                <div class="alert alert-danger">
-                    Invalid username and password.
-                </div>
-            </div>
-            <div th:if="${param.logout}">
-                <div class="alert alert-info">
-                    You have been logged out.
-                </div>
-            </div>
-            <div class="col-md-3">
-            </div>
-            <div class="col-md-6">
-                <h1>Login...</h1>
-
-                <label for="username" class="col-2 col-form-label"><strong>Login: </strong></label>
-                <input class="form-control" type="text" name="username" id="username" autofocus="true"></input>
-
-                <label for="password" class="col-2 col-form-label"><strong>Password: </strong></label>
-                <input class="form-control" type="password" name="password" id="password"></input><br></br>
-
-                <button type="submit" class="btn btn-primary btn-lg btn-block">Войти в систему</button>
-                <div th:replace="fragments/footer :: footer"/>
-            </div>
-        </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+    <div class="row">
         <div class="col-md-3">
         </div>
-        <br></br>
-        </fieldset>
-    </form>
+        <div class="col-md-6">
+            <form th:action="@{/login}" method="post">
+                <div>
+                    <div th:if="${param.error}">
+                        <div class="alert alert-danger">
+                            Invalid username and password.
+                        </div>
+                    </div>
+                    <div th:if="${param.logout}">
+                        <div class="alert alert-info">
+                            You have been logged out.
+                        </div>
+                    </div>
+                    <h1 class="display-4">Авторизуйтесь</h1>
+                    <p class="h2">что бы иметь возможность</p>
+                    <p class="h2">изменять данные</p>
+                    <label for="username" class="col-2 col-form-label"><strong>Login: </strong></label>
+                    <input class="form-control" type="text" name="username" id="username" autofocus="true"></input>
+
+                    <label for="password" class="col-2 col-form-label"><strong>Password: </strong></label>
+                    <input class="form-control" type="password" name="password" id="password"></input><br></br>
+
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Войти в систему</button>
+                    <div th:replace="fragments/footer :: footer"/>
+                </div>
+                <div class="col-md-3">
+                </div>
+
+            </form>
+        </div>
+    </div>
 </div>
 
 </body>
