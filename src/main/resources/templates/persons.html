@@ -9,11 +9,11 @@
     <link href="../static/js/bootstrap.min.js" th:href="@{/js/jquery-3.2.1.min.js}" rel="stylesheet" media="screen"/>
     <script src="webjars/jquery/3.2.1/jquery.min.js"></script>
     <!--<script th:inline="javascript">-->
-        <!--$(document).ready(function() {-->
-            <!--$('h1').animate({-->
-                <!--fontSize: '42px'-->
-            <!--}, "slow");-->
-        <!--});-->
+    <!--$(document).ready(function() {-->
+    <!--$('h1').animate({-->
+    <!--fontSize: '42px'-->
+    <!--}, "slow");-->
+    <!--});-->
     <!--</script>-->
     <style type="text/css">
         body {
@@ -23,11 +23,12 @@
     </style>
 </head>
 <body>
-<div th:replace="fragments/header :: header"/></div>
+<div th:replace="fragments/header :: header"/>
+</div>
 <div class="container">
     <div class="row">
         <ul class="nav nav-tabs">
-            <li role="presentation"><a href="/" >Аll</a></li>
+            <li role="presentation"><a href="/">Аll</a></li>
             <li role="presentation"><a th:href="@{/а}">А</a></li>
             <li role="presentation"><a th:href="@{/б}">Б</a></li>
             <li role="presentation"><a th:href="@{/в}">В</a></li>
@@ -69,6 +70,7 @@
                 <th>Мобильный</th>
                 <th>Отделение</th>
                 <th>Подразделение</th>
+                <th>...</th>
                 <th>Должность</th>
                 <th>Каб.</th>
             </tr>
@@ -82,6 +84,14 @@
                 <td th:text="${person.numberMobil}"></td>
                 <td th:text="${person.branchS}"></td>
                 <td th:text="${person.treeS}"></td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="...">
+                        <a th:href="${'/personBranch/byTreeId/' + person.treeId}"
+                           title="VIEW Person"><span class="badge badge-default" data-toggle="tooltip"
+                                                     data-placement="top" title="Просмотреть без изменений (безопасно)">View</span></a>
+                    </div>
+
+                </td>
                 <td th:text="${person.presentPositionS}"></td>
                 <td th:text="${person.room}"></td>
             </tr>

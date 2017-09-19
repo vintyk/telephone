@@ -1,0 +1,75 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title>Persons</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+
+    <script src="../static/js/tether.min.js" th:src="@{/js/tether.min.js}"></script>
+    <script src="../../resources/static/jquery/jquery-3.2.1.min.js" th:src="@{/jquery/jquery-3.2.1.min.js}"></script>
+    <script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+    <script src="../static/js/getrequest.js" th:src="@{/js/getrequest.js}"></script>
+    <style type="text/css">
+        body {
+            background-image: url('/pic/2144.jpg');
+            background-size: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-toggleable-md bg-inverse">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" th:href="@{/}">ТЕЛЕФОННЫЙ СПРАВОЧНИК</a>
+</nav>
+
+<div class="container">
+    <!--<div class="row">-->
+        <!--<h1 th:text="${session.branchName}+ ': '+ ${session.officeName}">...</h1>-->
+    <!--</div>-->
+    <div class="row">
+        <table class="table table-hover">
+            <thead class="thead-inverse">
+            <tr>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <th>Отчество</th>
+                <th>внутренний</th>
+                <th>Городской</th>
+                <th>Мобильный</th>
+                <th>Отделение</th>
+                <th>Подразделение</th>
+                <th>Должность</th>
+                <th>Каб.</th>
+            </tr>
+            </thead>
+            <tr th:each="person : ${listAllPersons}">
+                <td th:text="${person.lastName}"></td>
+                <td th:text="${person.firstName}"></td>
+                <td th:text="${person.sName}"></td>
+                <td th:text="${person.numberShot}"></td>
+                <td th:text="${person.numberCity}"></td>
+                <td th:text="${person.numberMobil}"></td>
+                <td th:text="${person.branchS}"></td>
+                <td th:text="${person.treeS}"></td>
+                <td th:text="${person.presentPositionS}"></td>
+                <td th:text="${person.room}"></td>
+            </tr>
+        </table>
+    </div>
+    <div th:replace="fragments/footer :: footer"/>
+</div>
+
+<script th:src="@{../static/js/app.js}"></script>
+<script th:src="@{../static/js/bootstrap.min.js}"></script>
+<script th:src="@{/static/js/jquery-3.2.1.min.js}"></script>
+
+</body>
+</html>

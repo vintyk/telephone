@@ -64,26 +64,29 @@
         <table class="table table-hover">
             <thead class="thead-default">
             <tr>
-                <th scope="row">#</th>
+                <!--<th scope="row">#</th>-->
                 <th>Фамилия</th>
                 <th>Имя</th>
                 <th>Отчество</th>
-                <th>Внутренний</th>
+                <th>внутренний</th>
                 <th>Городской</th>
                 <th>Мобильный</th>
+                <th>Отделение</th>
+                <th>Подразделение</th>
                 <th>Должность</th>
                 <th>Каб.</th>
             </tr>
             </thead>
             <tr th:each="person : ${persons}">
-                <td th:text="${person.id}"></td>
                 <td th:text="${person.lastName}"></td>
                 <td th:text="${person.firstName}"></td>
                 <td th:text="${person.sName}"></td>
                 <td th:text="${person.numberShot}"></td>
                 <td th:text="${person.numberCity}"></td>
                 <td th:text="${person.numberMobil}"></td>
-                <td th:text="${person.presentPosition}"></td>
+                <td th:text="${person.branchS}"></td>
+                <td th:text="${person.treeS}"></td>
+                <td th:text="${person.presentPositionS}"></td>
                 <td th:text="${person.room}"></td>
                 <td>
                     <div class="btn-group" role="group" aria-label="...">

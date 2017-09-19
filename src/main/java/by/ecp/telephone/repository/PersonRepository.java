@@ -31,4 +31,7 @@ public interface PersonRepository extends PagingAndSortingRepository<Person, Lon
 
     @Query(value = "SELECT * from person p where p.tree_id in (select t.id from tree t where t.branch_id = ?1 and t.present_position_1_id = ?2) ORDER BY p.id", nativeQuery = true)
     List<Person> findNativeByBranchAndOffice(String branchId, String officeId);
+
+    @Query(value = "SELECT * from person p where p.tree_id = ?1 ORDER BY p.id", nativeQuery = true)
+    List<Person> findNativeByTreeId(String officeId);
 }

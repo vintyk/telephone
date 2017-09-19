@@ -55,6 +55,7 @@ public class PersonDto {
                      String numberCity,
                      String alphabet,
                      String presentPositionS,
+                     Long treeId,
                      String treeS,
                      String branchS,
                      String room
@@ -68,6 +69,7 @@ public class PersonDto {
         this.numberCity = numberCity;
         this.alphabet = alphabet;
         this.presentPositionS = presentPositionS;
+        this.treeId = treeId;
         this.treeS = treeS;
         this.branchS = branchS;
         this.room = room;

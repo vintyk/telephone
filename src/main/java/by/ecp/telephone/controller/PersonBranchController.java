@@ -76,6 +76,14 @@ public class PersonBranchController {
         return modelAndView;
     }
 
+//    @RequestMapping(value = "/personBranch/byPersonId/{searchResult}", produces = "text/plain;charset=UTF-8", method = RequestMethod.GET)
+//    public ModelAndView showPersonsPageSearchByPerson(@PathVariable String treeId) {
+//        ModelAndView modelAndView = new ModelAndView("personsBranch");
+//        List<PersonDto> listAllPersons = personService.findNativeByTreeId(treeId);
+//        modelAndView.addObject("listAllPersons", listAllPersons);
+//        return modelAndView;
+//    }
+
     @PostMapping(path = "/personBranch/myBranch")
     public String search(@RequestParam String branchId,
                          HttpSession httpSession) {
