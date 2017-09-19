@@ -19,6 +19,7 @@ public class PersonDto {
     private Long presentPosition;
     private String presentPositionS;
     private Long treeId;
+    private String room;
 
     public PersonDto(Long id,
                       String firstName,
@@ -29,7 +30,8 @@ public class PersonDto {
                       String numberCity,
                       String alphabet,
                       Long presentPosition,
-                      Long treeId) {
+                      Long treeId,
+                     String room) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -40,6 +42,7 @@ public class PersonDto {
         this.alphabet = alphabet;
         this.presentPosition = presentPosition;
         this.treeId = treeId;
+        this.room = room;
     }
     public PersonDto(Long id,
                      String firstName,
@@ -50,7 +53,8 @@ public class PersonDto {
                      String numberCity,
                      String alphabet,
                      String presentPositionS,
-                     Long treeId
+                     Long treeId,
+                     String room
                      ) {
         this.id = id;
         this.firstName = firstName;
@@ -62,5 +66,6 @@ public class PersonDto {
         this.alphabet = alphabet;
         this.presentPositionS = presentPositionS;
         this.treeId = treeId;
+        this.room = room;
     }
 }

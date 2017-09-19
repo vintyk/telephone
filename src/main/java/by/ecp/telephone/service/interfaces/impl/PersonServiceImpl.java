@@ -59,6 +59,7 @@ public class PersonServiceImpl implements PersonService {
         person.setAlphabet(personDto.getAlphabet());
         person.setPresentPosition(presentPosition);
         person.setTreeId(tree);
+        person.setRoom(personDto.getRoom());
         this.personRepository.save(person);
     }
 
@@ -81,6 +82,7 @@ public class PersonServiceImpl implements PersonService {
         person.setAlphabet(personDto.getAlphabet());
         person.setPresentPosition(presentPosition);
         person.setTreeId(tree);
+        person.setRoom(personDto.getRoom());
         this.personRepository.save(person);
     }
 
@@ -103,6 +105,7 @@ public class PersonServiceImpl implements PersonService {
         personWithAlphabetDigit.setAlphabet(cutFromWordFirstChar(personDto.getLastName()));
         personWithAlphabetDigit.setPresentPosition(presentPosition);
         personWithAlphabetDigit.setTreeId(tree);
+        personWithAlphabetDigit.setRoom(personDto.getRoom());
         this.personRepository.save(personWithAlphabetDigit);
     }
 
@@ -128,7 +131,8 @@ public class PersonServiceImpl implements PersonService {
                         person.getNumberCity(),
                         person.getAlphabet(),
                         person.getPresentPosition().getId(),
-                        person.getTreeId().getId()))
+                        person.getTreeId().getId(),
+                        person.getRoom()))
                 .collect(Collectors.toList()), pageable, totalElements);
         }
 
@@ -148,7 +152,8 @@ public class PersonServiceImpl implements PersonService {
                         person.getNumberCity(),
                         person.getAlphabet(),
                         person.getPresentPosition().getName(),
-                        person.getTreeId().getId()))
+                        person.getTreeId().getId(),
+                        person.getRoom()))
                 .collect(Collectors.toList()), pageable, totalElements);
     }
 
@@ -168,7 +173,8 @@ public class PersonServiceImpl implements PersonService {
                         person.getNumberCity(),
                         person.getAlphabet(),
                         person.getPresentPosition().getId(),
-                        person.getTreeId().getId()))
+                        person.getTreeId().getId(),
+                        person.getRoom()))
                 .collect(Collectors.toList()), pageable, totalElements);
         }
 
@@ -188,7 +194,8 @@ public class PersonServiceImpl implements PersonService {
                         person.getNumberCity(),
                         person.getAlphabet(),
                         person.getPresentPosition().getName(),
-                        person.getTreeId().getId()))
+                        person.getTreeId().getId(),
+                        person.getRoom()))
                 .collect(Collectors.toList()), pageable, totalElements);
     }
 
@@ -208,7 +215,8 @@ public class PersonServiceImpl implements PersonService {
                         person.getNumberCity(),
                         person.getAlphabet(),
                         person.getPresentPosition().getId(),
-                        person.getTreeId().getId()))
+                        person.getTreeId().getId(),
+                        person.getRoom()))
                 .collect(Collectors.toList()), pageable, totalElements);
     }
 
@@ -228,7 +236,8 @@ public class PersonServiceImpl implements PersonService {
                         person.getNumberCity(),
                         person.getAlphabet(),
                         person.getPresentPosition().getName(),
-                        person.getTreeId().getId()))
+                        person.getTreeId().getId(),
+                        person.getRoom()))
                 .collect(Collectors.toList()), pageable, totalElements);
     }
 
@@ -252,7 +261,8 @@ public class PersonServiceImpl implements PersonService {
                         person.getNumberCity(),
                         person.getAlphabet(),
                         person.getPresentPosition().getName(),
-                        person.getTreeId().getId()))
+                        person.getTreeId().getId(),
+                        person.getRoom()))
                 .collect(Collectors.toList()));
     }
 
@@ -271,7 +281,8 @@ public class PersonServiceImpl implements PersonService {
                         person.getNumberCity(),
                         person.getAlphabet(),
                         person.getPresentPosition().getName(),
-                        person.getTreeId().getId()))
+                        person.getTreeId().getId(),
+                        person.getRoom()))
                 .collect(Collectors.toList()));
     }
 

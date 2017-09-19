@@ -51,6 +51,7 @@
                 <th>Городской</th>
                 <th>Мобильный</th>
                 <th>Должность</th>
+                <th>Каб.</th>
             </tr>
             </thead>
             <tr th:each="person : ${listAllPersons}">
@@ -61,6 +62,7 @@
                 <td th:text="${person.numberCity}"></td>
                 <td th:text="${person.numberMobil}"></td>
                 <td th:text="${person.presentPositionS}"></td>
+                <td th:text="${person.room}"></td>
             </tr>
         </table>
     </div>

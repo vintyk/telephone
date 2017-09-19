@@ -105,6 +105,11 @@
                         <input type="text" class="form-control" id="inputMobileNumber" placeholder="Mobile No."
                                th:field="*{person.numberMobil}" name="mobileNumber" disabled="disabled"/>
                     </div>
+                    <div class="col-md-6">
+                        <label for="room">Номер кабинета</label>
+                        <input type="text" class="form-control" id="room" placeholder="202"
+                               th:field="*{person.room}" name="room" disabled="disabled"/>
+                    </div>
                 </div>
 
                 <ul class="nav nav-pills nav-justified">
@@ -118,15 +123,5 @@
     </div>
 </div>
 
-<!--<div class="container">-->
-<!--<div class="row">-->
-
-<!--<div class="col-md-12">-->
-<!--<input class="form-control" type="text" value="" placeholder="Name Person"-->
-<!--id="name" th:field="${person.firstName}"/>-->
-<!--</div>-->
-
-<!--</div>-->
-<!--</div>-->
 </body>
 </html>
