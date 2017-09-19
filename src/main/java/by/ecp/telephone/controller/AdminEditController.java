@@ -104,6 +104,7 @@ public class AdminEditController {
             personEditDto.setAlphabet(personOptional.get().getAlphabet());
             personEditDto.setPresentPosition(personOptional.get().getPresentPosition().getId());
             personEditDto.setTreeId(personOptional.get().getTreeId().getId());
+            personEditDto.setRoom(personOptional.get().getRoom());
             this.personService.savePersonClone(personEditDto);
         }
         return "redirect:/adminEdit";
@@ -124,6 +125,7 @@ public class AdminEditController {
             personDto.setAlphabet(personOptional.get().getAlphabet());
             personDto.setPresentPosition(personOptional.get().getPresentPosition().getId());
             personDto.setTreeId(personOptional.get().getTreeId().getId());
+            personDto.setRoom(personOptional.get().getRoom());
             model.addAttribute("person", personDto);
         } else {
             return "adminEdit";
@@ -146,6 +148,7 @@ public class AdminEditController {
             personEditDto.setAlphabet(personOptional.get().getAlphabet());
             personEditDto.setPresentPosition(personOptional.get().getPresentPosition().getId());
             personEditDto.setTreeId(personOptional.get().getTreeId().getId());
+            personEditDto.setRoom(personOptional.get().getRoom());
             model.addAttribute("person", Optional.of(personEditDto));
 
 //            model.addAttribute("person", personEdit);
