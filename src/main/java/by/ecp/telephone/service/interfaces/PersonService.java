@@ -41,4 +41,6 @@ public interface PersonService {
     List<PersonDto> findPersonByBranchAndOffice(String branchId, String officeId);
 
     List<PersonDto> findNativeByTreeId(String treeId);
+
+    List<PersonDto> findNativeByRoom(String room);
 }

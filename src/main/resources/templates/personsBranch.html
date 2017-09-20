@@ -29,6 +29,13 @@
     </button>
     <a class="navbar-brand" th:href="@{/}">ТЕЛЕФОННЫЙ СПРАВОЧНИК</a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <form class="form-inline my-2 my-lg-0" th:action="@{/}" method="post" th:object="${litera}">
+
+                <input type="text" class="form-control" placeholder="Search" th:id="litera" th:name="litera" autofocus="autofocus" >
+
+            <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Поиск по фамилии</button>
+        </form>
+
         <form class="form-inline my-2 my-lg-0" th:action="@{/personsBranch/office}" method="post" th:object="${officeId}">
             <select class="form-control mr-sm-2" th:id="officeId" th:name="officeId">
                 <option th:each="office : ${listAllOffices}"
@@ -41,25 +48,65 @@
     </div>
 </nav>
 
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <h1 th:text="${session.branchName}+ ': '+ ${session.officeName}">...</h1>
+        <ul class="nav justify-content-center">
+            <li class="nav-item"><a class="nav-link" href="/">Аll</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/а}">А</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/б}">Б</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/в}">В</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/г}">Г</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/д}">Д</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/е}">ЕЖ</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/з}">З</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/и}">И</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/к}">К</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/л}">Л</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/м}">М</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/н}">Н</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/о}">О</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/п}">П</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/р}">Р</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/с}">С</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/т}">Т</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/у}">УФ</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/х}">ХЦ</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/ч}">Ч</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/ш}">ШЩ</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/э}">ЭЮЯ</a></li>
+        </ul>
+        <!--<ul class="nav justify-content-center">-->
+            <!--<li class="nav-item">-->
+                <!--<a class="nav-link active" href="#">Active</a>-->
+            <!--</li>-->
+            <!--<li class="nav-item">-->
+                <!--<a class="nav-link" href="#">Link</a>-->
+            <!--</li>-->
+            <!--<li class="nav-item">-->
+                <!--<a class="nav-link" href="#">Link</a>-->
+            <!--</li>-->
+            <!--<li class="nav-item">-->
+                <!--<a class="nav-link disabled" href="#">Disabled</a>-->
+            <!--</li>-->
+        <!--</ul>-->
+        <br>
     </div>
+    <h1 th:text="${session.branchName}+ ': '+ ${session.officeName}">...</h1>
     <div class="row">
         <table class="table table-hover">
-            <thead class="thead-inverse">
             <tr>
-                <th>Фамилия</th>
-                <th>Имя</th>
-                <th>Отчество</th>
-                <th>внутренний</th>
-                <th>Городской</th>
-                <th>Мобильный</th>
-                <th>Отделение</th>
-                <th>Подразделение</th>
-                <th>Должность</th>
-                <th>Каб.</th>
-            </tr>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>внутренний</th>
+            <th>Городской</th>
+            <th>Мобильный</th>
+            <th>Отделение</th>
+            <th>Подразделение</th>
+            <th></th>
+            <th>Должность</th>
+            <th>Каб.</th>
+        </tr>
             </thead>
             <tr th:each="person : ${listAllPersons}">
                 <td th:text="${person.lastName}"></td>
@@ -70,9 +117,17 @@
                 <td th:text="${person.numberMobil}"></td>
                 <td th:text="${person.branchS}"></td>
                 <td th:text="${person.treeS}"></td>
+                <td>
+                    <a th:href="${'/personBranch/byTreeId/' + person.treeId}"><img th:src='@{/pic/icons8.png}'></a>
+                </td>
                 <td th:text="${person.presentPositionS}"></td>
                 <td th:text="${person.room}"></td>
+                <td>
+                    <a th:href="${'/personBranch/byRoom/' + person.room}"><img th:src='@{/pic/office.png}'></a>
+                </td>
             </tr>
+            <thead class="thead-inverse">
+
         </table>
     </div>
     <div th:replace="fragments/footer :: footer"/>

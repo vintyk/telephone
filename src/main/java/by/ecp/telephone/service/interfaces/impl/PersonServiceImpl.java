@@ -324,6 +324,28 @@ public class PersonServiceImpl implements PersonService {
                 .collect(Collectors.toList()));
     }
 
+    @Override
+    public List<PersonDto> findNativeByRoom(String room) {
+        List<Person> personList = personRepository.findNativeByRoom(room);
+        return new ArrayList<PersonDto>(personList
+                .stream()
+                .map(person -> new PersonDto(
+                        person.getId(),
+                        person.getFirstName(),
+                        person.getLastName(),
+                        person.getSName(),
+                        person.getNumberMobil(),
+                        person.getNumberShot(),
+                        person.getNumberCity(),
+                        person.getAlphabet(),
+                        person.getPresentPosition().getName(),
+                        person.getTreeId().getId(),
+                        person.getTreeId().getPresentPosition1Id().getName(),
+                        person.getTreeId().getBranchId().getName(),
+                        person.getRoom()))
+                .collect(Collectors.toList()));
+    }
+
 
     private String cutFromWordFirstChar(String word) {
         String result = word.toLowerCase().substring(0, 1);
