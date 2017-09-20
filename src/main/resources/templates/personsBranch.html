@@ -30,25 +30,26 @@
     <a class="navbar-brand" th:href="@{/}">ТЕЛЕФОННЫЙ СПРАВОЧНИК</a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <form class="form-inline my-2 my-lg-0" th:action="@{/}" method="post" th:object="${litera}">
+            <label class="sr-only" ></label>
+                <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" placeholder="Search" th:id="litera" th:name="litera" autofocus="autofocus" >
 
-                <input type="text" class="form-control" placeholder="Search" th:id="litera" th:name="litera" autofocus="autofocus" >
-
-            <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Поиск по фамилии</button>
+            <button type="submit" class="btn btn-outline-primary my-2 my-sm-0">Поиск по фамилии</button>
         </form>
-
+<br>
         <form class="form-inline my-2 my-lg-0" th:action="@{/personsBranch/office}" method="post" th:object="${officeId}">
-            <select class="form-control mr-sm-2" th:id="officeId" th:name="officeId">
+            <label class="mr-sm-2" for="officeId">Preference</label>
+            <select class="form-control mr-sm-2" th:id="officeId" id="officeId" th:name="officeId">
                 <option th:each="office : ${listAllOffices}"
                         th:value="${office.id}"
                         th:text="${office.name}">
                 </option>
             </select>
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск по подразделению</button>
+            <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Поиск по подразделению</button>
         </form>
     </div>
 </nav>
 
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <ul class="nav justify-content-center">
             <li class="nav-item"><a class="nav-link" href="/">Аll</a></li>
@@ -98,7 +99,7 @@
             <th>Фамилия</th>
             <th>Имя</th>
             <th>Отчество</th>
-            <th>внутренний</th>
+            <th>внутр.</th>
             <th>Городской</th>
             <th>Мобильный</th>
             <th>Отделение</th>

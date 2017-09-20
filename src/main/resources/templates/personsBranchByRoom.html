@@ -28,9 +28,17 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand" th:href="@{/}">ТЕЛЕФОННЫЙ СПРАВОЧНИК</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <form class="form-inline my-2 my-lg-0" th:action="@{/}" method="post" th:object="${litera}">
+            <label class="sr-only" ></label>
+            <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" placeholder="Search" th:id="litera" th:name="litera" autofocus="autofocus" >
+
+            <button type="submit" class="btn btn-outline-primary my-2 my-sm-0">Поиск по фамилии</button>
+        </form>
+    </div>
 </nav>
 
-<div class="container">
+<div class="container-fluid">
     <!--<div class="row">-->
         <!--<h1 th:text="${session.branchName}+ ': '+ ${session.officeName}">...</h1>-->
     <!--</div>-->
@@ -66,9 +74,9 @@
                 <th>Фамилия</th>
                 <th>Имя</th>
                 <th>Отчество</th>
-                <th>внутренний</th>
-                <th>Городской</th>
-                <th>Мобильный</th>
+                <th>внутр.</th>
+                <th>Город.</th>
+                <th>Моб.</th>
                 <th>Отделение</th>
                 <th>Подразделение</th>
                 <th></th>
