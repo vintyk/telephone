@@ -26,17 +26,18 @@
 </head>
 
 <body>
-<nav class="navbar navbar-toggleable-md bg-inverse">
+<nav class="navbar navbar-toggleable-md ">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
             aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand" th:href="@{/}">ТЕЛЕФОННЫЙ СПРАВОЧНИК</a>
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="nav nav-pills" role="navigation">
             <li class="dropdown">
-                <a class="btn btn-outline-primary" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                <a class="btn btn-outline-secondary" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                    aria-expanded="false">Структура предприятия</a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" th:href="@{/handbooks/createTree}">Создание структуры предприятия</a>
@@ -45,20 +46,27 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="btn btn-outline-primary" th:href="@{/handbooks}">Справочники</a>
+                <label class="mr-sm-1" for="handbooks"></label>
+                <a class="btn btn-outline-secondary" th:href="@{/handbooks}" id="handbooks">Справочники</a>
             </li>
             <li class="nav-item">
-                <a class="btn btn-outline-primary" th:href="@{/adminEdit}">Администратор</a>
+                <label class="mr-sm-1" for="admin"></label>
+                <a class="btn btn-outline-secondary" th:href="@{/adminEdit}" id="admin">Администратор</a>
             </li>
             <li class="nav-item">
-                <a class="btn btn-outline-secondary" th:href="@{/logout}">Выйти</a>
+                <form class="form-inline my-2 my-lg-0" th:action="@{/adminEdit}" method="post" th:object="${litera}">
+                    <label class="mr-sm-1" for="litera"></label>
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search" id="litera" name="litera"
+                           autofocus="autofocus">
+                    <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Поиск по фамилии</button>
+                </form>
+            </li>
+            <li class="nav-item">
+                <label class="mr-sm-3" for="exit"></label>
+                <a class="btn btn-outline-secondary" th:href="@{/logout}" id="exit">Выйти</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0" th:action="@{/adminEdit}" method="post" th:object="${litera}">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" id="litera" name="litera"
-                   autofocus="autofocus">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск по фамилии</button>
-        </form>
+
     </div>
 </nav>
 <div class="container-fluid">

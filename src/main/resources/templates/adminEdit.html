@@ -24,7 +24,7 @@
 
 <body>
 
-<nav class="navbar navbar-toggleable-md bg-inverse">
+<nav class="navbar navbar-toggleable-md ">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
             aria-label="Toggle navigation">
@@ -35,7 +35,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="nav nav-pills" role="navigation">
             <li class="dropdown">
-                <a class="btn btn-outline-primary" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                <a class="btn btn-outline-secondary" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                    aria-expanded="false">Структура предприятия</a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" th:href="@{/handbooks/createTree}">Создание структуры предприятия</a>
@@ -44,19 +44,19 @@
                 </div>
             </li>
             <li class="nav-item">
-                <label class="mr-sm-1" for="handbooks">Preference</label>
-                <a class="btn btn-outline-primary" th:href="@{/handbooks}" id="handbooks">Справочники</a>
+                <label class="mr-sm-1" for="handbooks"></label>
+                <a class="btn btn-outline-secondary" th:href="@{/handbooks}" id="handbooks">Справочники</a>
             </li>
             <li class="nav-item">
             <form class="form-inline my-2 my-lg-0" th:action="@{/adminEdit}" method="post" th:object="${litera}">
-                <label class="mr-sm-1" for="litera">Preference</label>
+                <label class="mr-sm-1" for="litera"></label>
                 <input class="form-control mr-sm-2" type="text" placeholder="Search" id="litera" name="litera"
                        autofocus="autofocus">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск по фамилии</button>
+                <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Поиск по фамилии</button>
             </form>
             </li>
             <li class="nav-item">
-                <label class="mr-sm-3" for="exit">Preference</label>
+                <label class="mr-sm-3" for="exit"></label>
                 <a class="btn btn-outline-secondary" th:href="@{/logout}" id="exit">Выйти</a>
             </li>
         </ul>
@@ -96,15 +96,22 @@
                 <td th:text="${person.room}"></td>
                 <td>
                     <div class="btn-group" role="group" aria-label="...">
-                        <a th:href="${'/adminEdit/view/' + person.id}"
-                           title="VIEW Person"><span class="badge badge-default" data-toggle="tooltip"
-                                                     data-placement="top" title="Просмотреть без изменений (безопасно)">View</span></a>
-                        <a th:href="${'/adminEdit/edit/' + person.id}"
-                           title="Изменить запись"><span class="badge badge-success">Edit</span></a>
-                        <a th:href="${'/adminEdit/clone/' + person.id}"
-                           title="Сделать точную копию записи"><span class="badge badge-default">Clon</span></a>
-                        <a th:href="${'/adminEdit/delete/' + person.id}"
-                           title="Удалить запись. Операция необратима!"><span class="badge badge-danger">Del</span></a>
+                        <a th:href="${'/adminEdit/view/' + person.id}" title="Просмотреть запись (безопасно)">
+                            <!--<span class="badge badge-default" data-toggle="tooltip" data-placement="top" title="Просмотреть без изменений (безопасно)">View</span>-->
+                            <img th:src='@{/pic/view.png}'>
+                        </a>
+                        <a th:href="${'/adminEdit/edit/' + person.id}" title="Изменить запись">
+                            <!--<span class="badge badge-success">Edit</span>-->
+                            <img th:src='@{/pic/edit.png}'>
+                        </a>
+                        <a th:href="${'/adminEdit/clone/' + person.id}" title="Сделать точную копию записи (клонировать)">
+                            <!--<span class="badge badge-default">Clon</span>-->
+                            <img th:src='@{/pic/clone.png}'>
+                        </a>
+                        <a th:href="${'/adminEdit/delete/' + person.id}" title="Удалить запись (операция необратима!)">
+                            <!--<span class="badge badge-danger">Del</span>-->
+                            <img th:src='@{/pic/delete.png}'>
+                        </a>
                     </div>
 
                 </td>
@@ -141,10 +148,12 @@
                     </ul>
                 </div>
             </div>
-
-            <div class="card card-outline-success mb-3 text-center">
+            <div class="card">
+                <h3 class="card-header">Создание нового пользователя</h3>
                 <div class="card-block">
-                    <blockquote class="card-blockquote">
+            <!--<div class="card card-outline-success mb-3 text-center">-->
+                <!--<div class="card-block">-->
+                    <!--<blockquote class="card-blockquote">-->
 
                         <form th:action="@{/adminEdit/save}" method="post" th:object="${person}">
 
@@ -247,7 +256,8 @@
                                 </div>
                                 <small id="room" class="form-text text-muted">Рабочий кабинет (11)</small>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-lg btn-block">Записать данные в БД</button>
+                            <button type="submit" class="btn btn-outline-secondary btn-lg btn-block">Записать данные в БД</button>
+                            <!--<a class="btn btn-outline-secondary" th:href="@{/logout}" id="exit">Выйти</a>-->
                         </form>
                     </blockquote>
                 </div>
