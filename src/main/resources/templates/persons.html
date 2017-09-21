@@ -27,80 +27,14 @@
 </div>
 <div class="container">
     <div class="row">
-        <ul class="nav nav-tabs">
-            <li role="presentation"><a href="/">Аll</a></li>
-            <li role="presentation"><a th:href="@{/а}">А</a></li>
-            <li role="presentation"><a th:href="@{/б}">Б</a></li>
-            <li role="presentation"><a th:href="@{/в}">В</a></li>
-            <li role="presentation"><a th:href="@{/г}">Г</a></li>
-            <li role="presentation"><a th:href="@{/д}">Д</a></li>
-            <li role="presentation"><a th:href="@{/е}">ЕЖ</a></li>
-            <li role="presentation"><a th:href="@{/з}">З</a></li>
-            <li role="presentation"><a th:href="@{/и}">И</a></li>
-            <li role="presentation"><a th:href="@{/к}">К</a></li>
-            <li role="presentation"><a th:href="@{/л}">Л</a></li>
-            <li role="presentation"><a th:href="@{/м}">М</a></li>
-            <li role="presentation"><a th:href="@{/н}">Н</a></li>
-            <li role="presentation"><a th:href="@{/о}">О</a></li>
-            <li role="presentation"><a th:href="@{/п}">П</a></li>
-            <li role="presentation"><a th:href="@{/р}">Р</a></li>
-            <li role="presentation"><a th:href="@{/с}">С</a></li>
-            <li role="presentation"><a th:href="@{/т}">Т</a></li>
-            <li role="presentation"><a th:href="@{/у}">УФ</a></li>
-            <li role="presentation"><a th:href="@{/х}">ХЦ</a></li>
-            <li role="presentation"><a th:href="@{/ч}">Ч</a></li>
-            <li role="presentation"><a th:href="@{/ш}">ШЩ</a></li>
-            <li role="presentation"><a th:href="@{/э}">ЭЮЯ</a></li>
-        </ul>
-
+        <div th:replace="fragments/headerAlphabet337 :: Alphabet337"/>
         <!--<div><img alt=logo th:src='@{/pic/fon.jpg}'>-->
         <!--<a class='btn btn-primary' href='#'><img th:src='@{/pic/find.png}'></a>-->
-
         <h1>Телефонный справочник</h1>
-
     </div>
     <div class="row">
-        <table class="table table-hover">
-            <thead class="thead-inverse">
-            <tr>
-                <th>Фамилия</th>
-                <th>Имя</th>
-                <th>Отчество</th>
-                <th>внутр.</th>
-                <th>Городской</th>
-                <th>Мобильный</th>
-                <th>Отделение</th>
-                <th>Подразделение</th>
-                <th></th>
-                <th>Должность</th>
-                <th>Каб.</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tr th:each="person : ${persons}">
-                <td th:text="${person.lastName}"></td>
-                <td th:text="${person.firstName}"></td>
-                <td th:text="${person.sName}"></td>
-                <td th:text="${person.numberShot}"></td>
-                <td th:text="${person.numberCity}"></td>
-                <td th:text="${person.numberMobil}"></td>
-                <td th:text="${person.branchS}"></td>
-                <td th:text="${person.treeS}"></td>
-                <td>
-                    <!--<div class="btn-group" role="group" aria-label="...">-->
-                    <!--<a th:href="${'/personBranch/byTreeId/' + person.treeId}"-->
-                    <!--title="VIEW Person"><span class="badge badge-default" data-toggle="tooltip"-->
-                    <!--data-placement="top" title="Просмотреть без изменений (безопасно)">View</span></a>-->
-                    <!--</div>-->
-                    <a th:href="${'/personBranch/byTreeId/' + person.treeId}"><img th:src='@{/pic/icons8.png}' title="Выбрать всех с таким же подразделением"></a>
-                </td>
-                <td th:text="${person.presentPositionS}"></td>
-                <td th:text="${person.room}"></td>
-                <td>
-                    <a th:href="${'/personBranch/byRoom/' + person.room}"><img th:src='@{/pic/office.png}' title="Выбрать всех в этой комнате"></a>
-                </td>
-            </tr>
-        </table>
+        <div th:replace="fragments/table :: table"/>
+        <!--<div th:replace="fragments/table4Alpha :: table4Alpha"/>-->
     </div>
     <div class="row">
 

@@ -27,7 +27,7 @@ public class PersonBranchByTreeController {
     public ModelAndView showPersonsPageSearchByPerson(@PathVariable String treeId) {
         ModelAndView modelAndView = new ModelAndView("personsBranchByTree");
         List<PersonDto> listAllPersons = personService.findNativeByTreeId(treeId);
-        modelAndView.addObject("listAllPersons", listAllPersons);
+        modelAndView.addObject("persons", listAllPersons);
         return modelAndView;
     }
 }

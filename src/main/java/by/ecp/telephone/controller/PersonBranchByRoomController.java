@@ -23,7 +23,7 @@ public class PersonBranchByRoomController {
     public ModelAndView showPersonsPageSearchByPerson(@PathVariable String room) {
         ModelAndView modelAndView = new ModelAndView("personsBranchByRoom");
         List<PersonDto> listAllPersons = personService.findNativeByRoom(room);
-        modelAndView.addObject("listAllPersons", listAllPersons);
+        modelAndView.addObject("persons", listAllPersons);
         return modelAndView;
     }
 }

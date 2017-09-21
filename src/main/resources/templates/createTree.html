@@ -4,78 +4,15 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout}"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-
-
-<title>Admin</title>
 <head>
-    <title>Admin</title>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
-
-    <link rel="stylesheet" href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
-
-    <script src="../static/js/tether.min.js" th:src="@{/js/tether.min.js}"></script>
-    <script src="../../resources/static/jquery/jquery-3.2.1.min.js" th:src="@{/jquery/jquery-3.2.1.min.js}"></script>
-    <script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
-    <script src="../static/js/getrequest.js" th:src="@{/js/getrequest.js}"></script>
-    <style type="text/css">
-        body {
-            background-image: url('/pic/backgrnd.jpg');
-            background-size: 100%;
-        }
-    </style>
+    <title>Create Tree</title>
+    <div th:replace="fragments/headerAdmin :: headerHead"/>
 </head>
-
-
 <body>
-
-<nav class="navbar navbar-toggleable-md ">
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-            aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <a class="navbar-brand" th:href="@{/}">ТЕЛЕФОННЫЙ СПРАВОЧНИК</a>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="nav nav-pills" role="navigation">
-            <li class="dropdown">
-                <a class="btn btn-outline-secondary" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                   aria-expanded="false">Структура предприятия</a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" th:href="@{/handbooks/createTree}">Создание структуры предприятия</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" th:href="@{/handbooks/tree}">Просмотр структуры предприятия</a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <label class="mr-sm-1" for="handbooks"></label>
-                <a class="btn btn-outline-secondary" th:href="@{/handbooks}" id="handbooks">Справочники</a>
-            </li>
-            <li class="nav-item">
-                <label class="mr-sm-1" for="admin"></label>
-                <a class="btn btn-outline-secondary" th:href="@{/adminEdit}" id="admin">Администратор</a>
-            </li>
-            <li class="nav-item">
-                <form class="form-inline my-2 my-lg-0" th:action="@{/adminEdit}" method="post" th:object="${litera}">
-                    <label class="mr-sm-1" for="litera"></label>
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search" id="litera" name="litera"
-                           autofocus="autofocus">
-                    <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Поиск по фамилии</button>
-                </form>
-            </li>
-            <li class="nav-item">
-                <label class="mr-sm-3" for="exit"></label>
-                <a class="btn btn-outline-secondary" th:href="@{/logout}" id="exit">Выйти</a>
-            </li>
-        </ul>
-
-    </div>
-</nav>
-
+<div th:replace="fragments/headerAdmin :: headerAdmin"/>
 <div class="container-fluid">
     <h2>Создание иерархии</h2>
     <br>
-
     <div class="jumbotron">
         <h1 class="display-4">Иерархия подразделений</h1>
         <p class="lead">Иерархия должна быть уникальна и не должна дублироваться с уже находящимися в списке (255
@@ -97,7 +34,8 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="chiefExecutiveName" class="col-2 col-form-label">Руководитель отделения/филиала</label>
+                        <label for="chiefExecutiveName" class="col-2 col-form-label">Руководитель
+                            отделения/филиала</label>
                         <div class="col-8">
                             <select class="form-control" id="chiefExecutiveName" th:field="*{chiefExecutiveId}">
                                 <option th:each="chiefExecutive : ${listAllPositions}"
@@ -108,7 +46,8 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="presentPosition1" class="col-2 col-form-label">наименование подразделения (учавствует в поиске по подразделению)</label>
+                        <label for="presentPosition1" class="col-2 col-form-label">наименование подразделения
+                            (учавствует в поиске по подразделению)</label>
                         <div class="col-8">
                             <select class="form-control" id="presentPosition1" th:field="*{presentPosition1Id}">
                                 <option th:each="presentPosition1 : ${listAllPositions}"
@@ -162,8 +101,9 @@
                             </select>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-outline-secondary btn-lg btn-block">Внести иерархию в справочник
-                </button>
+                    <button type="submit" class="btn btn-outline-secondary btn-lg btn-block">Внести иерархию в
+                        справочник
+                    </button>
                 </form>
             </div>
         </div>

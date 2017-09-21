@@ -61,7 +61,7 @@ public class PersonBranchController {
     public ModelAndView showPersonsPageSearchByBranch(@PathVariable String searchResult) {
         ModelAndView modelAndView = new ModelAndView("personsBranch");
         List<PersonDto> listAllPersons = personService.findPersonByBranch(searchResult);
-        modelAndView.addObject("listAllPersons", listAllPersons);
+        modelAndView.addObject("persons", listAllPersons);
         return modelAndView;
     }
 
@@ -72,17 +72,9 @@ public class PersonBranchController {
         String branchId = (String) httpSession.getAttribute("branchId");
         String officeId = (String) httpSession.getAttribute("officeId");
         List<PersonDto> listAllPersons = personService.findPersonByBranchAndOffice(branchId, officeId);
-        modelAndView.addObject("listAllPersons", listAllPersons);
+        modelAndView.addObject("persons", listAllPersons);
         return modelAndView;
     }
-
-//    @RequestMapping(value = "/personBranch/byPersonId/{searchResult}", produces = "text/plain;charset=UTF-8", method = RequestMethod.GET)
-//    public ModelAndView showPersonsPageSearchByPerson(@PathVariable String treeId) {
-//        ModelAndView modelAndView = new ModelAndView("personsBranch");
-//        List<PersonDto> listAllPersons = personService.findNativeByTreeId(treeId);
-//        modelAndView.addObject("listAllPersons", listAllPersons);
-//        return modelAndView;
-//    }
 
     @PostMapping(path = "/personBranch/myBranch")
     public String search(@RequestParam String branchId,
