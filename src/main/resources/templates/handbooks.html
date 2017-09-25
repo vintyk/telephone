@@ -12,98 +12,137 @@
 <body>
 <div th:replace="fragments/headerAdmin :: headerAdmin"/>
 <div class="container-fluid">
-    <h2>Справочники</h2>
-    <br>
-    <div class="jumbotron">
-        <h1 class="display-4">Должности</h1>
-        <p class="lead">Должность не должна дублироваться с уже находящимися в списке (255 максимальное число
-            символов)</p>
-        <div class="row">
-            <div class="col-6">
-                <table class="table table-hover">
-                    <thead class="thead-default">
-                    <tr>
-                        <th scope="row">ID</th>
-                        <th>Наименование должности</th>
-                    </tr>
-                    </thead>
-                    <tr th:each="presentPosition : ${listAllPositions}">
-                        <td th:text="${presentPosition.id}"></td>
-                        <td th:text="${presentPosition.name}"></td>
-                        <td>
-                            <a th:href="${'/handbooks/deletePresentPosition/' + presentPosition.id}"
-                               title="Удалить запись. Операция необратима!"><span class="badge badge-danger">Удаление из справочника</span></a>
+    <div class="row">
+        <div class="col-12">
+            <h2>Справочники</h2>
+            <br>
+            <div class="card">
+                <h3 class="card-header">Подразделения</h3>
+                <div class="card-block">
+                    <!--<div class="jumbotron">-->
+                    <!--<h1 class="display-4">Подразделения</h1>-->
+                    <p class="lead">Введите подразделение в котором работает человек. Это наименование будет
+                        учавствовать в
+                        поиске после того, как вы на главной странице выберете Филиал. </p>
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="card">
+                                <h3 class="card-header">Наименование подразделения</h3>
+                                <div class="card-block">
+                                    <div id="myScrollTree">
+                                        <table class="table table-hover">
+                                            <thead class="thead-default">
+                                            <!--<tr>-->
+                                            <!--<th scope="row">ID</th>-->
+                                            <!--<th>Наименование Подразделения</th>-->
+                                            <!--</tr>-->
+                                            </thead>
+                                            <tr th:each="presentPosition : ${listAllPositions}">
+                                                <td th:text="${presentPosition.id}"></td>
+                                                <td th:text="${presentPosition.name}"></td>
+                                                <td>
+                                                    <a th:href="${'/handbooks/deletePresentPosition/' + presentPosition.id}"
+                                                       title="Удалить запись. Операция необратима!"><span
+                                                            class="badge badge-danger">Удаление из справочника</span></a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="card">
+                                <h3 class="card-header">Ввести новое подразделение</h3>
+                                <div class="card-block">
+                                    <form th:action="@{/handbooks/savePresentPosition}" method="post"
+                                          th:object="${newPresentPosition}">
+                                        <div class="form-group row">
+                                            <!--<label for="present" class="col-2 col-form-label">Уникальное наименование</label>-->
+                                            <input class="form-control" type="text" value=""
+                                                   placeholder="управление маркетинга"
+                                                   id="present" th:field="${newPresentPosition.name}"
+                                                   required="required"/></input>
 
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div class="col-6">
-                <h3>Ввести новую должность</h3>
-                <form th:action="@{/handbooks/savePresentPosition}" method="post" th:object="${newPresentPosition}">
-                    <div class="form-group row">
-                        <label for="present" class="col-2 col-form-label">Уникальное наименование</label>
-                        <div class="col-6">
-                            <input class="form-control" type="text" value="" placeholder="начальник департамента"
-                                   id="present" th:field="${newPresentPosition.name}" required="required"/></input>
+                                        </div>
+                                        <button type="submit" class="btn btn-outline-secondary btn-md btn-block">Внести
+                                            подразделение в
+                                            справочник
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <!--<hr class="my-4">-->
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-outline-secondary btn-lg btn-block">Внести должность в
-                        справочник
-                    </button>
-                </form>
+                </div>
             </div>
-        </div>
-        <hr class="my-4">
-    </div>
+            <br>
+            <br>
+            <div class="card">
+                <h3 class="card-header">Отделения</h3>
+                <div class="card-block">
+                    <p class="lead">Отделение, филиал - это город в котором находится отделение. Например: "Гродненский
+                        филиал №1",
+                        "Отделение Минска - Колядичи". Указывайте самую верхнюю структуру выше которой в вашей
+                        организации
+                        ничего
+                        нет.(255 максимальное число символов)</p>
 
-
-    <div class="jumbotron">
-        <h1 class="display-4">Наименование отделения</h1>
-        <p class="lead">Отделение, филиал - это город в котором находится отделение. Например: "Гродненский филиал №1",
-            "Отделение Минска - Колядичи". Указывайте самую верхнюю структуру выше которой в вашей организации ничего
-            нет.(255 максимальное число символов)</p>
-
-        <div class="row">
-            <div class="col-6">
-                <table class="table table-hover">
-                    <thead class="thead-default">
-                    <tr>
-                        <th scope="row">ID</th>
-                        <th>Наименование Отделения</th>
-                    </tr>
-                    </thead>
-                    <tr th:each="branches : ${listAllBranches}">
-                        <td th:text="${branches.id}"></td>
-                        <td th:text="${branches.name}"></td>
-                        <td>
-                            <a th:href="${'/handbooks/deleteBranch/' + branches.id}"
-                               title="Удалить запись. Операция необратима!"><span class="badge badge-danger">Удаление из справочника</span></a>
-
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div class="col-6">
-                <h3>Ввести новое отделение</h3>
-                <form th:action="@{/handbooks/saveBranch}" method="post" th:object="${newBranch}">
-                    <div class="form-group row">
-                        <label for="branch" class="col-2 col-form-label">Уникальное наименование</label>
-                        <div class="col-6">
-                            <input class="form-control" type="text" value="" placeholder="Отделение - Колядичи"
-                                   id="branch" th:field="${newBranch.name}" required="required"/></input>
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="card">
+                                <h3 class="card-header">Наименование отделения</h3>
+                                <div class="card-block">
+                                    <div id="myScrollTree2">
+                                        <table class="table table-hover">
+                                            <thead class="thead-default">
+                                            <!--<tr>-->
+                                            <!--<th scope="row">ID</th>-->
+                                            <!--<th>Наименование Отделения</th>-->
+                                            <!--</tr>-->
+                                            </thead>
+                                            <tr th:each="branches : ${listAllBranches}">
+                                                <td th:text="${branches.id}"></td>
+                                                <td th:text="${branches.name}"></td>
+                                                <td>
+                                                    <a th:href="${'/handbooks/deleteBranch/' + branches.id}"
+                                                       title="Удалить запись. Операция необратима!"><span
+                                                            class="badge badge-danger">Удаление из справочника</span></a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="card">
+                                <h3 class="card-header">Ввести новое отделение</h3>
+                                <div class="card-block">
+                                    <form th:action="@{/handbooks/saveBranch}" method="post" th:object="${newBranch}">
+                                        <div class="form-group row">
+                                            <!--<label for="branch" class="col-2 col-form-label">Уникальное наименование</label>-->
+                                            <input class="form-control" type="text" value=""
+                                                   placeholder="Отделение - Колядичи"
+                                                   id="branch" th:field="${newBranch.name}"
+                                                   required="required"/></input>
+                                        </div>
+                                        <button type="submit" class="btn btn-outline-secondary btn-md btn-block">Внести
+                                            отделение в
+                                            справочник
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-outline-secondary btn-lg btn-block">Внести отделение в
-                        справочник
-                    </button>
-                </form>
+                    <!--<hr class="my-4">-->
+                </div>
             </div>
         </div>
-        <hr class="my-4">
     </div>
 </div>
-
 
 <!--<button type="button" class="btn btn-primary" id="btnId">Open Modal</button>-->
 

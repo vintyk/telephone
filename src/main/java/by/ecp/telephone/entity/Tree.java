@@ -8,7 +8,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "tree")
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
 public class Tree extends BaseEntity {
 
     @OneToOne

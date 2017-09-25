@@ -11,103 +11,121 @@
 <body>
 <div th:replace="fragments/headerAdmin :: headerAdmin"/>
 <div class="container-fluid">
-    <h2>Создание иерархии</h2>
     <br>
-    <div class="jumbotron">
-        <h1 class="display-4">Иерархия подразделений</h1>
-        <p class="lead">Иерархия должна быть уникальна и не должна дублироваться с уже находящимися в списке (255
-            максимальное число символов)</p>
-        <div class="row">
-            <div class="col-12">
-                <h3>Ввести новую запись</h3>
-                <form th:action="@{/handbooks/saveTree}" method="post" th:object="${newTree}">
-
-                    <div class="form-group row">
-                        <label for="branches" class="col-2 col-form-label">Отделение/филиал</label>
-                        <div class="col-8">
-                            <select class="form-control" id="branches" th:field="*{branchId}">
-                                <option th:each="branch : ${listAllBranches}"
-                                        th:value="${branch.id}"
-                                        th:text="${branch.name}">
-                                </option>
-                            </select>
+    <div class="card">
+        <h3 class="card-header">Создание иерархии</h3>
+        <div class="card-block">
+            <!--<h1 class="display-4">Иерархия подразделений</h1>-->
+            <p class="lead">Иерархия должна быть уникальна и не должна дублироваться с уже находящимися в списке</p>
+            <form th:action="@{/handbooks/saveTree}" method="post" th:object="${newTree}">
+                <div class="card">
+                    <h3 class="card-header">Ввести новую запись</h3>
+                    <div class="card-block">
+                        <div class="form-group row">
+                            <label for="branches" class="col-2 col-form-label">Отделение/филиал</label>
+                            <div class="col-8">
+                                <select class="form-control" id="branches" th:field="*{branchId}">
+                                    <option th:each="branch : ${listAllBranches}"
+                                            th:value="${branch.id}"
+                                            th:text="${branch.name}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="chiefExecutiveName" class="col-2 col-form-label">Руководитель
+                                отделения/филиала</label>
+                            <div class="col-8">
+                                <select class="form-control" id="chiefExecutiveName"
+                                        th:field="*{chiefExecutiveId}">
+                                    <option th:each="chiefExecutive : ${listAllPositions}"
+                                            th:value="${chiefExecutive.id}"
+                                            th:text="${chiefExecutive.name}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="presentPosition1" class="col-2 col-form-label">наименование
+                                подразделения
+                                (учавствует в поиске по подразделению)</label>
+                            <div class="col-8">
+                                <select class="form-control" id="presentPosition1"
+                                        th:field="*{presentPosition1Id}">
+                                    <option th:each="presentPosition1 : ${listAllPositions}"
+                                            th:value="${presentPosition1.id}"
+                                            th:text="${presentPosition1.name}">
+                                    </option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label for="chiefExecutiveName" class="col-2 col-form-label">Руководитель
-                            отделения/филиала</label>
-                        <div class="col-8">
-                            <select class="form-control" id="chiefExecutiveName" th:field="*{chiefExecutiveId}">
-                                <option th:each="chiefExecutive : ${listAllPositions}"
-                                        th:value="${chiefExecutive.id}"
-                                        th:text="${chiefExecutive.name}">
-                                </option>
-                            </select>
+                </div>
+                <br>
+                <div class="card">
+                    <h3 class="card-header">Не учавствуют в поиске в данной реализации. Т.е. не
+                        обязательны.</h3>
+                    <div class="card-block">
+                        <div class="form-group row">
+                            <label for="presentPosition2" class="col-2 col-form-label">наименование
+                                подразделения</label>
+                            <div class="col-8">
+                                <select class="form-control" id="presentPosition2"
+                                        th:field="*{presentPosition2Id}">
+                                    <option th:each="presentPosition2 : ${listAllPositions}"
+                                            th:value="${presentPosition2.id}"
+                                            th:text="${presentPosition2.name}">
+                                    </option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="presentPosition1" class="col-2 col-form-label">наименование подразделения
-                            (учавствует в поиске по подразделению)</label>
-                        <div class="col-8">
-                            <select class="form-control" id="presentPosition1" th:field="*{presentPosition1Id}">
-                                <option th:each="presentPosition1 : ${listAllPositions}"
-                                        th:value="${presentPosition1.id}"
-                                        th:text="${presentPosition1.name}">
-                                </option>
-                            </select>
+                        <div class="form-group row">
+                            <label for="presentPosition3" class="col-2 col-form-label">наименование
+                                подразделения</label>
+                            <div class="col-8">
+                                <select class="form-control" id="presentPosition3"
+                                        th:field="*{presentPosition3Id}">
+                                    <option th:each="presentPosition3 : ${listAllPositions}"
+                                            th:value="${presentPosition3.id}"
+                                            th:text="${presentPosition3.name}">
+                                    </option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="presentPosition2" class="col-2 col-form-label">наименование подразделения</label>
-                        <div class="col-8">
-                            <select class="form-control" id="presentPosition2" th:field="*{presentPosition2Id}">
-                                <option th:each="presentPosition2 : ${listAllPositions}"
-                                        th:value="${presentPosition2.id}"
-                                        th:text="${presentPosition2.name}">
-                                </option>
-                            </select>
+                        <div class="form-group row">
+                            <label for="presentPosition4" class="col-2 col-form-label">наименование
+                                подразделения</label>
+                            <div class="col-8">
+                                <select class="form-control" id="presentPosition4"
+                                        th:field="*{presentPosition4Id}">
+                                    <option th:each="presentPosition4 : ${listAllPositions}"
+                                            th:value="${presentPosition4.id}"
+                                            th:text="${presentPosition4.name}">
+                                    </option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="presentPosition3" class="col-2 col-form-label">наименование подразделения</label>
-                        <div class="col-8">
-                            <select class="form-control" id="presentPosition3" th:field="*{presentPosition3Id}">
-                                <option th:each="presentPosition3 : ${listAllPositions}"
-                                        th:value="${presentPosition3.id}"
-                                        th:text="${presentPosition3.name}">
-                                </option>
-                            </select>
+                        <div class="form-group row">
+                            <label for="presentPosition5" class="col-2 col-form-label">...</label>
+                            <div class="col-8">
+                                <select class="form-control" id="presentPosition5"
+                                        th:field="*{presentPosition5Id}">
+                                    <option th:each="presentPosition5 : ${listAllPositions}"
+                                            th:value="${presentPosition5.id}"
+                                            th:text="${presentPosition5.name}">
+                                    </option>
+                                </select>
+                            </div>
                         </div>
+                        <button type="submit" class="btn btn-outline-secondary btn-lg btn-block">Внести
+                            иерархию в
+                            справочник
+                        </button>
                     </div>
-                    <div class="form-group row">
-                        <label for="presentPosition4" class="col-2 col-form-label">наименование подразделения</label>
-                        <div class="col-8">
-                            <select class="form-control" id="presentPosition4" th:field="*{presentPosition4Id}">
-                                <option th:each="presentPosition4 : ${listAllPositions}"
-                                        th:value="${presentPosition4.id}"
-                                        th:text="${presentPosition4.name}">
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="presentPosition5" class="col-2 col-form-label">...</label>
-                        <div class="col-8">
-                            <select class="form-control" id="presentPosition5" th:field="*{presentPosition5Id}">
-                                <option th:each="presentPosition5 : ${listAllPositions}"
-                                        th:value="${presentPosition5.id}"
-                                        th:text="${presentPosition5.name}">
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-outline-secondary btn-lg btn-block">Внести иерархию в
-                        справочник
-                    </button>
-                </form>
-            </div>
+                </div>
+            </form>
+            <!--<hr class="my-4">-->
         </div>
-        <hr class="my-4">
     </div>
 </div>
 </body>

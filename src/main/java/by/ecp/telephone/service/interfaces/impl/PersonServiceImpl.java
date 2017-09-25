@@ -114,143 +114,46 @@ public class PersonServiceImpl implements PersonService {
         this.personRepository.deleteById(id);
     }
 
-
     @Override
     public Page<PersonDto> findAllPageableOrderBylastName(Pageable pageable) {
         Page<Person> personPage = personRepository.findAllByLastNameIsNotNullOrderByLastName(pageable);
         int totalElements = (int) personPage.getTotalElements();
-        return new PageImpl<PersonDto>(personPage
-                .stream()
-                .map(person -> new PersonDto(
-                        person.getId(),
-                        person.getFirstName(),
-                        person.getLastName(),
-                        person.getSName(),
-                        person.getNumberMobil(),
-                        person.getNumberShot(),
-                        person.getNumberCity(),
-                        person.getAlphabet(),
-                        person.getPresentPosition().getName(),
-                        person.getTreeId().getId(),
-                        person.getTreeId().getPresentPosition1Id().getName(),
-                        person.getTreeId().getBranchId().getName(),
-                        person.getRoom()))
-                .collect(Collectors.toList()), pageable, totalElements);
-        }
+        return convertPerson2PersonDto(personPage, pageable, totalElements);
+    }
 
     @Override
     public Page<PersonDto> findAllPageableOrderBylastNameStringPresentPosition(Pageable pageable) {
         Page<Person> personPage = personRepository.findAllByLastNameIsNotNullOrderByLastName(pageable);
         int totalElements = (int) personPage.getTotalElements();
-        return new PageImpl<PersonDto>(personPage
-                .stream()
-                .map(person -> new PersonDto(
-                        person.getId(),
-                        person.getFirstName(),
-                        person.getLastName(),
-                        person.getSName(),
-                        person.getNumberMobil(),
-                        person.getNumberShot(),
-                        person.getNumberCity(),
-                        person.getAlphabet(),
-                        person.getPresentPosition().getName(),
-                        person.getTreeId().getId(),
-                        person.getTreeId().getPresentPosition1Id().getName(),
-                        person.getTreeId().getBranchId().getName(),
-                        person.getRoom()))
-                .collect(Collectors.toList()), pageable, totalElements);
+        return convertPerson2PersonDto(personPage, pageable, totalElements);
     }
 
     @Override
     public Page<PersonDto> findAllByAlphabetEqualsOrderByLastName(Pageable pageable, String searchResult) {
         Page<Person> personPage = personRepository.findAllByAlphabetEqualsOrderByLastName(pageable, searchResult);
         int totalElements = (int) personPage.getTotalElements();
-        return new PageImpl<PersonDto>(personPage
-                .stream()
-                .map(person -> new PersonDto(
-                        person.getId(),
-                        person.getFirstName(),
-                        person.getLastName(),
-                        person.getSName(),
-                        person.getNumberMobil(),
-                        person.getNumberShot(),
-                        person.getNumberCity(),
-                        person.getAlphabet(),
-                        person.getPresentPosition().getName(),
-                        person.getTreeId().getId(),
-                        person.getTreeId().getPresentPosition1Id().getName(),
-                        person.getTreeId().getBranchId().getName(),
-                        person.getRoom()))
-                .collect(Collectors.toList()), pageable, totalElements);
-        }
+        return convertPerson2PersonDto(personPage, pageable, totalElements);
+    }
 
     @Override
     public Page<PersonDto> findAllByAlphabetEqualsOrderByLastNameStringPresentPosition(Pageable pageable, String searchResult) {
         Page<Person> personPage = personRepository.findAllByAlphabetEqualsOrderByLastName(pageable, searchResult);
         int totalElements = (int) personPage.getTotalElements();
-        return new PageImpl<PersonDto>(personPage
-                .stream()
-                .map(person -> new PersonDto(
-                        person.getId(),
-                        person.getFirstName(),
-                        person.getLastName(),
-                        person.getSName(),
-                        person.getNumberMobil(),
-                        person.getNumberShot(),
-                        person.getNumberCity(),
-                        person.getAlphabet(),
-                        person.getPresentPosition().getName(),
-                        person.getTreeId().getId(),
-                        person.getTreeId().getPresentPosition1Id().getName(),
-                        person.getTreeId().getBranchId().getName(),
-                        person.getRoom()))
-                .collect(Collectors.toList()), pageable, totalElements);
+        return convertPerson2PersonDto(personPage, pageable, totalElements);
     }
 
     @Override
     public Page<PersonDto> findAllByLastNameContainsOrderByLastName(Pageable pageable, String searchRes) {
         Page<Person> personPage = personRepository.findAllByLastNameContainsOrderByLastName(pageable, searchRes);
         int totalElements = (int) personPage.getTotalElements();
-        return new PageImpl<PersonDto>(personPage
-                .stream()
-                .map(person -> new PersonDto(
-                        person.getId(),
-                        person.getFirstName(),
-                        person.getLastName(),
-                        person.getSName(),
-                        person.getNumberMobil(),
-                        person.getNumberShot(),
-                        person.getNumberCity(),
-                        person.getAlphabet(),
-                        person.getPresentPosition().getName(),
-                        person.getTreeId().getId(),
-                        person.getTreeId().getPresentPosition1Id().getName(),
-                        person.getTreeId().getBranchId().getName(),
-                        person.getRoom()))
-                .collect(Collectors.toList()), pageable, totalElements);
+        return convertPerson2PersonDto(personPage, pageable, totalElements);
     }
 
     @Override
     public Page<PersonDto> findAllByLastNameContainsOrderByLastNameStringPresentPosition(Pageable pageable, String searchRes) {
         Page<Person> personPage = personRepository.findAllByLastNameContainsOrderByLastName(pageable, searchRes);
         int totalElements = (int) personPage.getTotalElements();
-        return new PageImpl<PersonDto>(personPage
-                .stream()
-                .map(person -> new PersonDto(
-                        person.getId(),
-                        person.getFirstName(),
-                        person.getLastName(),
-                        person.getSName(),
-                        person.getNumberMobil(),
-                        person.getNumberShot(),
-                        person.getNumberCity(),
-                        person.getAlphabet(),
-                        person.getPresentPosition().getName(),
-                        person.getTreeId().getId(),
-                        person.getTreeId().getPresentPosition1Id().getName(),
-                        person.getTreeId().getBranchId().getName(),
-                        person.getRoom()))
-                .collect(Collectors.toList()), pageable, totalElements);
+        return convertPerson2PersonDto(personPage, pageable, totalElements);
     }
 
     @Override
@@ -261,89 +164,26 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public List<PersonDto> findPersonByBranch(String branchId) {
         List<Person> personList = personRepository.findNativeByBranch(branchId);
-        return new ArrayList<PersonDto>(personList
-                .stream()
-                .map(person -> new PersonDto(
-                        person.getId(),
-                        person.getFirstName(),
-                        person.getLastName(),
-                        person.getSName(),
-                        person.getNumberMobil(),
-                        person.getNumberShot(),
-                        person.getNumberCity(),
-                        person.getAlphabet(),
-                        person.getPresentPosition().getName(),
-                        person.getTreeId().getId(),
-                        person.getTreeId().getPresentPosition1Id().getName(),
-                        person.getTreeId().getBranchId().getName(),
-                        person.getRoom()))
-                .collect(Collectors.toList()));
+        return convertListPerson2PersonDto(personList);
     }
+
 
     @Override
     public List<PersonDto> findPersonByBranchAndOffice(String branchId, String officeId) {
         List<Person> personList = personRepository.findNativeByBranchAndOffice(branchId, officeId);
-        return new ArrayList<PersonDto>(personList
-                .stream()
-                .map(person -> new PersonDto(
-                        person.getId(),
-                        person.getFirstName(),
-                        person.getLastName(),
-                        person.getSName(),
-                        person.getNumberMobil(),
-                        person.getNumberShot(),
-                        person.getNumberCity(),
-                        person.getAlphabet(),
-                        person.getPresentPosition().getName(),
-                        person.getTreeId().getId(),
-                        person.getTreeId().getPresentPosition1Id().getName(),
-                        person.getTreeId().getBranchId().getName(),
-                        person.getRoom()))
-                .collect(Collectors.toList()));
+        return convertListPerson2PersonDto(personList);
     }
 
     @Override
     public List<PersonDto> findNativeByTreeId(String treeId) {
         List<Person> personList = personRepository.findNativeByTreeId(treeId);
-        return new ArrayList<PersonDto>(personList
-                .stream()
-                .map(person -> new PersonDto(
-                        person.getId(),
-                        person.getFirstName(),
-                        person.getLastName(),
-                        person.getSName(),
-                        person.getNumberMobil(),
-                        person.getNumberShot(),
-                        person.getNumberCity(),
-                        person.getAlphabet(),
-                        person.getPresentPosition().getName(),
-                        person.getTreeId().getId(),
-                        person.getTreeId().getPresentPosition1Id().getName(),
-                        person.getTreeId().getBranchId().getName(),
-                        person.getRoom()))
-                .collect(Collectors.toList()));
+        return convertListPerson2PersonDto(personList);
     }
 
     @Override
     public List<PersonDto> findNativeByRoom(String room) {
         List<Person> personList = personRepository.findNativeByRoom(room);
-        return new ArrayList<PersonDto>(personList
-                .stream()
-                .map(person -> new PersonDto(
-                        person.getId(),
-                        person.getFirstName(),
-                        person.getLastName(),
-                        person.getSName(),
-                        person.getNumberMobil(),
-                        person.getNumberShot(),
-                        person.getNumberCity(),
-                        person.getAlphabet(),
-                        person.getPresentPosition().getName(),
-                        person.getTreeId().getId(),
-                        person.getTreeId().getPresentPosition1Id().getName(),
-                        person.getTreeId().getBranchId().getName(),
-                        person.getRoom()))
-                .collect(Collectors.toList()));
+        return convertListPerson2PersonDto(personList);
     }
 
 
@@ -368,5 +208,47 @@ public class PersonServiceImpl implements PersonService {
                 break;
         }
         return result;
+    }
+
+    private Page<PersonDto> convertPerson2PersonDto(Page<Person> personPage,
+                                                    Pageable pageable,
+                                                    int totalElements) {
+        return new PageImpl<PersonDto>(personPage
+                .stream()
+                .map(person -> new PersonDto(
+                        person.getId(),
+                        person.getFirstName(),
+                        person.getLastName(),
+                        person.getSName(),
+                        person.getNumberMobil(),
+                        person.getNumberShot(),
+                        person.getNumberCity(),
+                        person.getAlphabet(),
+                        person.getPresentPosition().getName(),
+                        person.getTreeId().getId(),
+                        person.getTreeId().getPresentPosition1Id().getName(),
+                        person.getTreeId().getBranchId().getName(),
+                        person.getRoom()))
+                .collect(Collectors.toList()), pageable, totalElements);
+    }
+
+    private List<PersonDto> convertListPerson2PersonDto(List<Person> personList) {
+        return new ArrayList<PersonDto>(personList
+                .stream()
+                .map(person -> new PersonDto(
+                        person.getId(),
+                        person.getFirstName(),
+                        person.getLastName(),
+                        person.getSName(),
+                        person.getNumberMobil(),
+                        person.getNumberShot(),
+                        person.getNumberCity(),
+                        person.getAlphabet(),
+                        person.getPresentPosition().getName(),
+                        person.getTreeId().getId(),
+                        person.getTreeId().getPresentPosition1Id().getName(),
+                        person.getTreeId().getBranchId().getName(),
+                        person.getRoom()))
+                .collect(Collectors.toList()));
     }
 }
