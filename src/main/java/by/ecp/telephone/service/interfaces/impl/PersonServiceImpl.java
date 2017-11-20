@@ -181,8 +181,8 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public List<PersonDto> findNativeByRoom(String room) {
-        List<Person> personList = personRepository.findNativeByRoom(room);
+    public List<PersonDto> findNativeByRoom(String idPerson) {
+        List<Person> personList = personRepository.findNativeByRoom(idPerson);
         return convertListPerson2PersonDto(personList);
     }
 

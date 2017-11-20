@@ -16,4 +16,9 @@ public class PresentPosition extends BaseEntity {
     @Setter
     @Column(name = "name")
     private String name;
+    @Getter
+    @Setter
+    @Column(name = "is_present_position_flag")
+    private Long isPresentPositionFlag;
+
 }

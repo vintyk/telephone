@@ -26,7 +26,7 @@ public class AdminEditController {
 
     private static final int BUTTONS_TO_SHOW = 5;
     private static final int INITIAL_PAGE = 0;
-    private static final int INITIAL_PAGE_SIZE = 6;
+    private static final int INITIAL_PAGE_SIZE = 5;
     private static final int[] PAGE_SIZES = {10, 15, 50};
     public static String searchR = "";
     private PersonService personService;
@@ -44,7 +44,7 @@ public class AdminEditController {
 
     @ModelAttribute("listAllPositions")
     public Iterable<PresentPosition> listAllPositions(){
-        return presentPositionRepository.findAllByNameIsNotNullOrderByName();
+        return presentPositionRepository.findAllPresentPositionFlagIsOne();
     }
     @ModelAttribute("listAllTrees")
     public Iterable<Tree> listAllTree(){

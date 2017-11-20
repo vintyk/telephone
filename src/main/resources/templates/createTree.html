@@ -32,19 +32,19 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="chiefExecutiveName" class="col-2 col-form-label">Руководитель
-                                отделения/филиала</label>
-                            <div class="col-8">
-                                <select class="form-control" id="chiefExecutiveName"
-                                        th:field="*{chiefExecutiveId}">
-                                    <option th:each="chiefExecutive : ${listAllPositions}"
-                                            th:value="${chiefExecutive.id}"
-                                            th:text="${chiefExecutive.name}">
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
+                        <!--<div class="form-group row">-->
+                            <!--<label for="chiefExecutiveName" class="col-2 col-form-label">Руководитель-->
+                                <!--отделения/филиала</label>-->
+                            <!--<div class="col-8">-->
+                                <!--<select class="form-control" id="chiefExecutiveName"-->
+                                        <!--th:field="*{chiefExecutiveId}">-->
+                                    <!--<option th:each="chiefExecutive : ${listAllPositions}"-->
+                                            <!--th:value="${chiefExecutive.id}"-->
+                                            <!--th:text="${chiefExecutive.name}">-->
+                                    <!--</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                        <!--</div>-->
                         <div class="form-group row">
                             <label for="presentPosition1" class="col-2 col-form-label">наименование
                                 подразделения

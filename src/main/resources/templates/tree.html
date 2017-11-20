@@ -28,7 +28,7 @@
                 <thead class="thead-default">
                 <tr>
                     <th scope="row">Отделение</th>
-                    <th>Руководитель</th>
+                    <!--<th>Руководитель</th>-->
                     <th><span class="badge badge-pill badge-info"><--Подразделение</span></th>
                     <th><span class="badge badge-pill badge-info"><--Подразделение</span></th>
                     <th><span class="badge badge-pill badge-info"><--Подразделение</span></th>
@@ -38,7 +38,7 @@
                 </thead>
                 <tr th:each="trees : ${listAllTrees}">
                     <td th:text="${trees.branchId.name}"></td>
-                    <td th:text="${trees.chiefExecutiveId.name}"></td>
+                    <!--<td th:text="${trees.chiefExecutiveId.name}"></td>-->
                     <td th:text="${trees.presentPosition1Id.name}"></td>
                     <td th:text="${trees.presentPosition2Id.name}"></td>
                     <td th:text="${trees.presentPosition3Id.name}"></td>

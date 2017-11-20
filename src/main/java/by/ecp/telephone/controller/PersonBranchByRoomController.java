@@ -19,10 +19,10 @@ public class PersonBranchByRoomController {
         this.personService = personServiceService;
     }
 
-    @RequestMapping(value = "personBranch/byRoom/{room}", produces = "text/plain;charset=UTF-8", method = RequestMethod.GET)
-    public ModelAndView showPersonsPageSearchByPerson(@PathVariable String room) {
+    @RequestMapping(value = "personBranch/byRoom/{idPerson}", produces = "text/plain;charset=UTF-8", method = RequestMethod.GET)
+    public ModelAndView showPersonsPageSearchByPerson(@PathVariable String idPerson) {
         ModelAndView modelAndView = new ModelAndView("personsBranchByRoom");
-        List<PersonDto> listAllPersons = personService.findNativeByRoom(room);
+        List<PersonDto> listAllPersons = personService.findNativeByRoom(idPerson);
         modelAndView.addObject("persons", listAllPersons);
         return modelAndView;
     }

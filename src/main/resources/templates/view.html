@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+>
 <head>
     <div th:replace="fragments/headerAdmin :: headerHead"/>
     <title>View</title>
@@ -30,97 +30,98 @@
 <div th:replace="fragments/headerAdmin :: headerAdmin"/>
 
 <div class="col-md-8">
-            <div class="card">
-                <h3 class="card-header">Просмотр записи</h3>
-                <div class="card-block">
+    <div class="card">
+        <h3 class="card-header">Просмотр записи</h3>
+        <div class="card-block">
 
-                <div class="col-md-3">
-                    <label for="inputId">ID</label>
-                    <input type="text" class="form-control" id="inputId" placeholder="ID" th:field="*{person.id}"
-                           name="id" disabled="disabled"/>
-                </div>
-                <div class="col-md-3">
-                    <label for="inputId">Алфавитный поиск</label>
-                    <input type="text" class="form-control" id="inputId" placeholder="Alphabet"
-                           th:field="*{person.alphabet}"
-                           name="id" disabled="disabled"/>
-                    <small id="alphabet" class="form-text text-muted">Изменить в случае смены фамилии</small>
-                    <br>
-                </div>
+            <div class="col-md-3">
+                <label for="inputId">ID</label>
+                <input type="text" class="form-control" id="inputId" placeholder="ID" th:field="*{person.id}"
+                       name="id" disabled="disabled"/>
+            </div>
+            <div class="col-md-3">
+                <label for="inputId">Алфавитный поиск</label>
+                <input type="text" class="form-control" id="inputId" placeholder="Alphabet"
+                       th:field="*{person.alphabet}"
+                       name="id" disabled="disabled"/>
+                <small id="alphabet" class="form-text text-muted">Изменить в случае смены фамилии</small>
+                <br>
+            </div>
             <div class="card">
                 <h3 class="card-header">Значения для редактирования</h3>
                 <div class="card-block">
-                <div class="col-md-6">
-                    <label for="inputLastName">Фамилия</label>
-                    <input type="text" class="form-control" id="inputLastName" placeholder="Last Name"
-                           th:field="*{person.lastName}" name="lastName" disabled="disabled"/>
-                </div>
-                <div class="col-md-6">
-                    <label for="inputFirstName">Имя</label>
-                    <input type="text" class="form-control" id="inputFirstName" placeholder="First Name"
-                           th:field="*{person.firstName}" name="firstName" disabled="disabled"/>
-                </div>
-                <div class="col-md-6">
-                    <label for="sName">Отчество</label>
-                    <input type="text" class="form-control" id="sName" placeholder="S Name"
-                           th:field="*{person.sName}" name="sName" disabled="disabled"/>
-                </div>
-                <div class="col-6">
-                    <label for="presentPosition">Должность</label>
-                    <select class="form-control" id="presentPosition" disabled="disabled">
-                        <option th:each="presentPosition : ${listAllPositions}"
-                                th:value="${presentPosition.id}"
-                                th:text="${presentPosition.name}">
-                        </option>
-                    </select>
-                </div>
-                <div class="col-12">
-                    <label for="tree">Иерархия</label>
-                    <select class="form-control" id="tree" disabled="disabled">
-                        <option th:each="tree : ${listAllTrees}"
-                                th:value="${tree.id}"
-                                th:text="${tree.branchId.name}+'_'
-                                                +${tree.chiefExecutiveId.name}+'_'
+                    <div class="col-md-6">
+                        <label for="inputLastName">Фамилия</label>
+                        <input type="text" class="form-control" id="inputLastName" placeholder="Last Name"
+                               th:field="*{person.lastName}" name="lastName" disabled="disabled"/>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputFirstName">Имя</label>
+                        <input type="text" class="form-control" id="inputFirstName" placeholder="First Name"
+                               th:field="*{person.firstName}" name="firstName" disabled="disabled"/>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="sName">Отчество</label>
+                        <input type="text" class="form-control" id="sName" placeholder="S Name"
+                               th:field="*{person.sName}" name="sName" disabled="disabled"/>
+                    </div>
+                    <div class="col-6">
+                        <label for="presentPosition">Должность</label>
+                        <select class="form-control" id="presentPosition" disabled="disabled">
+                            <option th:each="presentPosition : ${listAllPositions}"
+                                    th:value="${presentPosition.id}"
+                                    th:text="${presentPosition.name}">
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label for="tree">Иерархия</label>
+                        <select class="form-control" id="tree" disabled="disabled">
+                            <option th:each="tree : ${listAllTrees}"
+                                    th:value="${tree.id}"
+                                    th:text="${tree.branchId.name}+'_'
                                         +${tree.presentPosition1Id.name}+'_'
                                         +${tree.presentPosition2Id.name}+'_'
                                         +${tree.presentPosition3Id.name}+'_'
                                         +${tree.presentPosition4Id.name}+'_'
                                         +${tree.presentPosition5Id.name}">
-                        </option>
-                    </select>
-                </div>
-                <div class="col-md-6">
-                    <label for="numberShot">Короткий номер</label>
-                    <input type="text" class="form-control" id="numberShot" placeholder="3451"
-                           th:field="*{person.numberShot}" name="numberShot" disabled="disabled"/>
-                </div>
-                <div class="col-md-6">
-                    <label for="numberCity">Городской номер</label>
-                    <input type="text" class="form-control" id="numberCity" placeholder="249-98-73"
-                           th:field="*{person.numberCity}" name="numberCity" disabled="disabled"/>
-                </div>
-                <div class="col-md-6">
-                    <label for="inputMobileNumber">Мобильный номер</label>
-                    <input type="text" class="form-control" id="inputMobileNumber" placeholder="Mobile No."
-                           th:field="*{person.numberMobil}" name="mobileNumber" disabled="disabled"/>
-                </div>
-                <div class="col-md-6">
-                    <label for="room">Номер кабинета</label>
-                    <input type="text" class="form-control" id="room" placeholder="202"
-                           th:field="*{person.room}" name="room" disabled="disabled"/>
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="numberShot">Короткий номер</label>
+                        <input type="text" class="form-control" id="numberShot" placeholder="3451"
+                               th:field="*{person.numberShot}" name="numberShot" disabled="disabled"/>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="numberCity">Городской номер</label>
+                        <input type="text" class="form-control" id="numberCity" placeholder="249-98-73"
+                               th:field="*{person.numberCity}" name="numberCity" disabled="disabled"/>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputMobileNumber">Мобильный номер</label>
+                        <input type="text" class="form-control" id="inputMobileNumber" placeholder="Mobile No."
+                               th:field="*{person.numberMobil}" name="mobileNumber" disabled="disabled"/>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="room">Номер кабинета</label>
+                        <input type="text" class="form-control" id="room" placeholder="202"
+                               th:field="*{person.room}" name="room" disabled="disabled"/>
+                    </div>
                 </div>
             </div>
-            </div>
-                </div>
+            <br>
             <ul class="nav nav-pills nav-justified">
                 <label class="mr-sm-1" for="back"></label>
                 <li><a href="/adminEdit" class="btn btn-secondary btn-md " role="button" id="back">
                     Вернуться</a></li>
                 <label class="mr-sm-1" for="edit"></label>
-                <li><a th:href="@{'/adminEdit/edit/' + ${person.id}}" class="btn btn-outline-primary btn-md " role="button" id="edit">Войти
-                    в режим редактирования</a></li>
-            </ul>
+                <li><a th:href="@{'/adminEdit/edit/' + ${person.id}}" class="btn btn-outline-primary btn-md "
+                       role="button"
+                       id="edit">Войти в режим редактирования</a></li>
                 <br>
+            </ul>
+        </div>
     </div>
 </div>
 </body>

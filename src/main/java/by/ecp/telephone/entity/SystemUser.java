@@ -24,6 +24,4 @@ public class SystemUser extends BaseEntity {
     @NotEmpty
     @Column(name = "privilege", nullable = false)
     private Long privilege;
-
-
 }

@@ -48,7 +48,7 @@ public class CreateTreesController {
 
     @ModelAttribute("listAllPositions")
     public Iterable<PresentPosition> listAllPositions() {
-        return presentPositionRepository.findAllByNameIsNotNullOrderByName();
+        return presentPositionRepository.findAllPresentPositionFlagIsNull();
     }
 
     @GetMapping("/handbooks/createTree")

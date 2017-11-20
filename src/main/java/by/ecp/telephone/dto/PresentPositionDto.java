@@ -10,9 +10,11 @@ public class PresentPositionDto {
 
     private Long id;
     private String name;
+    private Long isPresentPositionFlag;
 
-    public PresentPositionDto(Long id, String name) {
+    public PresentPositionDto(Long id, String name, Long isPresentPositionFlag) {
         this.id = id;
         this.name = name;
+        this.isPresentPositionFlag = isPresentPositionFlag;
     }
 }

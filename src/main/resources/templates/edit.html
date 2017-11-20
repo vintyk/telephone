@@ -31,69 +31,76 @@
                     <br>
                 </div>
                 <div class="card">
-                <h5 class="card-header">После изменения записи нажмите "Изменить запись" или клавишу ENTER</h5>
-                <div class="col-md-6">
-                    <label for="lastName">Фамилия</label>
-                    <input type="text" class="form-control" id="lastName" placeholder="Фамилия"
-                           th:field="*{lastName}" name="lastName"
-                           required="required"/>
-                </div>
-                <div class="col-md-6">
-                    <label for="firstName">Имя</label>
-                    <input type="text" class="form-control" id="firstName" placeholder="Имя"
-                           th:field="*{firstName}" name="firstName"/>
-                </div>
-                <div class="col-md-6">
-                    <label for="sName">Отчество</label>
-                    <input type="text" class="form-control" id="sName" placeholder="Отчество"
-                           th:field="*{sName}" name="sName"/>
-                </div>
-                <div class="col-6">
-                    <label for="presentPosition">Должность</label>
-                    <select class="form-control" id="presentPosition" th:field="*{presentPosition}">
-                        <option th:each="presentPosition : ${listAllPositions}"
-                                th:value="${presentPosition.id}"
-                                th:text="${presentPosition.name}">
-                        </option>
-                    </select>
-                </div>
-                <div class="col-12">
-                    <label for="tree">Иерархия</label>
-                    <select class="form-control" id="tree" th:field="*{treeId}">
-                        <option th:each="tree : ${listAllTrees}"
-                                th:value="${tree.id}"
-                                th:text="${tree.branchId.name}+'_'
-                                                +${tree.chiefExecutiveId.name}+'_'
+                    <h5 class="card-header">После внесенных изменений нажмите "Изменить запись" или клавишу ENTER</h5>
+                    <div class="col-md-6">
+                        <label for="lastName">Фамилия</label>
+                        <input type="text" class="form-control" id="lastName" placeholder="Фамилия"
+                               th:field="*{lastName}" name="lastName"
+                               required="required"/>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="firstName">Имя</label>
+                        <input type="text" class="form-control" id="firstName" placeholder="Имя"
+                               th:field="*{firstName}" name="firstName"/>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="sName">Отчество</label>
+                        <input type="text" class="form-control" id="sName" placeholder="Отчество"
+                               th:field="*{sName}" name="sName"/>
+                    </div>
+                    <div class="col-6">
+                        <label for="presentPosition">Должность</label>
+                        <select class="form-control" id="presentPosition" th:field="*{presentPosition}">
+                            <option th:each="presentPosition : ${listAllPositions}"
+                                    th:value="${presentPosition.id}"
+                                    th:text="${presentPosition.name}">
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label for="tree">Иерархия</label>
+                        <select class="form-control" id="tree" th:field="*{treeId}">
+                            <option th:each="tree : ${listAllTrees}"
+                                    th:value="${tree.id}"
+                                    th:text="${tree.branchId.name}+'_'
                                         +${tree.presentPosition1Id.name}+'_'
                                         +${tree.presentPosition2Id.name}+'_'
                                         +${tree.presentPosition3Id.name}+'_'
                                         +${tree.presentPosition4Id.name}+'_'
                                         +${tree.presentPosition5Id.name}">
-                        </option>
-                    </select>
-                </div>
-                <div class="col-md-6">
-                    <label for="numberShot">Короткий номер</label>
-                    <input type="text" class="form-control" id="numberShot" placeholder="3451"
-                           th:field="*{numberShot}" name="numberShot"/>
-                </div>
-                <div class="col-md-6">
-                    <label for="cityNumber">Городской номер</label>
-                    <input type="text" class="form-control" id="cityNumber" placeholder="xxx-xx-xx"
-                           th:field="*{numberCity}" name="cityNumber"/>
-                </div>
-                <div class="col-md-6">
-                    <label for="mobileNumber">Мобильный номер</label>
-                    <input type="text" class="form-control" id="mobileNumber"
-                           placeholder="xxx-xx-xxx-xx-xx"
-                           th:field="*{numberMobil}" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}-[0-9]{2}-[0-9]{2}"
-                           name="mobileNumber"/>
-                </div>
-                <div class="col-md-6">
-                    <label for="room">Номер кабинета</label>
-                    <input type="text" class="form-control" id="room" placeholder="202"
-                           th:field="*{room}" name="room"/>
-                </div>
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="numberShot">Короткий номер</label>
+                        <input type="text" class="form-control" id="numberShot" placeholder="3451"
+                               th:field="*{numberShot}" name="numberShot"/>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="cityNumber">Городской номер</label>
+                        <input type="text" class="form-control" id="cityNumber" placeholder="xxx-xx-xx"
+                               th:field="*{numberCity}" name="cityNumber"/>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="mobileNumber">Мобильный номер</label>
+                        <input type="text" class="form-control" id="mobileNumber"
+                               placeholder="xxx-xx-xxx-xx-xx"
+                               th:field="*{numberMobil}"
+                               name="mobileNumber"/>
+                    </div>
+                    <!--<div class="col-md-6">-->
+                    <!--<label for="mobileNumber">Мобильный номер</label>-->
+                    <!--<input type="text" class="form-control" id="mobileNumber"-->
+                    <!--placeholder="xxx-xx-xxx-xx-xx"-->
+                    <!--th:field="*{numberMobil}" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}-[0-9]{2}-[0-9]{2}"-->
+                    <!--name="mobileNumber"/>-->
+                    <!--</div>-->
+                    <div class="col-md-6">
+                        <label for="room">Номер кабинета*</label>
+                        <input type="text" class="form-control" id="room" placeholder="202"
+                               th:field="*{room}" name="room" required="required"/>
+                        <br>
+                    </div>
                     <br>
                 </div>
                 <div class="col-md-6">
@@ -102,6 +109,7 @@
                     <a th:href="@{/adminEdit}" id="back" class="btn btn-secondary btn-md">Вернуться</a>
                     <label class="mr-sm-1" for="back"></label>
                     <button type="submit" class="btn btn-outline-primary btn-md">Изменить запись</button>
+                    <br>
                 </div>
             </form>
         </div>

@@ -39,8 +39,8 @@
             <td th:text="${person.presentPositionS}"></td>
             <td th:text="${person.room}"></td>
             <td>
-                <a th:href="${'/personBranch/byRoom/' + person.room}"><img th:src='@{/pic/office.png}'
-                                                                           title="Выбрать всех в этой комнате"></a>
+                <a th:href="${'/personBranch/byRoom/' + person.id  }"><img th:src='@{/pic/office.png}'
+                                                                           title="Выбрать всех в этой комнате этого подразделения"></a>
             </td>
         </tr>
     </table>

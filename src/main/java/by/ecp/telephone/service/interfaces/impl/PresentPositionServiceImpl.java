@@ -41,6 +41,7 @@ public class PresentPositionServiceImpl implements PresentPositionService {
     public PresentPosition savePresentPosition(PresentPositionDto presentPositionDto) {
         PresentPosition presentPosition = new PresentPosition();
         presentPosition.setName(presentPositionDto.getName());
+        presentPosition.setIsPresentPositionFlag(presentPositionDto.getIsPresentPositionFlag());
         return presentPositionRepository.save(presentPosition);
     }
 
