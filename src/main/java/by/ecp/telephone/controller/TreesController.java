@@ -34,7 +34,7 @@ public class TreesController {
         this.treeRepository = treeRepository;
         this.branchRepository = branchRepository;
     }
-
+ 
     @ModelAttribute("listAllTrees")
     public Iterable<Tree> listAlllistAllTrees() {
         return treeRepository.findAll();
