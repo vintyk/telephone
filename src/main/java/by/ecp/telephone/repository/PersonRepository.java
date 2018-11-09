@@ -1,10 +1,7 @@
 package by.ecp.telephone.repository;
 
 
-import by.ecp.telephone.dto.PersonDto;
-import by.ecp.telephone.entity.Branch;
 import by.ecp.telephone.entity.Person;
-import by.ecp.telephone.entity.Tree;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -13,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
+
 @Transactional
 @Repository
 public interface PersonRepository extends PagingAndSortingRepository<Person, Long> {
@@ -35,7 +32,7 @@ public interface PersonRepository extends PagingAndSortingRepository<Person, Lon
     @Query(value = "SELECT * from person p where p.tree_id = ?1 ORDER BY p.id", nativeQuery = true)
     List<Person> findNativeByTreeId(String officeId);
 
-//    @Query(value = "SELECT * from person p where p.room = ?1 ORDER BY p.id", nativeQuery = true)
+    //    @Query(value = "SELECT * from person p where p.room = ?1 ORDER BY p.id", nativeQuery = true)
     @Query(value = "SELECT * FROM person p JOIN tree t ON t.id = p.tree_id WHERE " +
             "p.room=(SELECT p.room FROM person p JOIN tree t ON t.id = p.tree_id WHERE p.id=?1)\n" +
             "    AND\n" +

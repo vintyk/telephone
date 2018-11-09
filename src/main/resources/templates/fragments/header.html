@@ -6,7 +6,7 @@
     <title>Header</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
     <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
     <link href="../static/js/jquery-3.2.1.min.js" th:href="@{/js/jquery-3.2.1.min.js}" rel="stylesheet" media="screen"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -17,7 +17,7 @@
     <nav class="navbar navbar-inverse">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" th:href="@{/}" >ТЕЛЕФОННЫЙ СПРАВОЧНИК</a>
+                <a class="navbar-brand" th:href="@{/}">ТЕЛЕФОННЫЙ СПРАВОЧНИК</a>
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -30,13 +30,15 @@
                 </ul>
                 <form class="navbar-form navbar-left" th:action="@{/}" method="post" th:object="${litera}">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search" th:id="litera" th:name="litera" autofocus="autofocus" >
+                        <input type="text" class="form-control" placeholder="Search" th:id="litera" th:name="litera"
+                               autofocus="autofocus">
                     </div>
                     <button type="submit" class="btn btn-default">Поиск по фамилии</button>
                     <!--<small id="minTwoChar" class="form-text text-muted">Минимум 2 буквы.</small>-->
                 </form>
 
-                <form class="navbar-form navbar-left" th:action="@{/personBranch/myBranch}" method="post" th:object="${branchId}">
+                <form class="navbar-form navbar-left" th:action="@{/personBranch/myBranch}" method="post"
+                      th:object="${branchId}">
                     <div class="form-group">
                         <select class="form-control" th:id="branchId" th:name="branchId">
                             <option th:each="branch : ${listAllBranches}"

@@ -3,13 +3,17 @@ package by.ecp.telephone.repositories;
 
 import by.ecp.telephone.configuration.RepositoryConfigurationTest;
 import by.ecp.telephone.entity.Branch;
+import by.ecp.telephone.entity.Person;
 import by.ecp.telephone.repository.BranchRepository;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
@@ -38,5 +42,13 @@ public class BranchTest {
         fetchBranch
                 .ifPresent(branch1 -> assertEquals(branch1.getName(), branch.getName()));
         branchRepository.deleteById(branch.getId());
+    }
+
+    @Test
+    public void lesson1(){
+        Person person = new Person();
+        person.setFirstName("aaa");
+
+        Assert.assertEquals("aaa", person.getFirstName());
     }
 }

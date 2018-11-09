@@ -9,10 +9,9 @@ public class Pager {
     private int endPage;
 
     public Pager(int totalPages, int currentPage, int buttonsToShow) {
-
         setButtonsToShow(buttonsToShow);
-        int halfPagesToShow = getButtonsToShow() / 2;
 
+        int halfPagesToShow = getButtonsToShow() / 2;
         if (totalPages <= getButtonsToShow()) {
             setStartPage(1);
             setEndPage(totalPages);
@@ -38,5 +37,4 @@ public class Pager {
             throw new IllegalArgumentException("Must be an odd value!");
         }
     }
-
 }
